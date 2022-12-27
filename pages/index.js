@@ -22,7 +22,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="min-h-screen flex flex-row justify-center items-center bg-blue-gray-50 ">
+      <main className="min-h-screen flex flex-row justify-center items-center bg-white ">
         <div className="relative flex-1 h-screen">
           <Image src="/splashimage-1.jpg" fill className="w-12" />
         </div>

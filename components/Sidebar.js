@@ -32,7 +32,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className="h-full w-full bg-white shadow box-border p-5">
+      <aside className="h-full w-full bg-white shadow box-border p-5 ">
         <div className="box-border text-center">
           <h2 className="text-lg font-semibold mb-5">Inventory Gudang</h2>
         </div>
