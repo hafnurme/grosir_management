@@ -19,7 +19,7 @@ const MyTab = (props) => {
   const router = useRouter();
 
   const renderIcon = (label) => {
-    if (label.match(/overview/i)) {
+    if (label.match(/dashboard/i)) {
       return (
         <div className="w-5 mr-2">
           <ComputerDesktopIcon />
@@ -77,9 +77,9 @@ const MyTab = (props) => {
     <>
       <div
         className={`mb-5 w-full cursor-pointer rounded-lg ${
-          router.pathname.split("/").includes(link.split("/")[1])
+          router.pathname.split("/").includes(link.split("/")[2])
             ? "bg-deep-orange-400 text-white shadow-lg"
-            : "text-gray-800"
+            : "text-gray-700"
         } ${useDefaultTransition}`}
       >
         <Link href={link} className={`p-2 px-4 flex items-center`}>
@@ -101,7 +101,7 @@ const MyTab = (props) => {
                 } ${
                   router.pathname == link + child.link
                     ? "shadow-lg bg-deep-orange-400 text-white text-sm p-2 rounded-lg"
-                    : "text-gray-800"
+                    : "text-gray-700"
                 }`}
               >
                 {renderIcon(child.label)}

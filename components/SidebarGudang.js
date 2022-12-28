@@ -3,8 +3,8 @@ import MyTab from "./Tab/MyTab";
 const Sidebar = () => {
   const tab = [
     {
-      label: "Overview",
-      link: "/dashboard",
+      label: "Dashboard",
+      link: "/gudang/dashboard",
     },
     {
       label: "Product",
@@ -22,11 +22,11 @@ const Sidebar = () => {
           link: "/kategori",
         },
       ],
-      link: "/produk",
+      link: "/gudang/produk",
     },
     {
       label: "Pengiriman",
-      link: "/pengiriman",
+      link: "/gudang/pengiriman",
     },
   ];
 

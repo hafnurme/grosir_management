@@ -1,12 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/imag../components/CardComponents";
 import {
-  Card,
   CardHeader,
   CardBody,
-  Input,
-  Button,
-} from "@material-tailwind/react";
+} from "../components/TableComponents/TableShowind/react";
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -30,9 +27,9 @@ export default function Home() {
           <div className="w-96 h-min">
             <CardHeader
               color="transparent"
-              className="grid place-items-center py-4 shadow-none"
+              className="grid place-items-center p-2 shadow-none"
             >
-              <h2 className="text-2xl font-semibold text-deeporange">Login</h2>
+              <h2 className="text-5xl font-semibold text-c">Login</h2>
             </CardHeader>
             <CardBody className="flex flex-col gap-8">
               <Input label="Identifier" color="deep-orange" />
