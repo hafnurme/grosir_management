@@ -3,30 +3,16 @@ import MyTab from "./Tab/MyTab";
 const Sidebar = () => {
   const tab = [
     {
-      label: "Overview",
-      link: "/dashboard",
+      label: "Dashboard",
+      link: "/company/dashboard",
     },
     {
-      label: "Product",
-      child: [
-        {
-          label: "Produk List",
-          link: "",
-        },
-        {
-          label: "Tambah Produk",
-          link: "/tambah",
-        },
-        {
-          label: "Kategori",
-          link: "/kategori",
-        },
-      ],
-      link: "/produk",
+      label: "Branch",
+      link: "/company/branch",
     },
     {
-      label: "Pengiriman",
-      link: "/pengiriman",
+      label: "Order",
+      link: "/company/order",
     },
   ];
 
@@ -35,7 +21,7 @@ const Sidebar = () => {
       <aside className="h-full w-full bg-white shadow box-border p-5 ">
         <div className="box-border text-center">
           <h2 className="text-lg font-semibold mb-5 text-c">
-            Inventory Gudang
+            Company Management
           </h2>
         </div>
         {tab.map((elem) => {

@@ -1,15 +1,26 @@
-import { Button, Input } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 import CardComponents from "../../../components/CardComponents";
 import TableShow from "../../../components/TableComponents/TableShow";
 const Dashboard = () => {
-  const expTableHead = ["Name", "Produk Code", "Stock", "Exp Date"];
-  const outOfStockTableHead = [
-    "Name",
-    "Produk Code",
-    "Brand",
-    "Category",
-    "Stock",
-  ];
+
+  const [expTableHead, setExpTableHead] = useState()
+  const [outOfStockTableHead, setOutOfStockTableHead] = useState()
+
+  useEffect(() => {
+    setExpTableHead(["Name", "Produk Code", "Stock", "Exp Date"])
+    setOutOfStockTableHead([
+      "Name",
+      "Produk Code",
+      "Brand",
+      "Category",
+      "Stock",
+    ])
+    return () => {
+    }
+  }, [])
+
+
+
   return (
     <>
       <div className="flex gap-5 mb-5">

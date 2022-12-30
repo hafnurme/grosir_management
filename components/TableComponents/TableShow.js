@@ -13,7 +13,7 @@ const TableShow = (props) => {
       <table className=" p-4 bg-white rounded-lg shadow w-full">
         <thead>
           <tr>
-            <th class="border-b-2 p-1 dark:border-dark-5 whitespace-nowrap font-normal text-c"></th>
+            <th class="border-b-2 p-1 dark:border-dark-5 whitespace-nowrap font-normal"></th>
             {head &&
               head.map((labelHead) => {
                 return (
