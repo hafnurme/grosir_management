@@ -14,6 +14,10 @@ const Sidebar = () => {
       label: "Order",
       link: "/company/order",
     },
+    {
+      label: "Inventory",
+      link: "/company/inventory",
+    },
   ];
 
   return (

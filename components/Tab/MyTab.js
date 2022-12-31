@@ -10,7 +10,8 @@ import {
   QueueListIcon,
   TagIcon,
   TruckIcon,
-  BuildingStorefrontIcon
+  BuildingStorefrontIcon,
+  ShoppingBagIcon
 } from "@heroicons/react/20/solid";
 import { useDefaultTransition } from "../../hooks/useStyle";
 
@@ -61,12 +62,27 @@ const MyTab = (props) => {
           <TagIcon />
         </div>
       );
-    } else {
+    }
+    if (label.match(/branch/i)) {
       return (
         <div className="w-5 mr-2">
           <BuildingStorefrontIcon />
         </div>
-      )
+      );
+    }
+    if (label.match(/order/i)) {
+      return (
+        <div className="w-5 mr-2">
+          <ShoppingBagIcon />
+        </div>
+      );
+    }
+    if (label.match(/inventory/i)) {
+      return (
+        <div className="w-5 mr-2">
+          <CubeIcon />
+        </div>
+      );
     }
   };
 
@@ -84,7 +100,7 @@ const MyTab = (props) => {
     <>
       <div
         className={`mb-5 w-full cursor-pointer rounded-lg ${router.pathname.includes(link)
-          ? "bg-deep-orange-400 text-white shadow-lg"
+          ? "bg-deep-orange-400 text-white shadow-lg translate-x-3"
           : "text-gray-700"
           } ${useDefaultTransition}`}
       >

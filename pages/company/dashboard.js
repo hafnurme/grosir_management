@@ -1,11 +1,13 @@
 
+import { CircleStackIcon } from "@heroicons/react/20/solid"
+
 export default function Dashboard() {
     return (
 
         <div class="flex flex-wrap -mx-3">
 
             <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
                         <div class="flex flex-row -mx-3 h-12">
                             <div class="flex-none w-2/3 max-w-full px-3">
@@ -20,8 +22,8 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                    <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
+                                <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
+                                    <CircleStackIcon />
                                 </div>
                             </div>
                         </div>
@@ -29,7 +31,7 @@ export default function Dashboard() {
                 </div>
             </div>
             <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
                         <div class="flex flex-row -mx-3 h-12">
                             <div class="flex-none w-2/3 max-w-full px-3">
@@ -44,8 +46,8 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                    <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
+                                <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
+                                    <CircleStackIcon />
                                 </div>
                             </div>
                         </div>
@@ -53,7 +55,7 @@ export default function Dashboard() {
                 </div>
             </div>
             <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
                         <div class="flex flex-row -mx-3 h-12">
                             <div class="flex-none w-2/3 max-w-full px-3">
@@ -68,8 +70,8 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                    <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
+                                <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
+                                    <CircleStackIcon />
                                 </div>
                             </div>
                         </div>
@@ -77,7 +79,7 @@ export default function Dashboard() {
                 </div>
             </div>
             <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
                         <div class="flex flex-row -mx-3 h-12">
                             <div class="flex-none w-2/3 max-w-full px-3">
@@ -92,14 +94,15 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                    <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
+                                <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
+                                    <CircleStackIcon />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }
