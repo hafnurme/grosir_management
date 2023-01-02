@@ -1,15 +1,12 @@
 import Head from "next/head";
-import Image from "next/imag../components/CardComponents";
-import {
-  CardHeader,
-  CardBody,
-} from "../components/TableComponents/TableShowind/react";
+import { CardHeader, CardBody, Input, Button } from "@material-tailwind/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
   const handleSub = () => {
-    router.push("/dashboard");
+    router.push("/gudang/dashboard");
   };
   return (
     <>

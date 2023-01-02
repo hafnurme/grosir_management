@@ -17,10 +17,10 @@ const Dashboard = () => {
         <CardComponents />
         <CardComponents />
       </div>
-      <div className="my-5">
-        <TableShow head={expTableHead} title="Produk expired" />
+      <div className="my-5 p-5 bg-white rounded-md shadow-md">
+        <TableShow head={expTableHead} title="Product expired" />
       </div>
-      <div className="my-5">
+      <div className="my-5 p-5 bg-white rounded-md shadow-md">
         <TableShow head={outOfStockTableHead} title="Low Stock" />
       </div>
     </>
