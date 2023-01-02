@@ -32,11 +32,9 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className="h-full w-full bg-white shadow box-border p-5 ">
-        <div className="box-border text-center">
-          <h2 className="text-lg font-semibold mb-5 text-c">
-            Inventory Gudang
-          </h2>
+      <aside className="h-full w-full bg-white shadow box-border p-5">
+        <div className="box-border p-5 bg-black/5 rounded-lg mb-5 text-center">
+          <h2 className="text-lg font-semibold  text-c">Inventory Gudang</h2>
         </div>
         {tab.map((elem) => {
           if (elem.child) {
