@@ -5,20 +5,22 @@ const TableShow = (props) => {
 
   return (
     <>
-      <div className="text-c">
-        <div className="mx-2 mb-4 text-lg">
-          <h3>{title}</h3>
+      {title && (
+        <div className="text-c">
+          <div className="mx-2 mb-4 text-md">
+            <h3>{title}</h3>
+          </div>
         </div>
-      </div>
-      <table className=" p-4 bg-white rounded-lg shadow w-full">
+      )}
+      <table className=" p-4 bg-blue-gray-50/70 rounded-lg shadow w-full text-sm border-gray-200">
         <thead>
           <tr>
-            <th class="border-b-2 p-1 dark:border-dark-5 whitespace-nowrap font-normal"></th>
+            <th class="border-b p-1  whitespace-nowrap font-normal border-gray-300"></th>
             {head &&
               head.map((labelHead) => {
                 return (
                   <th
-                    className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c"
+                    className="border-b p-3 whitespace-nowrap font-normal text-c border-gray-300"
                     key={labelHead}
                   >
                     {labelHead}
@@ -26,7 +28,7 @@ const TableShow = (props) => {
                 );
               })}
             {status && (
-              <th class="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
+              <th class="border-b p-4 whitespace-nowrap font-normal text-c border-gray-300">
                 Status
               </th>
             )}
@@ -34,21 +36,19 @@ const TableShow = (props) => {
         </thead>
         <tbody>
           <tr className="text-c">
-            <td className="border-b-2 p-1 dark:border-dark-5 border-r text-center">
-              1
-            </td>
+            <td className="border-b p-1 border-r text-center">1</td>
             {head &&
               head.map(() => {
                 return (
                   <>
-                    <td className="border-b-2 p-4 dark:border-dark-5 border-r text-center">
+                    <td className="border-b p-3 border-r text-center border-gray-300">
                       {Math.floor(Math.random() * 2000)}
                     </td>
                   </>
                 );
               })}
             {status && (
-              <td className="border-b-2 p-1 dark:border-dark-5 border-r text-center">
+              <td className="border-b p-1 border-r text-center border-gray-300">
                 <Chip variant="gradient" color="yellow" value="Pending" />
               </td>
             )}

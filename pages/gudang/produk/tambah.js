@@ -7,6 +7,7 @@ import {
   Select,
   Textarea,
 } from "@material-tailwind/react";
+import TableShow from "../../../components/TableComponents/TableShow";
 
 const Tambah = () => {
   return (
@@ -61,50 +62,23 @@ const Tambah = () => {
             </div>
           </Card>
         </div>
-
         <Card className="overflow-hidden mt-5 p-5">
-          <table className="table bg-white p-4 w-full border">
-            <tr>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Name
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Product Code
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Category
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Brand
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Buy Price
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Price Recommendation
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Profit Margin
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Property
-              </th>
-              <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-c">
-                Supplier
-              </th>
-            </tr>
-            <tbody className="text-c">
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-              <td className="p-2 border-r text-center">A</td>
-            </tbody>
-          </table>
+          <TableShow
+            head={[
+              "Name",
+              "Product Code",
+              "Category",
+              "Brand",
+              "Buy Prince",
+              "Buy Rec",
+              "Profit",
+              "Property",
+              "Supplier",
+            ]}
+          />
+          <div className=" mt-5 flex justify-end">
+            <Button color="deep-orange">Save</Button>
+          </div>
         </Card>
       </div>
     </>

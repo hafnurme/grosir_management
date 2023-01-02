@@ -1,6 +1,37 @@
-import { Button } from "@material-tailwind/react";
+import {
+  Button,
+  Tab,
+  TabPanel,
+  Tabs,
+  TabsBody,
+  TabsHeader,
+} from "@material-tailwind/react";
 import CardComponents from "../../../components/CardComponents";
 import TableShow from "../../../components/TableComponents/TableShow";
+
+const data = [
+  {
+    label: "Pending",
+    value: "html",
+    desc: `It really matters and then like it really doesn't matter.
+    What matters is the people who are sparked by it. And the people 
+    who are like offended by it, it doesn't matter.`,
+  },
+  {
+    label: "Completed",
+    value: "react",
+    desc: `Because it's about motivating the doers. Because I'm here
+    to follow my dreams and inspire other people to follow their dreams, too.`,
+  },
+
+  {
+    label: "Outdated",
+    value: "vue",
+    desc: `We're not always in the position that we want to be at.
+    We're constantly growing. We're constantly making mistakes. We're 
+    constantly trying to express ourselves and actualize our dreams.`,
+  },
+];
 
 const Pengiriman = () => {
   return (
@@ -10,28 +41,27 @@ const Pengiriman = () => {
         <CardComponents />
         <CardComponents />
       </div>
-      <div className="mt-5 text-c">
-        <ul className="flex flex-wrap text-center text-gray-500 border-b border-gray-200 ">
-          <li className="mr-2">
-            <a className="inline-block p-2 bg-amber-400 shadow-md text-white rounded-lg active ">
-              Pending
-            </a>
-          </li>
-          <li className="mr-2">
-            <a className="inline-block p-2 rounded-lg hover:text-gray-700 hover:bg-gray-300 hover:shadow-lg ">
-              Outdated
-            </a>
-          </li>
-          <li className="mr-2">
-            <a className="inline-block p-2 rounded-lg hover:text-white hover:bg-green-300 hover:shadow-lg">
-              Completed
-            </a>
-          </li>
-        </ul>
-      </div>
+      <div className="mt-5 text-c"></div>
 
-      <div>
-        <TableShow head={["Request Id", "Produk Id", "Amount", "Order Date"]} />
+      <div className="my-5 p-5 bg-white rounded-md shadow-md">
+        <Tabs value="html">
+          <TabsHeader>
+            {data.map(({ label, value }) => (
+              <Tab key={value} value={value}>
+                {label}
+              </Tab>
+            ))}
+          </TabsHeader>
+          <TabsBody>
+            {data.map(({ value, desc }) => (
+              <TabPanel key={value} value={value} className="p-0 pt-5">
+                <TableShow
+                  head={["Request Id", "Produk Id", "Amount", "Order Date"]}
+                />
+              </TabPanel>
+            ))}
+          </TabsBody>
+        </Tabs>
       </div>
     </>
   );
