@@ -1,26 +1,94 @@
 import { CircleStackIcon, CubeIcon } from "@heroicons/react/20/solid"
-import Chart, {
+import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
-    Title,
     Tooltip,
     Legend,
 } from "chart.js/auto"
-import { Line } from "react-chartjs-2"
+import { useEffect, useRef, useState } from "react"
+import { Line, Chart } from "react-chartjs-2"
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Tooltip,
+    Legend
+);
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const colors = [
+    'red',
+    'orange',
+    'yellow',
+    'lime',
+    'green',
+    'teal',
+    'blue',
+    'purple',
+];
+
+export const data = {
+    labels,
+    datasets: [
+        {
+            label: 'Dataset 1',
+            data: [180, 300, 280, 100, 500, 230, 200],
+        },
+        {
+            label: 'Dataset 2',
+            data: [150, 100, 200, 146, 256, 450, 330],
+        },
+    ],
+};
+
+function createGradient(ctx, area) {
+    const gradient = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradient.addColorStop(1, "rgba(20,23,39,0.2)");
+    gradient.addColorStop(0.2, "rgba(72,72,176,0.0)");
+    gradient.addColorStop(0, "rgba(20,23,39,0)"); //purple colors
+
+    return gradient;
+}
 
 export default function Dashboard() {
 
-    Chart.register(
-        CategoryScale,
-        LinearScale,
-        PointElement,
-        LineElement,
-        Title,
-        Tooltip,
-        Legend)
+    const ref = useRef()
+    const [chartData, setChartData] = useState(
+        {
+            datasets: [],
+        })
+
+    useEffect(() => {
+        const chart = ref.current;
+
+        if (!chart) {
+            return;
+        }
+
+        const chartData = {
+            ...data,
+            datasets: data.datasets.map(dataset => ({
+                ...dataset,
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#f8fc03",
+                borderWidth: 3,
+                fill: true,
+                backgroundColor: createGradient(chart.ctx, chart.chartArea),
+                maxBarThickness: 6,
+            })),
+        };
+
+        setChartData(chartData);
+    }, [])
+
 
     return (
         <>
@@ -126,26 +194,9 @@ export default function Dashboard() {
             </div>
             <div className="w-full h-80">
                 <Line
-
+                    ref={ref}
                     datasetIdKey="1"
-                    data={{
-                        labels: ["January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"
-                        ],
-                        datasets: [
-                            {
-                                id: 1,
-                                label: '',
-                                data: [50, 40, 300, 220, 500, 250, 400, 230, 500, 230, 330, 200],
-                                tension: 0.4,
-                                borderWidth: 0,
-                                pointRadius: 0,
-                                borderColor: "#000",
-                                borderWidth: 3,
-                                fill: true
-                            },
-                        ],
-                    }}
+                    data={chartData}
                     options={{
                         responsive: true,
                         maintainAspectRatio: false,
