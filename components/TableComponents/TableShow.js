@@ -15,7 +15,7 @@ const TableShow = (props) => {
       <table className=" p-4 bg-blue-gray-50/70 rounded-lg shadow w-full text-sm border-gray-200">
         <thead>
           <tr>
-            <th class="border-b p-1  whitespace-nowrap font-normal text-c border-gray-300"></th>
+            <th class="border-b p-1  whitespace-nowrap font-normal border-gray-300"></th>
             {head &&
               head.map((labelHead) => {
                 return (

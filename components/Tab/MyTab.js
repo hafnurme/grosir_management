@@ -10,6 +10,8 @@ import {
   QueueListIcon,
   TagIcon,
   TruckIcon,
+  BuildingStorefrontIcon,
+  ShoppingBagIcon
 } from "@heroicons/react/20/solid";
 import { useDefaultTransition } from "../../hooks/useStyle";
 
@@ -61,6 +63,27 @@ const MyTab = (props) => {
         </div>
       );
     }
+    if (label.match(/branch/i)) {
+      return (
+        <div className="w-5 mr-2">
+          <BuildingStorefrontIcon />
+        </div>
+      );
+    }
+    if (label.match(/order/i)) {
+      return (
+        <div className="w-5 mr-2">
+          <ShoppingBagIcon />
+        </div>
+      );
+    }
+    if (label.match(/inventory/i)) {
+      return (
+        <div className="w-5 mr-2">
+          <CubeIcon />
+        </div>
+      );
+    }
   };
 
   useEffect(() => {
@@ -76,11 +99,10 @@ const MyTab = (props) => {
   return (
     <>
       <div
-        className={`mb-5 w-full cursor-pointer rounded-lg ${
-          router.pathname.split("/").includes(link.split("/")[2])
-            ? "bg-deep-orange-400 text-white shadow-lg"
-            : "text-gray-700"
-        } ${useDefaultTransition}`}
+        className={`mb-5 w-full cursor-pointer rounded-lg ${router.pathname.includes(link)
+          ? "bg-deep-orange-400 text-white shadow-lg translate-x-3"
+          : "text-gray-700"
+          } ${useDefaultTransition}`}
       >
         <Link href={link} className={`p-2 px-4 flex items-center`}>
           {renderIcon(label)} {label}
@@ -93,16 +115,14 @@ const MyTab = (props) => {
               <Link
                 href={link + child.link}
                 key={child.label}
-                className={`${
-                  childVisible
-                    ? "ml-1 mb-2 p-2 text-sm flex items-center translate-y-0" +
-                      useDefaultTransition
-                    : "-translate-y-5 delay-500 hidden"
-                } ${
-                  router.pathname == link + child.link
+                className={`${childVisible
+                  ? "ml-1 mb-2 p-2 text-sm flex items-center translate-y-0" +
+                  useDefaultTransition
+                  : "-translate-y-5 delay-500 hidden"
+                  } ${router.pathname == link + child.link
                     ? "shadow-lg bg-deep-orange-400 text-white text-sm p-2 rounded-lg"
                     : "text-gray-700"
-                }`}
+                  }`}
               >
                 {renderIcon(child.label)}
                 {child.label}
