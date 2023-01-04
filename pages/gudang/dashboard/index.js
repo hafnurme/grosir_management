@@ -20,9 +20,24 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex gap-5 mb-5">
-        <CardComponents />
-        <CardComponents />
-        <CardComponents />
+        <CardComponents>
+          <div className="text-center h-full w-full flex justify-center flex-col gap-3">
+            <h1 className="text-5xl">78</h1>
+            <h3>Total Product</h3>
+          </div>
+        </CardComponents>
+        <CardComponents>
+          <div className="text-center h-full w-full flex justify-center flex-col gap-3">
+            <h1 className="text-5xl">18</h1>
+            <h3>Exp Product</h3>
+          </div>
+        </CardComponents>
+        <CardComponents>
+          <div className="text-center h-full w-full flex justify-center flex-col gap-3">
+            <h1 className="text-5xl">8</h1>
+            <h3>Low Stock</h3>
+          </div>
+        </CardComponents>
       </div>
       <div className="my-5 p-5 bg-white rounded-md shadow-md">
         <TableShow head={expTableHead} title="Product expired" />

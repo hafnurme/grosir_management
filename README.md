@@ -1,4 +1,6 @@
-## Project starter
+<p align="center"><img src="./public/splash2.jpg"></p>
+
+# Project starter
 
 - npm install
 

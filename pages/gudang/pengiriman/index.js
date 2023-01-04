@@ -37,9 +37,24 @@ const Pengiriman = () => {
   return (
     <>
       <div className="flex gap-5">
-        <CardComponents />
-        <CardComponents />
-        <CardComponents />
+        <CardComponents>
+          <div className="text-center h-full w-full flex justify-center flex-col gap-3">
+            <h1 className="text-5xl">78</h1>
+            <h3>Pending</h3>
+          </div>
+        </CardComponents>
+        <CardComponents>
+          <div className="text-center h-full w-full flex justify-center flex-col gap-3">
+            <h1 className="text-5xl">12</h1>
+            <h3>Completed</h3>
+          </div>
+        </CardComponents>
+        <CardComponents>
+          <div className="text-center h-full w-full flex justify-center flex-col gap-3">
+            <h1 className="text-5xl">1</h1>
+            <h3>Outdated</h3>
+          </div>
+        </CardComponents>
       </div>
       <div className="mt-5 text-c"></div>
 

@@ -20,6 +20,7 @@ const Tambah = () => {
             <div className="mb-5">
               <ProductDetailForm />
             </div>
+            <hr className="mt-5 mb-7" />
             <WarehouseDetailForm />
             <div className="flex justify-end mt-5">
               <Button
