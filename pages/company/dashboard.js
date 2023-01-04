@@ -10,6 +10,7 @@ import {
 } from "chart.js/auto"
 import { useEffect, useRef, useState } from "react"
 import { Line, Chart } from "react-chartjs-2"
+import CardComponents from "../../components/CardComponents";
 
 ChartJS.register(
     CategoryScale,
@@ -78,7 +79,7 @@ export default function Dashboard() {
                 tension: 0.4,
                 borderWidth: 0,
                 pointRadius: 0,
-                borderColor: "#f8fc03",
+                borderColor: "#ff8000",
                 borderWidth: 3,
                 fill: true,
                 backgroundColor: createGradient(chart.ctx, chart.chartArea),
@@ -92,107 +93,46 @@ export default function Dashboard() {
 
     return (
         <>
-            <div class="flex flex-wrap -mx-3">
-
-                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                        <div class="flex-auto p-4">
-                            <div class="flex flex-row -mx-3 h-12">
-                                <div class="flex-none w-2/3 max-w-full px-3">
-                                    <div>
-                                        <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                                            Today's Sales
-                                        </p>
-                                        <h5 class="mb-0 font-bold">
-                                            Rp. 1.000.000,00
-                                            <span class="leading-normal ml-3 text-sm font-bold text-lime-500">+55%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="px-3 text-right basis-1/3">
-                                    <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                        <CircleStackIcon />
-                                    </div>
-                                </div>
+            <div className="flex gap-5 mb-5">
+                <CardComponents >
+                    <div className="flex justify-between items-center">
+                        <div className="text-lg font-medium text-gray-600 mb-1">Sales</div>
+                        <div class="px-3 text-right basis-1/3">
+                            <div class="inline-block w-8 h-8 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
+                                <CircleStackIcon />
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                        <div class="flex-auto p-4">
-                            <div class="flex flex-row -mx-3 h-12">
-                                <div class="flex-none w-2/3 max-w-full px-3">
-                                    <div>
-                                        <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                                            Products
-                                        </p>
-                                        <h5 class="mb-0 font-bold">
-                                            Rp. 1.000.000,00
-                                            <span class="leading-normal ml-3 text-sm font-bold text-lime-500">+55%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="px-3 text-right basis-1/3">
-                                    <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                        <CubeIcon />
-                                    </div>
-                                </div>
+                    <div className="text-2xl font-medium mb-1">1.200.000.000,00</div>
+                    <div className="ml-3 text-lg font-bold text-green-400">+55%</div>
+                </CardComponents>
+                <CardComponents >
+                    <div className="flex justify-between items-center">
+                        <div className="text-lg font-medium text-gray-600 mb-1">Products</div>
+                        <div class="px-3 text-right basis-1/3">
+                            <div class="inline-block w-8 h-8 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
+                                <CircleStackIcon />
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                        <div class="flex-auto p-4">
-                            <div class="flex flex-row -mx-3 h-12">
-                                <div class="flex-none w-2/3 max-w-full px-3">
-                                    <div>
-                                        <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                                            Inventory
-                                        </p>
-                                        <h5 class="mb-0 font-bold">
-                                            Rp. 1.000.000,00
-                                            <span class="leading-normal ml-3 text-sm font-bold text-lime-500">+55%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="px-3 text-right basis-1/3">
-                                    <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                        <CubeIcon />
-                                    </div>
-                                </div>
+                    <div className="text-2xl font-medium mb-1">122</div>
+                    <div className="ml-3 text-lg font-bold text-green-400">+55%</div>
+                </CardComponents>
+                <CardComponents >
+                    <div className="flex justify-between items-center">
+                        <div className="text-lg font-medium text-gray-600 mb-1">Sales</div>
+                        <div class="px-3 text-right basis-1/3">
+                            <div class="inline-block w-8 h-8 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
+                                <CircleStackIcon />
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                        <div class="flex-auto p-4">
-                            <div class="flex flex-row -mx-3 h-12">
-                                <div class="flex-none w-2/3 max-w-full px-3">
-                                    <div>
-                                        <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                                            Monthly Report
-                                        </p>
-                                        <h5 class="mb-0 font-bold">
-                                            Rp. 1.000.000,00
-                                            <span class="leading-normal ml-3 text-sm font-bold text-lime-500">+55%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="px-3 text-right basis-1/3">
-                                    <div class="inline-block w-12 h-12 text-center text-white p-2 rounded-lg bg-gradient-to-tl from-orange-700 to-orange-300">
-                                        <CircleStackIcon />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                    <div className="text-2xl font-medium mb-1">1.200.000.000,00</div>
+                    <div className="ml-3 text-lg font-bold text-green-400">+55%</div>
+                </CardComponents>
             </div>
-            <div className="w-full h-80">
+            <div className="w-full h-80 px-5 py-10">
+                <p className="text-xl font-semibold text-blue-gray-400 text-center">Monthly Report</p>
                 <Line
                     ref={ref}
                     datasetIdKey="1"
