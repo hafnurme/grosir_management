@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Provider from "next-auth/providers/credentials";
-
+const base_url = process.env.API_BASE_URL;
 export const NextAuthOptions = {
   providers: [
     Provider({
@@ -8,7 +8,7 @@ export const NextAuthOptions = {
       name: "credentials",
 
       async authorize(credentials, req) {
-        const tokenusrn = await fetch("http://127.0.0.1:8000/api/login", {
+        const tokenusrn = await fetch(base_url + "/api/login", {
           method: "POST",
           body: JSON.stringify({
             username: credentials.username,
