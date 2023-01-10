@@ -1,4 +1,3 @@
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/20/solid";
 import ProdukEdit from "../../../components/TableComponents/TableEdit";
 const ProdukList = () => {
   return (

@@ -1,17 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { Input, Button, CardHeader, CardBody } from "@material-tailwind/react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { Button } from "@material-tailwind/react";
+import { signIn } from "next-auth/react";
 
 export default function Home({ data }) {
-  const router = useRouter();
   const handleSub = async () => {
-    await signIn({
-      username: "admin",
-      password: "admin",
-      redirect: false,
-    });
+    await signIn();
   };
 
   return (

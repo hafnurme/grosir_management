@@ -17,7 +17,7 @@ export default withAuth(
     }
 
     if (
-      req.nextauth.token.user.role === "admin gudang" &&
+      req.nextauth.token.user.role === "admgudang" &&
       req.nextUrl.pathname.startsWith("/company")
     ) {
       return NextResponse.redirect(new URL("/gudang", req.url));

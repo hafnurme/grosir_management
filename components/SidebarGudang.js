@@ -1,5 +1,6 @@
 import { Button } from "@material-tailwind/react";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 import MyTab from "./Tab/MyTab";
 
 const Sidebar = () => {
@@ -38,9 +39,11 @@ const Sidebar = () => {
   return (
     <>
       <aside className="h-full w-full bg-white shadow box-border p-5">
-        <div className="box-border p-5 bg-black/5 rounded-lg mb-5 text-center">
-          <h2 className="text-lg font-semibold  text-c">Inventory Gudang</h2>
-        </div>
+        <Link href="/gudang">
+          <div className="box-border p-5 bg-black/5 rounded-lg mb-5 text-center">
+            <h2 className="text-lg font-semibold  text-c">Inventory Gudang</h2>
+          </div>
+        </Link>
         {tab.map((elem) => {
           if (elem.child) {
             return (

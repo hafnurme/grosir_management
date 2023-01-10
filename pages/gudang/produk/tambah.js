@@ -1,12 +1,5 @@
 import { PlusCircleIcon } from "@heroicons/react/20/solid";
-import {
-  Button,
-  Card,
-  Input,
-  Option,
-  Select,
-  Textarea,
-} from "@material-tailwind/react";
+import { Button, Card } from "@material-tailwind/react";
 import ProductDetailForm from "../../../components/FormComponents/ProductDetailForm";
 import WarehouseDetailForm from "../../../components/FormComponents/WarehouseDetailForm";
 import TableShow from "../../../components/TableComponents/TableShow";
