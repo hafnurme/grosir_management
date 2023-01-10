@@ -1,3 +1,5 @@
+import { Button } from "@material-tailwind/react";
+import { signOut } from "next-auth/react";
 import MyTab from "./Tab/MyTab";
 
 const Sidebar = () => {
@@ -20,6 +22,10 @@ const Sidebar = () => {
     },
   ];
 
+  const handleLogOut = () => {
+    signOut();
+  };
+
   return (
     <>
       <aside className="h-full w-full bg-white shadow box-border p-5 ">
@@ -41,6 +47,9 @@ const Sidebar = () => {
           }
           return <MyTab label={elem.label} link={elem.link} key={elem.label} />;
         })}
+        <Button color="red" onClick={handleLogOut}>
+          LogOut
+        </Button>
       </aside>
     </>
   );

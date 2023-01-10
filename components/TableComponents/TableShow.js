@@ -38,13 +38,10 @@ const TableShow = (props) => {
           <tr className="text-c">
             <td className="border-b p-1 border-r text-center">1</td>
             {head &&
-              head.map((labelHead) => {
+              head.map(() => {
                 return (
                   <>
-                    <td
-                      className="border-b p-3 border-r text-center border-gray-300"
-                      key={labelHead}
-                    >
+                    <td className="border-b p-3 border-r text-center border-gray-300">
                       {Math.floor(Math.random() * 2000)}
                     </td>
                   </>
