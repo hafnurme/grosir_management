@@ -92,8 +92,6 @@ const MyTab = (props) => {
     }
 
     setChildVisible(false);
-
-    console.log(childVisible);
   }, [router.pathname]);
 
   return (

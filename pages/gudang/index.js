@@ -1,10 +1,14 @@
-import Image from "next/image";
-import React from "react";
+import { getSession, useSession } from "next-auth/react";
 
-export default function index() {
+const GudangIndex = () => {
+  const { data: session, status } = useSession();
+
+  console.log(session);
   return (
-    <div>
-      <Image src="/splashimage-1.jpg" fill />
-    </div>
+    <>
+      <p>Hello World</p>
+    </>
   );
-}
+};
+
+export default GudangIndex;

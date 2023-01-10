@@ -2,12 +2,18 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Input, Button, CardHeader, CardBody } from "@material-tailwind/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
-export default function Home() {
+export default function Home({ data }) {
   const router = useRouter();
-  const handleSub = () => {
-    router.push("/gudang/dashboard");
+  const handleSub = async () => {
+    await signIn({
+      username: "admin",
+      password: "admin",
+      redirect: false,
+    });
   };
+
   return (
     <>
       <Head>
@@ -18,25 +24,24 @@ export default function Home() {
       </Head>
       <main className="min-h-screen flex flex-row justify-center items-center bg-white ">
         <div className="relative flex-1 h-screen">
-          <Image src="/splashimage-1.jpg" fill className="w-12" />
+          <Image
+            src="/splashimage-1.jpg"
+            fill
+            className="w-12"
+            alt="splash"
+            priority
+          />
         </div>
-        <form className="w-min p-10 flex justify-center">
-          <div className="w-96 h-min">
-            <CardHeader
-              color="transparent"
-              className="grid place-items-center p-2 shadow-none"
-            >
-              <h2 className="text-5xl font-semibold text-c">Login</h2>
-            </CardHeader>
-            <CardBody className="flex flex-col gap-8">
-              <Input label="Identifier" color="deep-orange" />
-              <Input label="Password" color="deep-orange" />
-              <Button color="deep-orange" onClick={handleSub}>
-                Submit
-              </Button>
-            </CardBody>
-          </div>
-        </form>
+        <div className="w-96 h-96 fixed top-0 bg-white mt-28 p-5 text-c">
+          <h2 className="text-lg mb-2">Wellcome</h2>
+          <h1 className="text-4xl font-semibold mb-5">
+            Grosir Management System
+          </h1>
+          <p className="mb-3">You are not logged yet!</p>
+          <Button color="deep-orange" onClick={handleSub}>
+            login
+          </Button>
+        </div>
       </main>
     </>
   );
