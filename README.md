@@ -10,3 +10,7 @@
 
 - domain/company/dashboard
 - domain/gudang/dashboard
+
+## Attention
+
+You have to configure env variables first
