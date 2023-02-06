@@ -1,9 +1,6 @@
-import {
-  InformationCircleIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/20/solid";
-import { Button, Input } from "@material-tailwind/react";
+import { Button, Card, Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
+import AddModal from "@/components/Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
 import UpdateModal from "../Modal/UpdateModal";
@@ -41,15 +38,25 @@ export default function BranchTable({
             </div>
           </div>
         )}
-        {search && (
-          <div className="flex">
-            <Input
-              label="Search"
-              color="deep-orange"
-              onChange={inputListener}
-            />
-          </div>
-        )}
+        <div className="flex gap-4">
+          {search && (
+            <div className="flex">
+              <Input
+                label="Search"
+                color="orange"
+                variant="standard"
+                onChange={inputListener}
+              />
+            </div>
+          )}
+          <AddModal
+            refreshData={refreshData}
+            addUrl="/api/branch"
+            itemHead={["branch_name", "leader_name", "contact", "address"]}
+            fieldType={["text", "text", "number", "text"]}
+            label="Tambah Branch"
+          />
+        </div>
       </div>
       <table className="w-full text-sm text-left text-gray-700">
         <thead className="text-xs text-c uppercase bg-gray-100">

@@ -25,4 +25,28 @@ export default async function handler(req, res) {
         res.status(500).json("Delete Failed , Server Error");
       });
   }
+
+  if (req.method === "PUT") {
+    const body = await req.body.data;
+
+    // body["contact"] = parseInt(body["contact"]);
+
+    const options = {
+      method: "PUT",
+      url: `${base_url}/api/product/supplier/${id}`,
+      headers: {
+        "Content-Type": "application/json",
+        token: session.accessToken,
+      },
+      data: body,
+    };
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
 }

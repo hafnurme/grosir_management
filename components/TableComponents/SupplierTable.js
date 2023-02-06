@@ -4,8 +4,10 @@ import {
 } from "@heroicons/react/20/solid";
 import { Button, Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
+import AddModal from "../Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
+import UpdateModal from "../Modal/UpdateModal";
 
 export default function SupplierTable({
   head,
@@ -44,15 +46,23 @@ export default function SupplierTable({
             </div>
           </div>
         )}
-        {search && (
-          <div className="flex">
+        <div className="flex gap-4">
+          {search && (
             <Input
               label="Search"
-              color="deep-orange"
+              color="orange"
+              variant="standard"
               onChange={inputListener}
             />
-          </div>
-        )}
+          )}
+          <AddModal
+            addUrl="/api/supplier"
+            itemHead={["supplier_name", "contact", "address"]}
+            fieldType={["text", "number", "text"]}
+            label="Tambah Supplier"
+            refreshData={refreshData}
+          />
+        </div>
       </div>
       <table className="w-full text-sm text-left text-gray-700">
         <thead className="text-xs text-c uppercase bg-gray-100">
@@ -85,14 +95,19 @@ export default function SupplierTable({
                     })}
                   <td className="px-3 py-2 flex gap-3 justify-end items-center">
                     <DetailModal item={object} />
-                    <Button variant="text" className="p-1 shadow-md">
-                      <PencilSquareIcon className="h-6 text-c" />
-                    </Button>
+                    <UpdateModal
+                      item={object}
+                      itemHead={["supplier_name", "contact", "address"]}
+                      updateUrl="/api/supplier/"
+                      refreshData={refreshData}
+                      itemIndex="supplier_id"
+                    />
                     <DeleteDialog
                       itemToDelete={object}
                       itemHead={head}
                       refreshData={refreshData}
                       deleteUrl="/api/supplier/"
+                      itemIndex="supplier_id"
                     />
                   </td>
                 </tr>

@@ -22,11 +22,19 @@ export default function Order() {
   return (
     <>
       <div className="my-3">
-        <OrderTable
-          head={["product_code", "amount", "order_date", "out_date", "status"]}
-          title="Order List"
-          data={order}
-        />
+        {order && (
+          <OrderTable
+            head={[
+              "product_code",
+              "amount",
+              "order_date",
+              "out_date",
+              "status",
+            ]}
+            title="Order List"
+            data={order.data}
+          />
+        )}
       </div>
     </>
   );

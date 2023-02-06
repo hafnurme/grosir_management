@@ -19,15 +19,13 @@ const Kategori = () => {
   return (
     <>
       <div>
-        <div className="bg-white p-4">
-          <CategoryTable
-            head={["category_name", "category_type"]}
-            title="Kategori Table"
-            search={true}
-            data={category}
-            refreshData={fetchProduct}
-          />
-        </div>
+        <CategoryTable
+          head={["category_name", "category_type"]}
+          title="Kategori Table"
+          search={true}
+          data={category}
+          refreshData={fetchProduct}
+        />
       </div>
     </>
   );

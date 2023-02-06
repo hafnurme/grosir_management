@@ -25,6 +25,8 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
 
     setFinalData(filteredData);
   };
+
+  console.log(finalData);
   return (
     <>
       <div className="flex justify-end items-center p-1 mb-4">

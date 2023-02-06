@@ -24,7 +24,7 @@ const Produk = () => {
           head={["product_code", "name", "brand", "category_id"]}
           title="Product List"
           search={true}
-          data={product[1]}
+          data={product}
           refreshData={fetchProduct}
         />
       )}

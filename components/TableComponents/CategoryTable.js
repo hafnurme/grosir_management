@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
 import CategoryAddForm from "@/components/Modal/CategoryAddModal";
 import UpdateModal from "@/components/Modal/UpdateModal";
+import AddModal from "@/components/Modal/AddModal";
 
 const CategoryTable = (props) => {
   const { head, title, search, data, refreshData } = props;
@@ -32,16 +33,25 @@ const CategoryTable = (props) => {
             </div>
           </div>
         )}
-        {search && (
-          <div className="flex items-center">
-            <CategoryAddForm refreshData={refreshData} />
-            <Input
-              label="Search"
-              color="deep-orange"
-              onChange={inputListener}
-            />
-          </div>
-        )}
+        <div className="flex gap-4">
+          {search && (
+            <div className="flex items-center">
+              <Input
+                label="Search"
+                color="orange"
+                variant="standard"
+                onChange={inputListener}
+              />
+            </div>
+          )}
+          <AddModal
+            refreshData={refreshData}
+            addUrl="/api/category"
+            itemHead={["category_name", "category_type"]}
+            fieldType={["text", "text"]}
+            label="Tambah Kategori"
+          />
+        </div>
       </div>
       <table className="w-full text-sm text-left text-gray-700">
         <thead className="text-xs text-c uppercase bg-gray-100">

@@ -48,6 +48,11 @@ export default function sidebar() {
       link: "/admin/warehouse",
       permission: ["admin", "lihat-gudang"],
     },
+    {
+      label: "Warehouse Request",
+      link: "/admin/warehouse_request",
+      permission: ["admin", "lihat-gudang"],
+    },
   ];
 
   const authorizePermissionTab = () => {
@@ -56,7 +61,7 @@ export default function sidebar() {
 
       Tab.filter((element) => {
         permission.map((permissionElement, index) => {
-          if (element.permission.includes(permissionElement.name)) {
+          if (element.permission.includes(permissionElement)) {
             authorizedTab.push(element);
           }
         });
