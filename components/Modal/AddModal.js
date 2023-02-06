@@ -16,6 +16,7 @@ export default function AddModal({
   refreshData,
   fieldType,
   label,
+  size,
 }) {
   const [open, setOpen] = useState(false);
   const [itemAdd, setItemAdd] = useState();
@@ -51,7 +52,7 @@ export default function AddModal({
       <Button onClick={handleOpen} color="orange" variant="filled">
         {label && label}
       </Button>
-      <Dialog open={open} handler={handleOpen} size="md">
+      <Dialog open={open} handler={handleOpen} size={size || "xl"}>
         <form
           className="w-full relative flex flex-col"
           onSubmit={(e) => {

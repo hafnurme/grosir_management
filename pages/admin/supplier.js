@@ -17,7 +17,7 @@ export default function supplier() {
 
   return (
     <>
-      <div className="my-3">
+      <div>
         <SupplierTable
           head={["supplier_name", "contact", "address"]}
           title="Supplier List"

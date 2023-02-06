@@ -16,6 +16,7 @@ export default function UpdateModal({
   updateUrl,
   refreshData,
   itemIndex,
+  size,
 }) {
   const [open, setOpen] = useState(false);
   const [itemUpdate, setItemUpdate] = useState();
@@ -43,6 +44,7 @@ export default function UpdateModal({
       .then((res) => {
         console.log(res.data);
         refreshData();
+        handleOpen();
       });
   };
 
@@ -53,9 +55,9 @@ export default function UpdateModal({
       <Button variant="text" className="p-1 shadow-md" onClick={handleOpen}>
         <PencilSquareIcon className="h-6 text-c" />
       </Button>
-      <Dialog open={open} handler={handleOpen} size="xxl">
+      <Dialog open={open} handler={handleOpen} size={size || "xl"}>
         <form
-          className="w-full relative flex flex-col h-screen"
+          className="w-full relative flex flex-col"
           onSubmit={(e) => {
             handleUpdate(e, item[`${itemIndex ? itemIndex : "id"}`]);
           }}

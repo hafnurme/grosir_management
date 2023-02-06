@@ -1,7 +1,6 @@
 import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
-import CategoryAddForm from "@/components/Modal/CategoryAddModal";
 import UpdateModal from "@/components/Modal/UpdateModal";
 import AddModal from "@/components/Modal/AddModal";
 
@@ -84,13 +83,15 @@ const CategoryTable = (props) => {
                     })}
                   <td className="px-3 py-2 flex gap-3 justify-end items-center">
                     <UpdateModal
-                      itemToUpdate={object}
+                      item={object}
                       itemHead={head}
+                      itemIndex="category_id"
                       refreshData={refreshData}
                       updateUrl="/api/category/"
                     />
                     <DeleteDialog
                       itemToDelete={object}
+                      itemIndex="category _id"
                       itemHead={head}
                       refreshData={refreshData}
                       deleteUrl="/api/category/"

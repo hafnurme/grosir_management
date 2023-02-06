@@ -2,7 +2,7 @@ import {
   InformationCircleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/20/solid";
-import { Button, Input } from "@material-tailwind/react";
+import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import AddModal from "../Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
@@ -40,7 +40,7 @@ export default function SupplierTable({
     <>
       <div className="flex justify-between items-center mb-4 p-1">
         {title && (
-          <div className="text-c">
+          <div>
             <div className="mx-2 text-2xl font-semibold">
               <h3>{title}</h3>
             </div>
@@ -48,12 +48,14 @@ export default function SupplierTable({
         )}
         <div className="flex gap-4">
           {search && (
-            <Input
-              label="Search"
-              color="orange"
-              variant="standard"
-              onChange={inputListener}
-            />
+            <div>
+              <Input
+                label="Search"
+                color="orange"
+                variant="standard"
+                onChange={inputListener}
+              />
+            </div>
           )}
           <AddModal
             addUrl="/api/supplier"
@@ -64,57 +66,43 @@ export default function SupplierTable({
           />
         </div>
       </div>
-      <table className="w-full text-sm text-left text-gray-700">
-        <thead className="text-xs text-c uppercase bg-gray-100">
-          <tr>
-            <th scope="col" className="px-6 py-3"></th>
-            {head &&
-              head.map((e, i) => {
-                return (
-                  <th key={i} className="px-6 py-3">
-                    {e}
-                  </th>
-                );
-              })}
-            <th scope="col" className="px-6 py-3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {finalData &&
-            finalData.map((object, index) => {
-              return (
-                <tr className="bg-white border-b text-c" key={index}>
-                  <td className="px-6 py-3 w-10 text-center">{index + 1}</td>
-                  {head &&
-                    head.map((elem, i) => {
-                      return (
-                        <td className="px-6 py-3" key={Math.random() * 100 * i}>
-                          {object[elem]}
-                        </td>
-                      );
-                    })}
-                  <td className="px-3 py-2 flex gap-3 justify-end items-center">
-                    <DetailModal item={object} />
-                    <UpdateModal
-                      item={object}
-                      itemHead={["supplier_name", "contact", "address"]}
-                      updateUrl="/api/supplier/"
-                      refreshData={refreshData}
-                      itemIndex="supplier_id"
-                    />
-                    <DeleteDialog
-                      itemToDelete={object}
-                      itemHead={head}
-                      refreshData={refreshData}
-                      deleteUrl="/api/supplier/"
-                      itemIndex="supplier_id"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        {finalData &&
+          finalData.map((object, index) => {
+            return (
+              <Card key={index} className="p-4 flex justify-between">
+                <div>
+                  <Typography variant="h5" className="mb-1">
+                    {object["supplier_name"]}
+                  </Typography>
+                  <Typography className="text-sm font-semibold mb-2">
+                    {object["address"]}
+                  </Typography>
+                  <Typography className="text-sm mb-1">
+                    Contact : {object["contact"]}
+                  </Typography>
+                </div>
+                <div className="flex gap-2 mt-2">
+                  <DetailModal item={object} />
+                  <UpdateModal
+                    item={object}
+                    itemHead={["supplier_name", "contact", "address"]}
+                    updateUrl="/api/supplier/"
+                    refreshData={refreshData}
+                    itemIndex="supplier_id"
+                  />
+                  <DeleteDialog
+                    itemToDelete={object}
+                    itemHead={head}
+                    refreshData={refreshData}
+                    deleteUrl="/api/supplier/"
+                    itemIndex="supplier_id"
+                  />
+                </div>
+              </Card>
+            );
+          })}
+      </div>
     </>
   );
 }

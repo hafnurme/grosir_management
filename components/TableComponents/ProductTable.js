@@ -26,7 +26,6 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
     setFinalData(filteredData);
   };
 
-  console.log(finalData);
   return (
     <>
       <div className="flex justify-end items-center p-1 mb-4">
@@ -34,7 +33,8 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
           <div className="flex">
             <Input
               label="Search"
-              color="deep-orange"
+              color="orange"
+              variant="standard"
               onChange={inputListener}
             />
           </div>
@@ -64,7 +64,10 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
                   {head &&
                     head.map((elem, i) => {
                       return (
-                        <td className="px-6 py-3" key={Math.random() * 100 * i}>
+                        <td
+                          className="px-6 py-3 truncate"
+                          key={Math.random() * 100 * i}
+                        >
                           {object[elem]}
                         </td>
                       );

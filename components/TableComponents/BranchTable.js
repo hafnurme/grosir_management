@@ -1,4 +1,4 @@
-import { Button, Card, Input } from "@material-tailwind/react";
+import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import AddModal from "@/components/Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
@@ -58,62 +58,51 @@ export default function BranchTable({
           />
         </div>
       </div>
-      <table className="w-full text-sm text-left text-gray-700">
-        <thead className="text-xs text-c uppercase bg-gray-100">
-          <tr>
-            <th scope="col" className="px-6 py-3"></th>
-            {head &&
-              head.map((e, i) => {
-                return (
-                  <th key={i} className="px-6 py-3">
-                    {e}
-                  </th>
-                );
-              })}
-            <th scope="col" className="px-6 py-3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {finalData &&
-            finalData.map((object, index) => {
-              return (
-                <tr className="bg-white border-b text-c" key={index}>
-                  <td className="px-6 py-3 w-10 text-center">{index + 1}</td>
-                  {head &&
-                    head.map((elem, i) => {
-                      return (
-                        <td className="px-6 py-3" key={Math.random() * 100 * i}>
-                          {object[elem]}
-                        </td>
-                      );
-                    })}
-                  <td className="px-3 py-2 flex gap-3 justify-end items-center">
-                    <DetailModal item={object} />
-                    <UpdateModal
-                      item={object}
-                      itemHead={[
-                        "branch_name",
-                        "leader_name",
-                        "contact",
-                        "address",
-                      ]}
-                      updateUrl="/api/branch/"
-                      refreshData={refreshData}
-                      itemIndex="branch_id"
-                    />
-                    <DeleteDialog
-                      itemToDelete={object}
-                      itemHead={head}
-                      refreshData={refreshData}
-                      itemIndex="branch_id"
-                      deleteUrl="/api/branch/"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      <div className="grid grid-cols-3 gap-4">
+        {finalData &&
+          finalData.map((object, index) => {
+            return (
+              <Card key={index} className="p-4 flex justify-between">
+                <div>
+                  <Typography variant="h5" className="mb-1">
+                    {object["branch_name"]}
+                  </Typography>
+                  <Typography className="text-sm font-semibold mb-2">
+                    {object["address"]}
+                  </Typography>
+                  <Typography className="text-sm mb-1">
+                    Manager : {object["leader_name"]}
+                  </Typography>
+                  <Typography className="text-sm mb-1">
+                    Contact : {object["contact"]}
+                  </Typography>
+                </div>
+                <div className="flex gap-2 mt-2">
+                  <DetailModal item={object} />
+                  <UpdateModal
+                    item={object}
+                    itemHead={[
+                      "branch_name",
+                      "leader_name",
+                      "contact",
+                      "address",
+                    ]}
+                    updateUrl="/api/branch/"
+                    refreshData={refreshData}
+                    itemIndex="branch_id"
+                  />
+                  <DeleteDialog
+                    itemToDelete={object}
+                    itemHead={head}
+                    refreshData={refreshData}
+                    itemIndex="branch_id"
+                    deleteUrl="/api/branch/"
+                  />
+                </div>
+              </Card>
+            );
+          })}
+      </div>
     </>
   );
 }
