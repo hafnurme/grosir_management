@@ -1,7 +1,6 @@
 import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
-import UpdateModal from "@/components/Modal/EditModal";
 import CategoryAddForm from "@/components/Modal/CategoryAddModal";
 import UpdateModal from "@/components/Modal/UpdateModal";
 

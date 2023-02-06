@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (req.method === "DELETE") {
     const options = {
       method: "DELETE",
-      url: `${base_url}/api/product/${id}`,
+      url: `${base_url}/api/warehouse/${id}`,
       headers: {
         token: session.accessToken,
       },
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
     const options = {
       method: "PUT",
-      url: `${base_url}/api/product/${id}`,
+      url: `${base_url}/api/warehouse/${id}`,
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         token: session.accessToken,

@@ -1,5 +1,6 @@
 import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
+import DeleteModal from "@/components/Modal/DeleteModal";
 
 export default function WarehouseTable({
   head,
@@ -80,13 +81,13 @@ export default function WarehouseTable({
                       ]}
                       updateUrl="/api/product/"
                       refreshData={refreshData}
-                    />
-                    <DeleteDialog
+                    />*/}
+                    <DeleteModal
                       itemToDelete={object}
                       itemHead={head}
-                      deleteUrl="/api/product/"
+                      deleteUrl="/api/warehouse/"
                       refreshData={refreshData}
-                    /> */}
+                    />
                   </td>
                 </tr>
               );

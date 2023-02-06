@@ -12,7 +12,6 @@ export default function sidebar() {
   const { data: session, status } = useSession();
 
   console.log(session);
-
   const Tab = [
     {
       label: "Produk",
@@ -37,7 +36,7 @@ export default function sidebar() {
     {
       label: "Order",
       link: "/admin/order",
-      permission: ["admin", "lihat-request-pesanan"],
+      permission: ["admin"],
     },
     {
       label: "Supplier",

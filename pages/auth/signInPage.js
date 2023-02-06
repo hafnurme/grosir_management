@@ -63,15 +63,17 @@ export default function signInPage() {
           />
         </div>
         <form
-          className="w-96 bg-white p-5 flex justify-center fixed top-1/2 -translate-y-1/2"
+          className="w-96 bg-white p-6 flex justify-center fixed top-1/2 -translate-y-1/2"
           onSubmit={handleSub}
         >
           <div className="w-96 h-min">
             <CardHeader color="transparent" className="mx-0 mt-0 shadow-none">
-              <h2 className="mb-2 text-lg text-black">Form</h2>
-              <h2 className="text-4xl font-semibold mb-5 text-black">Login</h2>
+              <h2 className="text-4xl font-semibold mb-4  text-black">Login</h2>
+              {inputRequired === false && (
+                <p className="mb-4">Fill the required credentials</p>
+              )}
             </CardHeader>
-            <CardBody className="flex flex-col gap-3 p-0">
+            <CardBody className="flex flex-col gap-4 p-0">
               <Input
                 label="Username"
                 color="orange"
@@ -90,9 +92,6 @@ export default function signInPage() {
               <Button color="orange" variant="gradient" onClick={handleSub}>
                 Login
               </Button>
-              {inputRequired === false && (
-                <p className="text-center">Fill the required credentials</p>
-              )}
               {loginError === true && (
                 <p className="text-red-500">Login Error</p>
               )}
