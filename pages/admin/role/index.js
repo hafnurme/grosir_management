@@ -34,10 +34,15 @@ const Produk = () => {
 
         const res = await axios.post("/api/Role", {
             data: { name, permision: permisionList.toString() }
-        }).catch(err => {
-            setErrName(err.response.data.name)
-            setErrPermision(err.response.data.permision)
         })
+            .then(e => {
+                fetchRole()
+                setOpenDialog(false)
+            })
+            .catch(err => {
+                setErrName(err.response.data.name)
+                setErrPermision(err.response.data.permision)
+            })
 
     }
 
