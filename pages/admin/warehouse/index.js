@@ -3,14 +3,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function index() {
-  const [warehouse, setwarehouse] = useState();
+  const [warehouse, setWarehouse] = useState();
 
   const fetchProduct = async () => {
     const dataTemp = await axios.get("/api/warehouse").then((res) => {
       return res.data;
     });
 
-    setwarehouse(dataTemp);
+    setWarehouse(dataTemp);
   };
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function index() {
           ]}
           title="Warehouse List"
           search={true}
-          data={warehouse}
+          data={warehouse.data}
           refreshData={fetchProduct}
         />
       )}

@@ -49,6 +49,11 @@ export default function sidebar() {
       permission: ["admin", "lihat-gudang"],
     },
     {
+      label: "Simpan ke Warehouse",
+      link: "/admin/warehouse/store",
+      permission: ["admin", "tambah-detail-gudang"],
+    },
+    {
       label: "Warehouse Request",
       link: "/admin/warehouse_request",
       permission: ["admin", "lihat-gudang"],
