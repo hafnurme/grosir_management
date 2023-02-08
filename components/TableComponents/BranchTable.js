@@ -44,18 +44,11 @@ export default function BranchTable({
               <Input
                 label="Search"
                 color="orange"
-                variant="standard"
+                variant="outlined"
                 onChange={inputListener}
               />
             </div>
           )}
-          <AddModal
-            refreshData={refreshData}
-            addUrl="/api/branch"
-            itemHead={["branch_name", "leader_name", "contact", "address"]}
-            fieldType={["text", "text", "number", "text"]}
-            label="Tambah Branch"
-          />
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4">
@@ -78,7 +71,7 @@ export default function BranchTable({
                   </Typography>
                 </div>
                 <div className="flex gap-2 mt-2">
-                  <DetailModal item={object} />
+                  <DetailModal item={object} size="xl" />
                   <UpdateModal
                     item={object}
                     itemHead={[

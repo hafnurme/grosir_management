@@ -39,21 +39,19 @@ export default function DeleteModal({
       </Button>
       <Dialog open={open} handler={handleOpen} size={"md"}>
         <DialogHeader>Confirm</DialogHeader>
-        <DialogBody className="text-c bg-blue-gray-50" divider>
+        <DialogBody className="text-c bg-blue-gray-50 text-gray-800" divider>
           <div className="w-full m-2">
-            <p className="mb-3">Are you sure want to delete :</p>
+            <p className="mb-3 font-semibold">Are you sure want to delete :</p>
             <div>
               {itemHead &&
                 itemHead.map((elem, i) => {
                   return (
                     <div className="border-b py-1" key={i}>
-                      <label className="uppercase min-w-[150px] inline-block">
+                      <label className="uppercase min-w-[150px] inline-block font-semibold">
                         {elem}
                       </label>
                       <span className="mr-2">:</span>
-                      <p className="font-semibold inline-block">
-                        {itemToDelete[elem]}
-                      </p>
+                      <p className="inline-block">{itemToDelete[elem]}</p>
                     </div>
                   );
                 })}

@@ -23,11 +23,13 @@ const TambahProduk = () => {
 
   return (
     <>
-      <div>
-        <div className="w-full bg-white p-5">
-          <ProductDetailForm category={category} supplier={supplier} />
+      {supplier && (
+        <div>
+          <div className="w-full bg-white p-5">
+            <ProductDetailForm category={category} supplier={supplier.data} />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
 
-export default function DetailModal({ item }) {
+export default function DetailModal({ item, size }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -21,7 +21,7 @@ export default function DetailModal({ item }) {
       <Dialog
         open={open}
         handler={handleOpen}
-        size={"xxl"}
+        size={size || "xxl"}
         className="flex flex-col"
       >
         <DialogHeader>Detail</DialogHeader>
@@ -35,11 +35,10 @@ export default function DetailModal({ item }) {
                       className="border-b border-blue-gray-100 py-2"
                       key={index}
                     >
-                      <label className="uppercase min-w-[200px] inline-block">
-                        {key}
+                      <label className="uppercase min-w-[200px] block font-semibold">
+                        {key} :
                       </label>
-                      <span className="mr-4">:</span>
-                      <p className="font-semibold inline-block">{item[key]}</p>
+                      <p className="block text-gray-900">{item[key]}</p>
                     </div>
                   );
                 }

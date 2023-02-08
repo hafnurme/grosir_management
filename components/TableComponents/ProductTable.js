@@ -43,7 +43,6 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
       <table className="w-full text-sm text-left text-gray-700">
         <thead className="text-xs text-c uppercase bg-gray-100">
           <tr>
-            <th scope="col" className="px-6 py-3"></th>
             {head &&
               head.map((elem, i) => {
                 return (
@@ -60,7 +59,6 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
             finalData.map((object, indexp) => {
               return (
                 <tr className="bg-white border-b text-c" key={indexp}>
-                  <td className="px-6 py-3 w-10 text-center">{indexp + 1}</td>
                   {head &&
                     head.map((elem, i) => {
                       return (

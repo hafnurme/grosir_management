@@ -60,9 +60,11 @@ export default function SupplierTable({
           <AddModal
             addUrl="/api/supplier"
             itemHead={["supplier_name", "contact", "address"]}
-            fieldType={["text", "number", "text"]}
+            fieldType={["text", "number", "textarea"]}
             label="Tambah Supplier"
             refreshData={refreshData}
+            col="1"
+            size="md"
           />
         </div>
       </div>
@@ -83,13 +85,15 @@ export default function SupplierTable({
                   </Typography>
                 </div>
                 <div className="flex gap-2 mt-2">
-                  <DetailModal item={object} />
+                  <DetailModal item={object} size="xl" />
                   <UpdateModal
                     item={object}
                     itemHead={["supplier_name", "contact", "address"]}
                     updateUrl="/api/supplier/"
                     refreshData={refreshData}
                     itemIndex="supplier_id"
+                    col={1}
+                    size="md"
                   />
                   <DeleteDialog
                     itemToDelete={object}

@@ -17,6 +17,7 @@ export default function UpdateModal({
   refreshData,
   itemIndex,
   size,
+  col,
 }) {
   const [open, setOpen] = useState(false);
   const [itemUpdate, setItemUpdate] = useState();
@@ -64,7 +65,7 @@ export default function UpdateModal({
         >
           <DialogHeader>Update</DialogHeader>
           <DialogBody className="bg-blue-gray-50 flex-1" divider>
-            <div className="grid grid-cols-2 gap-5 h-min w-full">
+            <div className={`grid grid-cols-${col || "2"} gap-5 h-min w-full`}>
               {itemUpdate &&
                 itemHead.map((key, index) => {
                   return (

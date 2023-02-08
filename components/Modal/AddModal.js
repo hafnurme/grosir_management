@@ -17,6 +17,7 @@ export default function AddModal({
   fieldType,
   label,
   size,
+  col,
 }) {
   const [open, setOpen] = useState(false);
   const [itemAdd, setItemAdd] = useState();
@@ -61,7 +62,7 @@ export default function AddModal({
         >
           <DialogHeader>Add</DialogHeader>
           <DialogBody className="bg-blue-gray-50 flex-1" divider>
-            <div className="grid grid-cols-2 gap-5 h-min w-full">
+            <div className={`grid grid-cols-${col || "2"} gap-5 h-min w-full`}>
               {itemHead &&
                 itemHead.map((key, index) => {
                   return (
