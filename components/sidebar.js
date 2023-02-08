@@ -58,6 +58,12 @@ export default function sidebar() {
       link: "/admin/warehouse_request",
       permission: ["admin", "lihat-gudang"],
     },
+
+    {
+      label: "Role",
+      link: "/admin/role",
+      permission: ["admin"],
+    },
   ];
 
   const authorizePermissionTab = () => {
