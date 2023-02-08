@@ -80,7 +80,6 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
                         "name",
                         "category_id",
                         "description",
-                        "supplier_id",
                       ]}
                       updateUrl="/api/product/"
                       refreshData={refreshData}

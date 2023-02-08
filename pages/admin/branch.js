@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlusCircleIcon } from "@heroicons/react/20/solid";
+import { ArrowPathIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
 import { Button, Card, IconButton, Input } from "@material-tailwind/react";
 import axios from "axios";
 import BranchTable from "../../components/TableComponents/BranchTable";
@@ -120,9 +120,14 @@ export default function Branch() {
                 addUrl="/api/branch"
                 itemHead={["branch_name", "leader_name", "contact", "address"]}
                 fieldType={["text", "text", "number", "text"]}
+                col={"1"}
+                size={"md"}
                 label="Tambah Branch"
               />
               <div className="flex gap-1">
+                <IconButton onClick={fetchBranch}>
+                  <ArrowPathIcon className="h-6" />
+                </IconButton>
                 <Links />
               </div>
             </div>

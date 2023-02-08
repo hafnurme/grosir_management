@@ -4,6 +4,7 @@ import SupplierTable from "@/components/TableComponents/SupplierTable";
 import AddModal from "@/components/Modal/AddModal";
 import { IconButton } from "@material-tailwind/react";
 import { getSession } from "next-auth/react";
+import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function supplier() {
   const [supplier, setSupplier] = useState();
@@ -45,15 +46,6 @@ export default function supplier() {
         >
           Prev
         </IconButton>
-        {supplier.current_page != 1 && supplier.current_page - 1 != 1 && (
-          <IconButton
-            onClick={() => {
-              paginateNavigate(supplier.first_page_url);
-            }}
-          >
-            1...
-          </IconButton>
-        )}
         {supplier.current_page != 1 && (
           <IconButton
             onClick={() => {
@@ -107,19 +99,40 @@ export default function supplier() {
       </>
     );
   };
+
+  const handleSearch = async (search) => {
+    search = search.trim();
+    if (search || search !== "") {
+      console.log(search);
+      console.log("first");
+      const dataTemp = await axios
+        .post(`/api/supplier/name`, { data: { supplier_name: search } })
+        .then((res) => {
+          return res.data;
+        });
+
+      setSupplier(dataTemp);
+    }
+  };
+
   return (
     <>
       {supplier && (
-        <>
-          <div className="flex justify-between mb-4">
+        <div className="relative">
+          <div className="flex justify-between mb-4 sticky top-0 z-20 bg-blue-gray-100">
             <AddModal
               addUrl="/api/supplier"
               itemHead={["supplier_name", "contact", "address"]}
               fieldType={["text", "number", "text"]}
               label="Tambah Supplier"
               refreshData={fetchSupplier}
+              col="1"
+              size={"md"}
             />
             <div className="flex gap-1">
+              <IconButton onClick={fetchSupplier}>
+                <ArrowPathIcon className="h-6" />
+              </IconButton>
               <Links />
             </div>
           </div>
@@ -128,11 +141,12 @@ export default function supplier() {
               head={["supplier_name", "contact", "address"]}
               title="Supplier List"
               search
-              data={supplier}
+              data={supplier.data}
               refreshData={fetchSupplier}
+              handleSearch={handleSearch}
             />
           </div>
-        </>
+        </div>
       )}
     </>
   );

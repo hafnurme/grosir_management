@@ -1,8 +1,15 @@
 import {
   InformationCircleIcon,
+  MagnifyingGlassIcon,
   PencilSquareIcon,
 } from "@heroicons/react/20/solid";
-import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import {
+  Button,
+  Card,
+  IconButton,
+  Input,
+  Typography,
+} from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import AddModal from "../Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
@@ -15,26 +22,14 @@ export default function SupplierTable({
   search,
   data,
   refreshData,
+  handleSearch,
 }) {
   const [finalData, setFinalData] = useState();
+  const [searchQuery, setSearchQuery] = useState();
 
   useEffect(() => {
     setFinalData(data);
   }, [data]);
-
-  const inputListener = (input) => {
-    const filteredData = data.filter((e) => {
-      const key = new RegExp(input.target.value, "i");
-      if (
-        e.supplier_name.match(key) ||
-        e.contact.match(key) ||
-        e.address.match(key)
-      ) {
-        return e;
-      }
-    });
-    setFinalData(filteredData);
-  };
 
   return (
     <>
@@ -48,24 +43,26 @@ export default function SupplierTable({
         )}
         <div className="flex gap-4">
           {search && (
-            <div>
+            <div className="flex gap-2">
               <Input
                 label="Search"
                 color="orange"
-                variant="standard"
-                onChange={inputListener}
+                variant="outlined"
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                }}
               />
+              <IconButton
+                className="w-20"
+                color="orange"
+                onClick={() => {
+                  handleSearch(searchQuery);
+                }}
+              >
+                <MagnifyingGlassIcon className="h-6" />
+              </IconButton>
             </div>
           )}
-          <AddModal
-            addUrl="/api/supplier"
-            itemHead={["supplier_name", "contact", "address"]}
-            fieldType={["text", "number", "textarea"]}
-            label="Tambah Supplier"
-            refreshData={refreshData}
-            col="1"
-            size="md"
-          />
         </div>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
