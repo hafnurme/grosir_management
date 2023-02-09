@@ -49,6 +49,8 @@ const CategoryTable = (props) => {
             itemHead={["category_name", "category_type"]}
             fieldType={["text", "text"]}
             label="Tambah Kategori"
+            col="1"
+            size="md"
           />
         </div>
       </div>
@@ -88,6 +90,8 @@ const CategoryTable = (props) => {
                       itemIndex="category_id"
                       refreshData={refreshData}
                       updateUrl="/api/category/"
+                      col="1"
+                      size="md"
                     />
                     <DeleteDialog
                       itemToDelete={object}

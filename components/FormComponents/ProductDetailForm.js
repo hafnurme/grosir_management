@@ -9,6 +9,7 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { useState } from "react";
+import SupplierChoseModal from "../Modal/Produk/SupplierChose";
 
 const ProductDetailForm = ({ category, supplier }) => {
   const [categoryId, setCategoryId] = useState();
@@ -35,38 +36,14 @@ const ProductDetailForm = ({ category, supplier }) => {
     <>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
-          <h1 className="mb-5 text-2xl font-semibold text-gray-700">
-            Add Product
-          </h1>
-
-          <div className="flex flex-row gap-5">
-            <div className="w-[50%] flex gap-8 flex-col">
+          <div className="flex flex-row gap-4">
+            <div className="w-[50%] flex gap-4 flex-col">
               <Input
                 color="orange"
                 label="Product Name"
                 tabIndex="1"
                 name="name"
               />
-              {category && (
-                <Select
-                  label="Category"
-                  color="orange"
-                  name="category_id"
-                  tabIndex="3"
-                >
-                  {category.map((elements, index) => {
-                    return (
-                      <Option
-                        key={index}
-                        value={`${elements.id}`}
-                        onClick={() => setCategoryId(elements.category_id)}
-                      >
-                        {elements.category_name}
-                      </Option>
-                    );
-                  })}
-                </Select>
-              )}
               <Input
                 color="orange"
                 label="Buy Price"
@@ -74,7 +51,6 @@ const ProductDetailForm = ({ category, supplier }) => {
                 tabIndex="5"
                 type="number"
               />
-
               <Input
                 color="orange"
                 label="Profit Margin"
@@ -90,7 +66,7 @@ const ProductDetailForm = ({ category, supplier }) => {
               />
             </div>
 
-            <div className="w-[50%] flex flex-col gap-8">
+            <div className="w-[50%] flex flex-col gap-4">
               <Input
                 color="orange"
                 label="Product Code"
@@ -118,45 +94,11 @@ const ProductDetailForm = ({ category, supplier }) => {
                 tabIndex="8"
                 name="property"
               />
-              {supplier && (
-                <Select
-                  label="Supplier"
-                  color="orange"
-                  name="supplier_id"
-                  tabIndex="10"
-                  className="z-50"
-                >
-                  {supplier.map((elements, index) => {
-                    return (
-                      <Option
-                        key={index}
-                        value={`${elements.id}`}
-                        onClick={() => {
-                          setSupplierId(elements.supplier_id);
-                        }}
-                      >
-                        {elements.supplier_name}
-                      </Option>
-                    );
-                  })}
-                </Select>
-              )}
             </div>
           </div>
         </div>
-        <div className="flex justify-end mt-5">
-          <Button
-            type="submit"
-            className="flex w-40 items-center justify-center"
-            color="orange"
-          >
-            <div className="text-md">Add</div>
-            <div className="h-5 w-5 inline-block ml-2">
-              <PlusCircleIcon />
-            </div>
-          </Button>
-        </div>
       </form>
+      <SupplierChoseModal />
     </>
   );
 };

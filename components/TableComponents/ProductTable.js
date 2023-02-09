@@ -28,7 +28,14 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
 
   return (
     <>
-      <div className="flex justify-end items-center p-1 mb-4">
+      <div className="flex justify-between items-center p-1 mb-4">
+        {title && (
+          <div>
+            <div className="mx-2 text-2xl font-semibold">
+              <h3>{title}</h3>
+            </div>
+          </div>
+        )}
         {search && (
           <div className="flex">
             <Input

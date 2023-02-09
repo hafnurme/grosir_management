@@ -43,7 +43,7 @@ export default function UpdateModal({
         data: itemUpdate,
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data)
         refreshData();
         handleOpen();
       });

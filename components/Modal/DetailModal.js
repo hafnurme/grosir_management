@@ -29,7 +29,7 @@ export default function DetailModal({ item, size }) {
           <div className="grid grid-cols-2">
             {item &&
               Object.keys(item).map((key, index) => {
-                if (key !== "created_at" && key !== "updated_at") {
+                if (key !== "created_at" && key !== "updated_at" && key !== "deleted_at") {
                   return (
                     <div
                       className="border-b border-blue-gray-100 py-2"

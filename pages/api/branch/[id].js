@@ -16,6 +16,7 @@ export default async function handler(req, res) {
         token: session.accessToken,
       },
     };
+
     await axios
       .request(options)
       .then((response) => {
@@ -39,11 +40,8 @@ export default async function handler(req, res) {
       },
       data: body,
     };
-
-    console.log(id);
-
-    console.log(options);
-    await axios
+    
+    axios
       .request(options)
       .then(function (response) {
         return res.status(200).json(response.data);

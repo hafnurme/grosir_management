@@ -27,6 +27,10 @@ export default function SupplierTable({
   const [finalData, setFinalData] = useState();
   const [searchQuery, setSearchQuery] = useState();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(searchQuery);
+  };
   useEffect(() => {
     setFinalData(data);
   }, [data]);
@@ -42,27 +46,24 @@ export default function SupplierTable({
           </div>
         )}
         <div className="flex gap-4">
-          {search && (
-            <div className="flex gap-2">
-              <Input
-                label="Search"
-                color="orange"
-                variant="outlined"
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                }}
-              />
-              <IconButton
-                className="w-20"
-                color="orange"
-                onClick={() => {
-                  handleSearch(searchQuery);
-                }}
-              >
-                <MagnifyingGlassIcon className="h-6" />
-              </IconButton>
-            </div>
-          )}
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+            className="flex gap-2"
+          >
+            <Input
+              label="Search"
+              color="orange"
+              variant="outlined"
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+              }}
+            />
+            <IconButton className="w-20" color="orange">
+              <MagnifyingGlassIcon className="h-6" />
+            </IconButton>
+          </form>
         </div>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">

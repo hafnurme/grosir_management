@@ -26,7 +26,7 @@ const TambahProduk = () => {
       {supplier && (
         <div>
           <div className="w-full bg-white p-5">
-            <ProductDetailForm category={category} supplier={supplier.data} />
+            {/* <ProductDetailForm category={category} supplier={supplier.data} /> */}
           </div>
         </div>
       )}

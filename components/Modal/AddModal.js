@@ -20,7 +20,6 @@ export default function AddModal({
   col,
 }) {
   const [open, setOpen] = useState(false);
-  const [itemAdd, setItemAdd] = useState();
 
   const handleSubmit = async (e, id) => {
     e.preventDefault();
@@ -32,16 +31,13 @@ export default function AddModal({
       itemAddTemp[key] = value;
     });
 
-    setItemAdd(itemAddTemp);
-
-    console.log(itemAddTemp);
-
-    await axios
+    
+    axios
       .post(`${addUrl}`, {
-        data: itemAdd,
+        data: itemAddTemp,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         refreshData();
       });
   };

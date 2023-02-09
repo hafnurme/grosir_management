@@ -28,8 +28,6 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const body = await req.body.data;
 
-    body["contact"] = parseInt(body["contact"]);
-
     const options = {
       method: "POST",
       url: `${base_url}/api/product/supplier`,
@@ -39,6 +37,8 @@ export default async function handler(req, res) {
       },
       data: body,
     };
+
+    console.log(options)
 
     axios
       .request(options)
