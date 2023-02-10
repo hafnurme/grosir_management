@@ -9,50 +9,60 @@ import {
   Input,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
-const SupplierChoseModal = ({ size }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [supplierList, setSupplierList] = useState();
+const PilihKategoriModal = ({
+  size,
+  modalOpen,
+  handleOpenMod,
+  setCategory,
+}) => {
+  const [kategoriList, setKategoriList] = useState();
   const [searchQuery, setSearchQuery] = useState();
+  const [finalData, setFinalData] = useState();
 
-  const handleOpenMod = () => {
-    setModalOpen(!modalOpen);
+  const fetchKategori = async () => {
+    const kategoriTemp = await axios.get("/api/category").then((res) => {
+      return res.data;
+    });
+    setKategoriList(kategoriTemp);
   };
 
-  const handleSearch = async (e, search) => {
-    e.preventDefault();
-    search = search.trim();
-    if (search || search !== "") {
-      const dataTemp = await axios
-        .post(`/api/supplier/name`, { data: { supplier_name: search } })
-        .then((res) => {
-          return res.data;
-        });
+  useEffect(() => {
+    fetchKategori();
+  }, []);
 
-      setSupplierList(dataTemp.data);
-    }
+  useEffect(() => {
+    setFinalData(kategoriList);
+  }, [kategoriList]);
+
+  const handleSearch = (e, search) => {
+    e.preventDefault();
+    const filteredData = kategoriList.filter((elem) => {
+      const key = new RegExp("^" + search, "i");
+      if (elem.category_name.match(key)) {
+        return elem;
+      }
+    });
+
+    setFinalData(filteredData);
+  };
+
+  const handleSelectCategory = (item) => {
+    setCategory(item);
+    handleOpenMod();
   };
 
   return (
     <Fragment>
-      <div>
-        <Button
-          color="orange"
-          onClick={() => {
-            handleOpenMod();
-          }}
-        >
-          click
-        </Button>
-      </div>
+      <div></div>
       <Dialog
-        open={modalOpen}
+        open={modalOpen || false}
         size={size || "lg"}
         handler={handleOpenMod}
         className="z-50"
       >
-        <DialogHeader>Cari Supplier</DialogHeader>
+        <DialogHeader>Pilih Kategori</DialogHeader>
         <DialogBody divider>
           <form
             onSubmit={(e) => {
@@ -61,10 +71,11 @@ const SupplierChoseModal = ({ size }) => {
             className="flex gap-2"
           >
             <Input
-              label="Supplier Name"
+              label="Nama Kategori"
               color="orange"
               onChange={(e) => {
                 setSearchQuery(e.target.value);
+                handleSearch(e, searchQuery);
               }}
             />
             <IconButton
@@ -79,18 +90,21 @@ const SupplierChoseModal = ({ size }) => {
           </form>
           <div
             className={`mt-4 rounded overflow-hidden ${
-              supplierList ? "border" : ""
+              finalData ? "border" : ""
             } border-blue-gray-200`}
           >
             <ul>
-              {supplierList &&
-                supplierList.map((element, index) => {
+              {finalData &&
+                finalData.map((element, index) => {
                   return (
                     <li
                       className="bg-blue-gray-50 py-2 px-2 border-blue-gray-200 hover:bg-gray-50 cursor-pointer text-gray-800"
                       key={index}
+                      onClick={() => {
+                        handleSelectCategory(element);
+                      }}
                     >
-                      {element.supplier_name}
+                      {element.category_name}
                     </li>
                   );
                 })}
@@ -119,4 +133,4 @@ const SupplierChoseModal = ({ size }) => {
   );
 };
 
-export default SupplierChoseModal;
+export default PilihKategoriModal;

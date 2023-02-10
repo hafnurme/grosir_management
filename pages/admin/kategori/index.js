@@ -5,7 +5,7 @@ import CategoryTable from "@/components/TableComponents/CategoryTable";
 const Kategori = () => {
   const [category, setCategory] = useState();
 
-  const fetchProduct = async () => {
+  const fetchKategori = async () => {
     const categorytemp = await axios.get("/api/category").then((res) => {
       return res.data;
     });
@@ -13,7 +13,7 @@ const Kategori = () => {
   };
 
   useEffect(() => {
-    fetchProduct();
+    fetchKategori();
   }, []);
 
   return (
@@ -24,7 +24,7 @@ const Kategori = () => {
           title="Kategori Table"
           search={true}
           data={category}
-          refreshData={fetchProduct}
+          refreshData={fetchKategori}
         />
       </div>
     </>
