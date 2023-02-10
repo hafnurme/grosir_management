@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Dialog, DialogHeader, DialogBody, Input, Checkbox, Typography, Alert, Chip } from "@material-tailwind/react";
+import UpdateModal from "@/components/Modal/UpdateRoleModal";
+import DeleteDialog from "@/components/Modal/DeleteModal"
+import { PlusCircleIcon } from "@heroicons/react/20/solid";
+import DetailRoleModal from "@/components/Modal/DetailRoleModal";
 
-const Produk = () => {
+const role = () => {
     const [permision, setPermision] = useState();
     const [role, setRole] = useState();
     const [openDialog, setOpenDialog] = useState(false)
@@ -21,7 +25,7 @@ const Produk = () => {
         setRole(res)
     }
 
-    const handleOpen = () => {
+    const handleOpen = async () => {
         setOpenDialog(!openDialog)
         setPermisionList([])
         setName(null)
@@ -31,7 +35,6 @@ const Produk = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         const res = await axios.post("/api/Role", {
             data: { name, permision: permisionList.toString() }
         })
@@ -50,7 +53,7 @@ const Produk = () => {
         if (e.target.checked) {
             setPermisionList([...permisionList, e.target.value])
         } else {
-            permisionList.filter((el) => el !== e.target.value).map(el => setPermisionList([el]))
+            setPermisionList(permisionList.filter((el) => el !== e.target.value))
         }
 
     }
@@ -63,9 +66,14 @@ const Produk = () => {
     return (
         <div>
             <Button
+                className="flex w-40 items-center justify-center"
+                color="orange"
                 onClick={handleOpen}
             >
-                Tambah
+                <div className="text-md">Add</div>
+                <div className="h-5 w-5 inline-block ml-2">
+                    <PlusCircleIcon />
+                </div>
             </Button>
 
             <div className="flex flex-col">
@@ -75,16 +83,42 @@ const Produk = () => {
                             <table className="min-w-full">
                                 <thead className="border-b bg-white">
                                     <tr>
+                                        <th></th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-2">
                                             <Typography variant="h3" className="my-4">Daftar Role</Typography>
 
                                         </th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {role && (
                                         role.map((e, i) => {
-                                            return <tr className="bg-white border-b" key={i}><td className="text-md text-gray-900 px-6 py-2 whitespace-nowrap">{e.name}</td> </tr>
+                                            return <tr className="bg-white border-b" key={i}>
+                                                <td className="text-md text-gray-900 px-6 py-2 whitespace-nowrap">{i + 1}</td>
+                                                <td className="text-md text-gray-900 px-6 py-2 whitespace-nowrap">{e.name}</td>
+                                                {/* <td className="text-md text-gray-900 px-6 py-2 whitespace-nowrap">{result.permision.toString()}</td> */}
+                                                <td>
+                                                    <div className="flex gap-2 mr-4">
+                                                        <DetailRoleModal item={e} />
+                                                        <UpdateModal
+                                                            item={e}
+                                                            itemHead={["name"]}
+                                                            updateUrl="/api/Permision/"
+                                                            refreshData={fetchRole}
+                                                            itemIndex="role_id"
+                                                            data={permision}
+                                                        />
+                                                        <DeleteDialog
+                                                            itemToDelete={e}
+                                                            itemHead={["name"]}
+                                                            refreshData={fetchRole}
+                                                            deleteUrl="/api/Role/"
+                                                            itemIndex="role_id"
+                                                        />
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         })
                                     )}
                                 </tbody>
@@ -125,7 +159,7 @@ const Produk = () => {
                                         <h1 className="text-base font-bold ">{e}</h1>
                                         <div className="grid grid-cols-3 font-semibold text-sm">
                                             {permision[e].map((el, idx) => {
-                                                return <Checkbox key={idx} id={el.name} value={el.permision_id} label={el.name} ripple={true} onChange={handleChange} />
+                                                return <Checkbox key={idx} id={el.name} value={el.permision_id} label={el.label} ripple={true} onChange={handleChange} />
                                             })}
                                         </div>
                                     </div>
@@ -139,4 +173,4 @@ const Produk = () => {
     );
 };
 
-export default Produk;
+export default role;
