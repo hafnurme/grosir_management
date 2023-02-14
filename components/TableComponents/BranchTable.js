@@ -1,9 +1,16 @@
-import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import {
+  Button,
+  Card,
+  IconButton,
+  Input,
+  Typography,
+} from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import AddModal from "@/components/Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
 import UpdateModal from "../Modal/UpdateModal";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 export default function BranchTable({
   head,
@@ -11,8 +18,10 @@ export default function BranchTable({
   search,
   data,
   refreshData,
+  handleSearch,
 }) {
   const [finalData, setFinalData] = useState();
+  const [searchQuery, setSearchQuery] = useState();
 
   useEffect(() => {
     setFinalData(data);
@@ -28,8 +37,14 @@ export default function BranchTable({
     setFinalData(filteredData);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(searchQuery);
+  };
+
   return (
     <>
+<<<<<<< HEAD
       <div className="flex justify-between items-center mb-4 p-1">
         {title && (
           <div className="text-c">
@@ -52,6 +67,9 @@ export default function BranchTable({
         </div>
       </div>
       <div className="grid lg:grid-cols-3 gap-4">
+=======
+      <div className="grid grid-cols-3 gap-2">
+>>>>>>> f36357c4e3b87905d65644ad86bfe6d1ed4a5a0d
         {finalData &&
           finalData.map((object, index) => {
             return (
@@ -70,6 +88,7 @@ export default function BranchTable({
                     Contact : {object["contact"]}
                   </Typography>
                 </div>
+
                 <div className="flex gap-2 mt-2">
                   <DetailModal item={object} size="xl" />
                   <UpdateModal

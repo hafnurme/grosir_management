@@ -20,11 +20,6 @@ export default function sidebar({ openNav, setOpenNav }) {
       permission: ["admin"],
     },
     {
-      label: "Tambah Produk",
-      link: "/admin/produk/tambah",
-      permission: ["admin"],
-    },
-    {
       label: "Kategori",
       link: "/admin/kategori",
       permission: ["admin"],
@@ -35,7 +30,7 @@ export default function sidebar({ openNav, setOpenNav }) {
       permission: ["admin"],
     },
     {
-      label: "Order",
+      label: "Product Order",
       link: "/admin/order",
       permission: ["admin"],
     },

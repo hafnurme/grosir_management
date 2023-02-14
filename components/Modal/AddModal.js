@@ -31,7 +31,10 @@ export default function AddModal({
       itemAddTemp[key] = value;
     });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f36357c4e3b87905d65644ad86bfe6d1ed4a5a0d
     axios
       .post(`${addUrl}`, {
         data: itemAddTemp,
@@ -46,7 +49,11 @@ export default function AddModal({
 
   return (
     <Fragment>
+<<<<<<< HEAD
       <Button size={size} onClick={handleOpen} color="orange" variant="filled">
+=======
+      <Button onClick={handleOpen} color="orange" variant="filled" size="sm">
+>>>>>>> f36357c4e3b87905d65644ad86bfe6d1ed4a5a0d
         {label && label}
       </Button>
       <Dialog open={open} handler={handleOpen} size={size || "xl"}>
