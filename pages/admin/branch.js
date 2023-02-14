@@ -19,11 +19,8 @@ import Paginate from "@/components/paginate";
 
 export default function Branch() {
   const [branch, setBranch] = useState();
-<<<<<<< HEAD
-  const [size, setSize] = useState()
-=======
   const [search, setSearchQuery] = useState();
->>>>>>> f36357c4e3b87905d65644ad86bfe6d1ed4a5a0d
+  const [size, setSize] = useState()
 
   const fetchBranch = async () => {
     const branches = await axios.get("/api/branch");
@@ -105,17 +102,8 @@ export default function Branch() {
                 title="Branches"
                 data={branch.data}
                 refreshData={fetchBranch}
-<<<<<<< HEAD
-                addUrl="/api/branch"
-                itemHead={["branch_name", "leader_name", "contact", "address"]}
-                fieldType={["text", "text", "number", "text"]}
-                col={"1"}
-                size={size}
-                label="Tambah Branch"
-=======
                 search={true}
                 handleSearch={handleSearch}
->>>>>>> f36357c4e3b87905d65644ad86bfe6d1ed4a5a0d
               />
             </div>
             <div className="px-2 py-4 flex justify-end">

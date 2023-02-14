@@ -44,32 +44,7 @@ export default function BranchTable({
 
   return (
     <>
-<<<<<<< HEAD
-      <div className="flex justify-between items-center mb-4 p-1">
-        {title && (
-          <div className="text-c">
-            <div className="mx-2 text-base lg:text-2xl font-semibold">
-              <h3>{title}</h3>
-            </div>
-          </div>
-        )}
-        <div className="flex gap-4">
-          {search && (
-            <div className="flex">
-              <Input
-                label="Search"
-                color="orange"
-                variant="outlined"
-                onChange={inputListener}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="grid lg:grid-cols-3 gap-4">
-=======
       <div className="grid grid-cols-3 gap-2">
->>>>>>> f36357c4e3b87905d65644ad86bfe6d1ed4a5a0d
         {finalData &&
           finalData.map((object, index) => {
             return (

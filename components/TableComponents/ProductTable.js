@@ -17,28 +17,6 @@ const ProductTable = ({ head, data, refreshData, handleSearch }) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <div className="flex justify-between items-center p-1 mb-4">
-        {title && (
-          <div>
-            <div className="mx-2 text-base font-semibold">
-              <h3>{title}</h3>
-            </div>
-          </div>
-        )}
-        {search && (
-          <div className="flex">
-            <Input
-              label="Search"
-              color="orange"
-              variant="standard"
-              onChange={inputListener}
-            />
-          </div>
-        )}
-      </div>
-=======
->>>>>>> f36357c4e3b87905d65644ad86bfe6d1ed4a5a0d
       <table className="w-full text-sm text-left text-gray-700">
         <thead className="text-xs uppercase bg-gray-100">
           <tr>
