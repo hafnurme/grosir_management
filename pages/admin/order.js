@@ -14,8 +14,6 @@ export default function Order() {
       setOrder(producttemp);
     };
 
-    console.log(order);
-
     fetchProductReq();
   }, []);
 

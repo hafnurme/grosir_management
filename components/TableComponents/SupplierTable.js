@@ -40,7 +40,7 @@ export default function SupplierTable({
       <div className="flex justify-between items-center mb-4 p-1">
         {title && (
           <div>
-            <div className="mx-2 text-2xl font-semibold">
+            <div className="mx-2 text-base lg:text-2xl font-semibold">
               <h3>{title}</h3>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function SupplierTable({
           </form>
         </div>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div className="grid lg:grid-cols-3 gap-4">
         {finalData &&
           finalData.map((object, index) => {
             return (

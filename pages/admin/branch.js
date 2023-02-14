@@ -9,6 +9,7 @@ import Paginate from "@/components/paginate";
 
 export default function Branch() {
   const [branch, setBranch] = useState();
+  const [size, setSize] = useState()
 
   const fetchBranch = async () => {
     const branches = await axios.get("/api/branch");
@@ -35,6 +36,7 @@ export default function Branch() {
 
   useEffect(() => {
     fetchBranch();
+    window.innerWidth >= 960 ? setSize('lg') : setSize('sm')
   }, []);
   return (
     <>
@@ -48,7 +50,7 @@ export default function Branch() {
                 itemHead={["branch_name", "leader_name", "contact", "address"]}
                 fieldType={["text", "text", "number", "text"]}
                 col={"1"}
-                size={"md"}
+                size={size}
                 label="Tambah Branch"
               />
               <Paginate

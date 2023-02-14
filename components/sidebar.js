@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function sidebar() {
+export default function sidebar({ openNav, setOpenNav }) {
   const [permission, setPermission] = useState();
   const [actualTab, setActualTab] = useState();
+  const [size, setSize] = useState()
 
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -90,6 +91,12 @@ export default function sidebar() {
     if (session) {
       setPermission(session.permission);
     }
+    if (window.innerWidth >= 960) {
+      setSize('lg')
+      setOpenNav(true)
+    } else {
+      setSize('sm')
+    }
   }, [status]);
 
   useEffect(() => {
@@ -97,26 +104,31 @@ export default function sidebar() {
   }, [permission]);
 
   return (
-    <aside className="sticky w-56 bg-blue-gray-50 shadow box-border py-9 px-4 flex flex-col justify-between">
-      <div className="w-full">
-        {actualTab &&
-          actualTab.map((tab, index) => {
-            return (
-              <Link href={tab.link} key={index}>
-                <Button
-                  variant={tab.link === router.pathname ? "gradient" : "text"}
-                  color={tab.link === router.pathname ? "orange" : "blue-gray"}
-                  className="w-full mb-2 text-start"
-                >
-                  {tab.label}
-                </Button>
-              </Link>
-            );
-          })}
-      </div>
-      <Button color="orange" variant="gradient" onClick={handleLogOut}>
-        LogOut
-      </Button>
-    </aside>
-  );
+    <>
+      {openNav && (
+        <aside className="absolute lg:sticky z-30 w-56 bg-blue-gray-50 shadow box-border py-9 px-4 lg:flex lg:flex-col lg:justify-between">
+          <div className="w-full">
+            {actualTab &&
+              actualTab.map((tab, index) => {
+                return (
+                  <Link href={tab.link} key={index}>
+                    <Button
+                      size={size}
+                      variant={tab.link === router.pathname ? "gradient" : "text"}
+                      color={tab.link === router.pathname ? "orange" : "blue-gray"}
+                      className="w-full mb-2 text-start"
+                    >
+                      {tab.label}
+                    </Button>
+                  </Link>
+                );
+              })}
+          </div>
+          <Button size={size} color="orange" variant="gradient" onClick={handleLogOut}>
+            LogOut
+          </Button>
+        </aside>
+      )}
+    </>
+  )
 }

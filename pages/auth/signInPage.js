@@ -11,6 +11,7 @@ export default function signInPage() {
   const [isLogin, setIsLogin] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [inputRequired, setInputRequired] = useState(false);
+  const [size, setSize] = useState()
 
   const router = useRouter();
 
@@ -33,6 +34,9 @@ export default function signInPage() {
       console.log("gagal");
     }
   };
+  useEffect(() => {
+    window.innerWidth >= 960 ? setSize("lg") : setSize("sm")
+  }, [])
 
   useEffect(() => {
     const sess = getSession();
@@ -63,18 +67,19 @@ export default function signInPage() {
           />
         </div>
         <form
-          className="w-96 bg-white p-6 flex justify-center fixed top-1/2 -translate-y-1/2"
+          className="w-2/3 lg:w-96 bg-white p-6 flex justify-center fixed top-1/2 -translate-y-1/2"
           onSubmit={handleSub}
         >
           <div className="w-96 h-min">
             <CardHeader color="transparent" className="mx-0 mt-0 shadow-none">
-              <h2 className="text-4xl font-semibold mb-4  text-black">Login</h2>
+              <h2 className="text-lg lg:text-4xl font-semibold mb-4  text-black">Login</h2>
               {inputRequired === false && (
-                <p className="mb-4">Fill the required credentials</p>
+                <p className="mb-4 text-sm">Fill the required credentials</p>
               )}
             </CardHeader>
             <CardBody className="flex flex-col gap-4 p-0">
               <Input
+                className="h-5"
                 label="Username"
                 color="orange"
                 onChange={(e) => {
@@ -89,7 +94,7 @@ export default function signInPage() {
                   setPassword(e.target.value);
                 }}
               />
-              <Button color="orange" variant="gradient" onClick={handleSub}>
+              <Button size={size} color="orange" variant="gradient" onClick={handleSub}>
                 Login
               </Button>
               {loginError === true && (

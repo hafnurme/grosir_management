@@ -22,7 +22,7 @@ const ProductDetailForm = ({
     <>
       <div className="mb-5">
         <div className="flex flex-row gap-4">
-          <div className="w-[50%] flex gap-4 flex-col">
+          <div className="w-1/2 flex gap-4 flex-col">
             <Input
               required={true}
               color="orange"
