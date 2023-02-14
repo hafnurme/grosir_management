@@ -15,7 +15,7 @@ export default function layout({ children }) {
         <Navbar />
         <div className="flex flex-1 h-full overflow-hidden">
           <Sidebar />
-          <main className="h-full p-4 box-border w-full bg-blue-gray-100 overflow-y-scroll">
+          <main className="h-full box-border w-full bg-blue-gray-100 overflow-y-scroll">
             {children}
           </main>
         </div>

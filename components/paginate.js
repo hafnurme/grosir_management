@@ -1,7 +1,25 @@
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 import { IconButton } from "@material-tailwind/react";
+import axios from "axios";
+import { getSession } from "next-auth/react";
 
-const Paginate = ({ page, paginateNavigate, refreshData }) => {
+const Paginate = ({ page, refreshData, setData }) => {
+  const paginateNavigate = async (link) => {
+    const accessToken = await getSession().then((token) => token.accessToken);
+
+    const dataTemp = await axios
+      .get(link, {
+        headers: {
+          token: accessToken,
+        },
+      })
+      .then((res) => {
+        return res.data;
+      });
+
+    return setData(dataTemp);
+  };
+
   return (
     <div className="flex gap-1 bg-blue-gray-100">
       <IconButton onClick={refreshData}>

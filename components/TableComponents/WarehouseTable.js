@@ -1,6 +1,8 @@
 import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import DeleteModal from "@/components/Modal/DeleteModal";
+import DetailModal from "../Modal/DetailModal";
+import UpdateModal from "../Modal/UpdateModal";
 
 export default function WarehouseTable({
   head,
@@ -27,17 +29,6 @@ export default function WarehouseTable({
   };
   return (
     <>
-      <div className="flex justify-end items-center p-1 mb-4">
-        {search && (
-          <div className="flex">
-            <Input
-              label="Search"
-              color="deep-orange"
-              onChange={inputListener}
-            />
-          </div>
-        )}
-      </div>
       <table className="w-full text-sm text-left text-gray-700">
         <thead className="text-xs text-c uppercase bg-gray-100">
           <tr>
@@ -57,31 +48,39 @@ export default function WarehouseTable({
           {finalData &&
             finalData.map((object, indexp) => {
               return (
-                <tr className="bg-white border-b text-c" key={indexp}>
-                  <td className="px-6 py-3 w-10 text-center">{indexp + 1}</td>
+                <tr className="bg-white border-b" key={indexp}>
+                  <td className="px-6 py-1 w-8 text-center">{indexp + 1}</td>
                   {head &&
                     head.map((elem, i) => {
+                      if (elem === "warehouse_id") {
+                        return (
+                          <td className="py-1" key={Math.random() * 100 * i}>
+                            <span className="inline-block">{object[elem]}</span>
+                          </td>
+                        );
+                      }
                       return (
-                        <td className="px-6 py-3" key={Math.random() * 100 * i}>
+                        <td className="px-6 py-1" key={Math.random() * 100 * i}>
                           {object[elem]}
                         </td>
                       );
                     })}
-                  <td className="px-3 py-2 flex gap-3 justify-end items-center">
-                    {/* <DetailModal item={object} />
-                    <ProductUpdateModal
+                  <td className="px-3 py-1 flex gap-3 justify-end items-center">
+                    <DetailModal item={object} size="md" col="1" />
+                    <UpdateModal
                       item={object}
                       itemHead={[
+                        "warehouse_id",
                         "product_code",
-                        "brand",
-                        "name",
-                        "category_id",
-                        "description",
-                        "supplier_id",
+                        "stock",
+                        "location",
+                        "entry_date",
                       ]}
                       updateUrl="/api/product/"
                       refreshData={refreshData}
-                    />*/}
+                      col="1"
+                      size={"md"}
+                    />
                     <DeleteModal
                       itemToDelete={object}
                       itemHead={head}

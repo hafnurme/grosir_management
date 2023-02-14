@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ProductTable from "@/components/TableComponents/ProductTable";
-import { getSession } from "next-auth/react";
 import Paginate from "@/components/paginate";
 import ProdukAddModal from "@/components/Modal/Produk/ProdukAddModal";
+import { IconButton, Input } from "@material-tailwind/react";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 const Produk = () => {
   const [product, setProduct] = useState();
+  const [searchQuery, setSearchQuery] = useState();
 
   const fetchProduct = async (page, link) => {
     const producttemp = await axios.get("/api/product").then((res) => {
@@ -16,46 +18,77 @@ const Produk = () => {
     setProduct(producttemp);
   };
 
-  const paginateNavigate = async (link) => {
-    const accessToken = await getSession().then((token) => token.accessToken);
-
-    const productTemp = await axios
-      .get(link, {
-        headers: {
-          token: accessToken,
-        },
-      })
-      .then((res) => {
-        return res.data;
-      });
-
-    return setProduct(productTemp);
-  };
-
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  const handleSearch = async (search) => {
+    if (search) {
+      search = search.trim();
+    }
+    if (search || search !== "") {
+      console.log(search);
+      console.log("first");
+      // const dataTemp = await axios
+      //   .post(`/api/supplier/name`, { data: { supplier_name: search } })
+      //   .then((res) => {
+      //     return res.data;
+      //   });
+
+      // setSupplier(dataTemp);
+    }
+  };
 
   return (
     <div>
       {product && (
         <>
-          <div className="flex justify-between mb-4 sticky top-0 z-10">
-            <ProdukAddModal />
+          <div className="flex justify-between items-center py-4 px-2">
+            <div>
+              <div className="mx-2 text-2xl font-semibold">
+                <h3>Produk</h3>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <form
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+                className="flex gap-2"
+              >
+                <Input
+                  label="Search"
+                  color="orange"
+                  variant="outlined"
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                  }}
+                />
+                <IconButton className="w-20" color="orange">
+                  <MagnifyingGlassIcon className="h-6" />
+                </IconButton>
+              </form>
+              <ProdukAddModal />
+            </div>
+          </div>
+
+          <div>
+            <ProductTable
+              head={["product_code", "name", "brand", "category_id"]}
+              title="Product List"
+              search={true}
+              data={product.data}
+              refreshData={fetchProduct}
+            />
+          </div>
+          <div className="flex justify-end px-2 py-4">
             <Paginate
-              paginateNavigate={paginateNavigate}
+              setData={setProduct}
               page={product}
               refreshData={fetchProduct}
             />
           </div>
-
-          <ProductTable
-            head={["product_code", "name", "brand", "category_id"]}
-            title="Product List"
-            search={true}
-            data={product.data}
-            refreshData={fetchProduct}
-          />
         </>
       )}
     </div>

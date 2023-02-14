@@ -44,6 +44,7 @@ const AddProductModal = ({ size }) => {
 
     await axios.post("/api/product", { data: dataTemp }).then((res) => {
       console.log(res.data);
+      handleOpen();
     });
   };
 

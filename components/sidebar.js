@@ -19,11 +19,6 @@ export default function sidebar() {
       permission: ["admin"],
     },
     {
-      label: "Tambah Produk",
-      link: "/admin/produk/tambah",
-      permission: ["admin"],
-    },
-    {
       label: "Kategori",
       link: "/admin/kategori",
       permission: ["admin"],
@@ -34,7 +29,7 @@ export default function sidebar() {
       permission: ["admin"],
     },
     {
-      label: "Order",
+      label: "Product Order",
       link: "/admin/order",
       permission: ["admin"],
     },

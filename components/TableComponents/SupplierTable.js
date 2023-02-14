@@ -37,36 +37,7 @@ export default function SupplierTable({
 
   return (
     <>
-      <div className="flex justify-between items-center mb-4 p-1">
-        {title && (
-          <div>
-            <div className="mx-2 text-2xl font-semibold">
-              <h3>{title}</h3>
-            </div>
-          </div>
-        )}
-        <div className="flex gap-4">
-          <form
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-            className="flex gap-2"
-          >
-            <Input
-              label="Search"
-              color="orange"
-              variant="outlined"
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-              }}
-            />
-            <IconButton className="w-20" color="orange">
-              <MagnifyingGlassIcon className="h-6" />
-            </IconButton>
-          </form>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         {finalData &&
           finalData.map((object, index) => {
             return (

@@ -1,54 +1,24 @@
-import { Button, Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
 import DetailModal from "@/components/Modal/DetailModal";
 import UpdateModal from "@/components/Modal/UpdateModal";
 
-const ProductTable = ({ head, title, search, data, refreshData }) => {
+const ProductTable = ({ head, data, refreshData, handleSearch }) => {
   const [finalData, setFinalData] = useState();
 
   useEffect(() => {
     setFinalData(data);
   }, [data]);
 
-  const inputListener = (input) => {
-    const filteredData = data.filter((elem) => {
-      const key = new RegExp(input.target.value, "i");
-      if (
-        elem.product_code.match(key) ||
-        elem.name.match(key) ||
-        elem.brand.match(key)
-      ) {
-        return elem;
-      }
-    });
-
-    setFinalData(filteredData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(searchQuery);
   };
 
   return (
     <>
-      <div className="flex justify-between items-center p-1 mb-4">
-        {title && (
-          <div>
-            <div className="mx-2 text-2xl font-semibold">
-              <h3>{title}</h3>
-            </div>
-          </div>
-        )}
-        {search && (
-          <div className="flex">
-            <Input
-              label="Search"
-              color="orange"
-              variant="standard"
-              onChange={inputListener}
-            />
-          </div>
-        )}
-      </div>
       <table className="w-full text-sm text-left text-gray-700">
-        <thead className="text-xs text-c uppercase bg-gray-100">
+        <thead className="text-xs uppercase bg-gray-100">
           <tr>
             {head &&
               head.map((elem, i) => {
@@ -65,19 +35,16 @@ const ProductTable = ({ head, title, search, data, refreshData }) => {
           {finalData &&
             finalData.map((object, indexp) => {
               return (
-                <tr className="bg-white border-b text-c" key={indexp}>
+                <tr className="bg-white border-b" key={indexp}>
                   {head &&
                     head.map((elem, i) => {
                       return (
-                        <td
-                          className="px-6 py-3 truncate"
-                          key={Math.random() * 100 * i}
-                        >
+                        <td className="px-6 py-1" key={Math.random() * 100 * i}>
                           {object[elem]}
                         </td>
                       );
                     })}
-                  <td className="px-3 py-2 flex gap-3 justify-end items-center">
+                  <td className="px-3 py-1 flex gap-3 justify-end items-center">
                     <DetailModal item={object} />
                     <UpdateModal
                       item={object}
