@@ -36,7 +36,7 @@ export default function index() {
               <WarehouseAddModal />
             </div>
           </div>
-          <div>
+          <div className="overflow-x-scroll">
             <WarehouseTable
               head={[
                 "warehouse_id",

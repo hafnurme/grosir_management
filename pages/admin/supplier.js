@@ -10,6 +10,7 @@ import Paginate from "@/components/paginate";
 export default function supplier() {
   const [supplier, setSupplier] = useState();
   const [searchQuery, setSearchQuery] = useState();
+  const [size, setSize] = useState()
 
   const fetchSupplier = async () => {
     const supplier = await axios.get("/api/supplier");
@@ -20,6 +21,8 @@ export default function supplier() {
 
   useEffect(() => {
     fetchSupplier();
+    window.innerWidth >= 960 ? setSize('md') : setSize('sm')
+    window.addEventListener("resize", () => window.innerWidth >= 960 ? setSize('md') : setSize('sm'))
   }, []);
 
   const handleSearch = async (e, search) => {
@@ -75,7 +78,7 @@ export default function supplier() {
                 label="Tambah Supplier"
                 refreshData={fetchSupplier}
                 col="1"
-                size={"md"}
+                size={size}
               />
             </div>
           </div>

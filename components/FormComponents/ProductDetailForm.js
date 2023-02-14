@@ -21,8 +21,8 @@ const ProductDetailForm = ({
   return (
     <>
       <div className="mb-5">
-        <div className="flex flex-row gap-4">
-          <div className="w-1/2 flex gap-4 flex-col">
+        <div className="grid lg:grid-cols-2 gap-4">
+          <div className="flex gap-4 flex-col">
             <Input
               required={true}
               color="orange"
@@ -65,7 +65,7 @@ const ProductDetailForm = ({
             />
           </div>
 
-          <div className="w-[50%] flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <Input
               required={true}
               color="orange"

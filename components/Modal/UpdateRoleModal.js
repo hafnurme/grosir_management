@@ -74,10 +74,10 @@ export default function UpdateModal({
 
     return (
         <Fragment>
-            <Button variant="text" className="p-1 shadow-md" onClick={handleOpen}>
+            <Button size={size} variant="text" className="p-1 shadow-md" onClick={handleOpen}>
                 <PencilSquareIcon className="h-6 text-c" />
             </Button>
-            <Dialog className="p-5" open={open} handler={handleOpen} size="lg">
+            <Dialog className="p-5" open={open} handler={handleOpen} size={size == 'lg' ? 'lg' : 'xxl'}>
                 <DialogHeader>Edit Role</DialogHeader>
                 <DialogBody>
                     <div className="w-full flex justify-start gap-x-5 mb-5">
@@ -106,7 +106,7 @@ export default function UpdateModal({
                                 return (
                                     <div key={i} className="mb-4">
                                         <h1 className="text-base font-bold ">{e}</h1>
-                                        <div className="grid grid-cols-3 font-semibold text-sm">
+                                        <div className="grid lg:grid-cols-3 font-semibold text-sm">
                                             {data[e].map((el, idx) => {
                                                 if (permisionList.includes(el.permision_id)) {
                                                     return <Checkbox defaultChecked={true} key={idx} id={el.name} value={el.permision_id} label={el.label} ripple={true} onChange={handleChange} />
@@ -121,6 +121,11 @@ export default function UpdateModal({
                         )}
                     </div>
                 </DialogBody>
+                <DialogFooter>
+                    <Button variant="text" color="red" onClick={handleOpen}>
+                        <span>Close</span>
+                    </Button>
+                </DialogFooter>
             </Dialog>
         </Fragment>
     );

@@ -9,6 +9,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 const Produk = () => {
   const [product, setProduct] = useState();
   const [searchQuery, setSearchQuery] = useState();
+  const [size, setSize] = useState()
 
   const fetchProduct = async (page, link) => {
     const producttemp = await axios.get("/api/product").then((res) => {
@@ -20,6 +21,8 @@ const Produk = () => {
 
   useEffect(() => {
     fetchProduct();
+    window.innerWidth >= 960 ? setSize('md') : setSize('sm')
+    window.addEventListener("resize", () => window.innerWidth >= 960 ? setSize('md') : setSize('sm'))
   }, []);
 
   const handleSearch = async (search) => {
@@ -57,23 +60,25 @@ const Produk = () => {
                 }}
                 className="flex gap-2"
               >
-                <Input
-                  label="Search"
-                  color="orange"
-                  variant="outlined"
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                  }}
-                />
-                <IconButton className="w-20" color="orange">
-                  <MagnifyingGlassIcon className="h-6" />
+                <div className="w-52">
+                  <Input
+                    label="Search"
+                    color="orange"
+                    variant="outlined"
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                    }}
+                  />
+                </div>
+                <IconButton size={size} className="w-20" color="orange">
+                  <MagnifyingGlassIcon className={size == 'md' ? 'h-6' : 'h-4'} />
                 </IconButton>
               </form>
-              <ProdukAddModal />
+              <ProdukAddModal size={size} />
             </div>
           </div>
 
-          <div>
+          <div className="overflow-x-scroll">
             <ProductTable
               head={["product_code", "name", "brand", "category_id"]}
               title="Product List"

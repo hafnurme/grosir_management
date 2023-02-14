@@ -7,6 +7,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 const Kategori = () => {
   const [category, setCategory] = useState();
+  const [size, setSize] = useState()
 
   const fetchKategori = async () => {
     const categorytemp = await axios.get("/api/category").then((res) => {
@@ -17,13 +18,15 @@ const Kategori = () => {
 
   useEffect(() => {
     fetchKategori();
+    window.innerWidth >= 960 ? setSize('md') : setSize('sm')
+    window.addEventListener("resize", () => window.innerWidth >= 960 ? setSize('md') : setSize('sm'))
   }, []);
 
   return (
     <>
       <div>
         <div>
-          <div className="flex justify-between items-center px-2 py-4">
+          <div className="flex justify-between items-center px-2 py-4  overflow-hidden">
             <div className="text-c">
               <div className="mx-2 text-2xl font-semibold">
                 <h3>Kategori</h3>
@@ -32,8 +35,8 @@ const Kategori = () => {
             <div className="flex gap-2">
               <div className="flex items-center gap-2">
                 <Input label="Search" color="orange" variant="outlined" />
-                <IconButton className="w-20" color="orange">
-                  <MagnifyingGlassIcon className="h-6" />
+                <IconButton size={size} className="w-20" color="orange">
+                  <MagnifyingGlassIcon className={size == 'md' ? 'h-6' : 'h-4'} />
                 </IconButton>
               </div>
               <AddModal
@@ -43,12 +46,12 @@ const Kategori = () => {
                 fieldType={["text", "text"]}
                 label="Tambah Kategori"
                 col="1"
-                size="md"
+                size={size}
               />
             </div>
           </div>
         </div>
-        <div>
+        <div className="overflow-x-scroll">
           <CategoryTable
             head={["category_name", "category_type"]}
             title="Kategori Table"
