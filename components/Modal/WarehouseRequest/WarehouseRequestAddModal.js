@@ -8,15 +8,16 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { Fragment, useRef, useState } from "react";
-import SelectProductModal from "./SelectProductModal";
+import SelectProductModal from "../Warehouse/SelectProductModal";
 
-const WarehouseAddModal = ({ size, refreshData }) => {
+const WarehouseRequestAddModal = ({ size, refreshData }) => {
   const [open, setOpen] = useState(false);
   const [productSelected, setProductSelected] = useState();
   const [selectProductModalOpen, setSelectProductModalOpen] = useState(false);
 
-  const handleOpen = () => setOpen(!open);
   const refForm = useRef(null);
+
+  const handleOpen = () => setOpen(!open);
 
   const submitAddProduct = () => {
     refForm.current.requestSubmit();
@@ -35,17 +36,18 @@ const WarehouseAddModal = ({ size, refreshData }) => {
 
     dataTemp["product_code"] = productSelected.product_code;
 
-    await axios.post("/api/warehouse", { data: dataTemp }).then((res) => {
-      console.log(res.data);
-      handleOpen();
-      refreshData();
-    });
+    await axios
+      .post("/api/warehouse/request", { data: dataTemp })
+      .then((res) => {
+        handleOpen();
+        refreshData();
+      });
   };
   return (
     <Fragment>
       <div className="flex gap-3">
         <Button onClick={handleOpen} color="orange" variant="filled">
-          Add Product
+          Request
         </Button>
       </div>
       <Dialog
@@ -58,30 +60,27 @@ const WarehouseAddModal = ({ size, refreshData }) => {
         <DialogBody className="flex-1 bg-blue-gray-50" divider>
           <form
             ref={refForm}
+            className="grid grid-cols-1 gap-4"
             onSubmit={(e) => {
               handleSubmit(e);
             }}
           >
-            <div className="grid gap-2 grid-cols-1">
-              <Input
-                color="orange"
-                label="Product"
-                type="text"
-                readOnly={true}
-                value={productSelected ? productSelected.name : ""}
-                onClick={() => {
-                  setSelectProductModalOpen(!selectProductModalOpen);
-                }}
-                name="product_code"
-              />
-              <Input color="orange" label="Stock" type="number" name="stock" />
-              <Input
-                color="orange"
-                label="Location"
-                type="text"
-                name="location"
-              />
-            </div>
+            <Input
+              label="Produk"
+              color="orange"
+              name="product_code"
+              readOnly={true}
+              onClick={() => {
+                setSelectProductModalOpen(!selectProductModalOpen);
+              }}
+              defaultValue={productSelected ? productSelected.name : ""}
+            />
+            <Input
+              label="Jumlah"
+              color="orange"
+              name="quantity"
+              type={"number"}
+            />
           </form>
           <div className="grid grid-cols-2 gap-4">
             <SelectProductModal
@@ -113,4 +112,4 @@ const WarehouseAddModal = ({ size, refreshData }) => {
   );
 };
 
-export default WarehouseAddModal;
+export default WarehouseRequestAddModal;

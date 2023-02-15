@@ -38,14 +38,22 @@ const PilihKategoriModal = ({
 
   const handleSearch = (e, search) => {
     e.preventDefault();
-    const filteredData = kategoriList.filter((elem) => {
-      const key = new RegExp("^" + search, "i");
-      if (elem.category_name.match(key)) {
-        return elem;
-      }
-    });
 
-    setFinalData(filteredData);
+    if (search) {
+      search = search.replace(/[!@#$%^&*\\]/g, "");
+    }
+    if (search !== null || search !== "") {
+      const filteredData = kategoriList.filter((elem) => {
+        const key = new RegExp("^" + search, "i");
+        if (elem.category_name.match(key)) {
+          return elem;
+        }
+      });
+
+      setFinalData(filteredData);
+    } else {
+      fetchKategori();
+    }
   };
 
   const handleSelectCategory = (item) => {

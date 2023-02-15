@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function sidebar({ openNav, setOpenNav }) {
   const [permission, setPermission] = useState();
   const [actualTab, setActualTab] = useState();
-  const [size, setSize] = useState()
+  const [size, setSize] = useState();
 
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -17,7 +17,7 @@ export default function sidebar({ openNav, setOpenNav }) {
     {
       label: "Produk",
       link: "/admin/produk",
-      permission: ["admin"],
+      permission: ["admin", "lihat-gudang"],
     },
     {
       label: "Kategori",
@@ -45,16 +45,10 @@ export default function sidebar({ openNav, setOpenNav }) {
       permission: ["admin", "lihat-gudang"],
     },
     {
-      label: "Simpan ke Warehouse",
-      link: "/admin/warehouse/store",
-      permission: ["admin", "tambah-detail-gudang"],
-    },
-    {
-      label: "Warehouse Request",
+      label: "Request Produk",
       link: "/admin/warehouse_request",
-      permission: ["admin", "lihat-gudang"],
+      permission: ["admin", "lihat-request-pesanan"],
     },
-
     {
       label: "Role",
       link: "/admin/role",
@@ -69,6 +63,7 @@ export default function sidebar({ openNav, setOpenNav }) {
       Tab.filter((element) => {
         permission.map((permissionElement, index) => {
           if (element.permission.includes(permissionElement)) {
+            console.log(element);
             authorizedTab.push(element);
           }
         });
@@ -87,10 +82,10 @@ export default function sidebar({ openNav, setOpenNav }) {
       setPermission(session.permission);
     }
     if (window.innerWidth >= 960) {
-      setSize('lg')
-      setOpenNav(true)
+      setSize("lg");
+      setOpenNav(true);
     } else {
-      setSize('sm')
+      setSize("sm");
     }
   }, [status]);
 
@@ -109,8 +104,12 @@ export default function sidebar({ openNav, setOpenNav }) {
                   <Link href={tab.link} key={index}>
                     <Button
                       size={size}
-                      variant={tab.link === router.pathname ? "gradient" : "text"}
-                      color={tab.link === router.pathname ? "orange" : "blue-gray"}
+                      variant={
+                        tab.link === router.pathname ? "gradient" : "text"
+                      }
+                      color={
+                        tab.link === router.pathname ? "orange" : "blue-gray"
+                      }
                       className="w-full mb-2 text-start"
                     >
                       {tab.label}
@@ -119,11 +118,16 @@ export default function sidebar({ openNav, setOpenNav }) {
                 );
               })}
           </div>
-          <Button size={size} color="orange" variant="gradient" onClick={handleLogOut}>
+          <Button
+            size={size}
+            color="orange"
+            variant="gradient"
+            onClick={handleLogOut}
+          >
             LogOut
           </Button>
         </aside>
       )}
     </>
-  )
+  );
 }

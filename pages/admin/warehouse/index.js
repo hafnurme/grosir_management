@@ -33,7 +33,7 @@ export default function index() {
               <div className="flex items-center">
                 <Input label="Search" color="deep-orange" />
               </div>
-              <WarehouseAddModal />
+              <WarehouseAddModal refreshData={fetchWarehouse} />
             </div>
           </div>
           <div>

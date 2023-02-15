@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const options = {
       method: "GET",
-      url: `${base_url}/api/warehouse`,
+      url: `${base_url}/api/warehouse/request`,
       headers: {
         token: session.accessToken,
       },
@@ -29,13 +29,15 @@ export default async function handler(req, res) {
 
     const options = {
       method: "POST",
-      url: `${base_url}/api/warehouse`,
+      url: `${base_url}/api/warehouse/request`,
       headers: {
         "Content-Type": "application/json",
         token: session.accessToken,
       },
       data: body,
     };
+
+    console.log(options);
 
     axios
       .request(options)

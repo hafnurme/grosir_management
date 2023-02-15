@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function layout({ children }) {
   const router = useRouter();
-  const [openNav, setOpenNav] = useState(false)
+  const [openNav, setOpenNav] = useState(false);
 
   if (router.pathname === "/" || router.pathname === "/auth/signInPage") {
     return <main className="h-screen bg-blue-gray-100">{children}</main>;

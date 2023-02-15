@@ -9,7 +9,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const PilihSupplierModal = ({
   size,
@@ -17,12 +17,31 @@ const PilihSupplierModal = ({
   handleOpenMod,
   setSupplier,
 }) => {
+  const [finalData, setFinalData] = useState();
   const [supplierList, setSupplierList] = useState();
   const [searchQuery, setSearchQuery] = useState();
+
+  const fetchSupplier = async () => {
+    const dataTemp = await axios.get("/api/supplier").then((res) => {
+      return res.data;
+    });
+    setSupplierList(dataTemp.data);
+  };
+
+  useEffect(() => {
+    fetchSupplier();
+  }, []);
+
+  useEffect(() => {
+    setFinalData(supplierList);
+  }, [supplierList]);
 
   const handleSearch = async (e, search) => {
     e.preventDefault();
     search = search.trim();
+    if (search) {
+      search = search.replace(/[!@#$%^&*\\]/g, "");
+    }
     if (search || search !== "") {
       const dataTemp = await axios
         .post(`/api/supplier/name`, { data: { supplier_name: search } })
@@ -31,6 +50,8 @@ const PilihSupplierModal = ({
         });
 
       setSupplierList(dataTemp.data);
+    } else {
+      fetchSupplier();
     }
   };
 

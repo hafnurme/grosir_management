@@ -7,6 +7,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 const Kategori = () => {
   const [category, setCategory] = useState();
+  const [searchQuery, setSearchQuery] = useState();
 
   const fetchKategori = async () => {
     const categorytemp = await axios.get("/api/category").then((res) => {
@@ -31,7 +32,12 @@ const Kategori = () => {
             </div>
             <div className="flex gap-2">
               <div className="flex items-center gap-2">
-                <Input label="Search" color="orange" variant="outlined" />
+                <Input
+                  label="Search"
+                  color="orange"
+                  variant="outlined"
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
                 <IconButton className="w-20" color="orange">
                   <MagnifyingGlassIcon className="h-6" />
                 </IconButton>
@@ -52,7 +58,7 @@ const Kategori = () => {
           <CategoryTable
             head={["category_name", "category_type"]}
             title="Kategori Table"
-            search={true}
+            search={searchQuery}
             data={category}
             refreshData={fetchKategori}
           />

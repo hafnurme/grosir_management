@@ -1,27 +1,34 @@
-import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
 import UpdateModal from "@/components/Modal/UpdateModal";
-import AddModal from "@/components/Modal/AddModal";
 
-const CategoryTable = (props) => {
-  const { head, title, search, data, refreshData } = props;
+const CategoryTable = ({ head, data, refreshData, search }) => {
   const [finalData, setFinalData] = useState();
 
   useEffect(() => {
-    setFinalData(data);
+    return setFinalData(data);
   }, [data]);
 
-  const inputListener = (input) => {
-    const filteredData = data.filter((elem) => {
-      const key = new RegExp("^" + input.target.value, "i");
-      if (elem.category_name.match(key) || elem.category_type.match(key)) {
-        return elem;
-      }
-    });
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    if (search) {
+      search = search.replace(/[!@#$%^&*\\]/g, "");
+    }
+    if (search !== null || search !== "") {
+      const filteredData = data.filter((elem) => {
+        const key = new RegExp("^" + search, "i");
+        if (elem.category_name.match(key)) {
+          return elem;
+        }
+      });
 
-    setFinalData(filteredData);
-  };
+      return setFinalData(filteredData);
+    } else {
+      return refreshData();
+    }
+  }, [search]);
   return (
     <>
       <table className="w-full text-sm text-left text-gray-700">

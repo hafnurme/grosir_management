@@ -36,20 +36,19 @@ const SelectProductModal = ({
     setFinalData(productList);
   }, [productList]);
 
-  const handleSearch = (e, search) => {
+  const handleSearch = async (e, search) => {
     e.preventDefault();
-
     if (search !== null || search !== "") {
-      const filteredData = productList.filter((elem) => {
-        const key = new RegExp("^" + search, "i");
-        if (elem.name.match(key)) {
-          return elem;
-        }
-      });
-      return setFinalData(filteredData);
-    }
+      const dataTemp = await axios
+        .post(`/api/product/name`, { data: { name: search } })
+        .then((res) => {
+          return res.data;
+        });
 
-    fetchProduct();
+      setProductList(dataTemp.data);
+    } else {
+      fetchProduct();
+    }
   };
 
   const handleSelectProduct = (item) => {
@@ -78,7 +77,6 @@ const SelectProductModal = ({
               color="orange"
               onChange={(e) => {
                 setSearchQuery(e.target.value);
-                handleSearch(e, searchQuery);
               }}
             />
             <IconButton

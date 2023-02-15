@@ -8,14 +8,7 @@ export default withAuth(
     console.log(permission);
 
     if (NextRequest.nextUrl.pathname.startsWith("/admin/produk")) {
-      if (permission.includes("admin")) {
-        return NextResponse.next();
-      }
-      return NextResponse.redirect(new URL("/admin", NextRequest.url));
-    }
-
-    if (NextRequest.nextUrl.pathname.startsWith("/admin/produk/tambah")) {
-      if (permission.includes("admin")) {
+      if (permission.includes("admin") || permission.includes("lihat-gudang")) {
         return NextResponse.next();
       }
       return NextResponse.redirect(new URL("/admin", NextRequest.url));
@@ -51,6 +44,16 @@ export default withAuth(
 
     if (NextRequest.nextUrl.pathname.startsWith("/admin/warehouse")) {
       if (permission.includes("admin") || permission.includes("lihat-gudang")) {
+        return NextResponse.next();
+      }
+      return NextResponse.redirect(new URL("/admin", NextRequest.url));
+    }
+
+    if (NextRequest.nextUrl.pathname.startsWith("/admin/warehouse_request")) {
+      if (
+        permission.includes("admin") ||
+        permission.includes("lihat-request-pesanan")
+      ) {
         return NextResponse.next();
       }
       return NextResponse.redirect(new URL("/admin", NextRequest.url));

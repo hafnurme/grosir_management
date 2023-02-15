@@ -1,46 +1,15 @@
-import {
-  Button,
-  Card,
-  IconButton,
-  Input,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import AddModal from "@/components/Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
 import UpdateModal from "../Modal/UpdateModal";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
-export default function BranchTable({
-  head,
-  title,
-  search,
-  data,
-  refreshData,
-  handleSearch,
-}) {
+export default function BranchTable({ head, data, refreshData, handleSearch }) {
   const [finalData, setFinalData] = useState();
-  const [searchQuery, setSearchQuery] = useState();
 
   useEffect(() => {
     setFinalData(data);
   }, [data]);
-
-  const inputListener = (input) => {
-    const filteredData = data.filter((e) => {
-      const key = new RegExp(input.target.value, "i");
-      if (e.branch_name.match(key) || e.leader_name.match(key)) {
-        return e;
-      }
-    });
-    setFinalData(filteredData);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSearch(searchQuery);
-  };
 
   return (
     <>

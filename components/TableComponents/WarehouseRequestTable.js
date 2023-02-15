@@ -1,15 +1,15 @@
+import DetailModal from "../Modal/DetailModal";
+import UpdateModal from "../Modal/UpdateModal";
+import DeleteModal from "../Modal/DeleteModal";
 import { useEffect, useState } from "react";
-import DeleteDialog from "@/components/Modal/DeleteModal";
-import DetailModal from "@/components/Modal/DetailModal";
-import UpdateModal from "@/components/Modal/UpdateModal";
 
-const ProductTable = ({ head, data, refreshData, handleSearch }) => {
+const WarehouseRequestTable = ({ head, data, refreshData }) => {
   const [finalData, setFinalData] = useState();
 
+  console.log(finalData);
   useEffect(() => {
     setFinalData(data);
   }, [data]);
-
   return (
     <table className="w-full text-sm text-left text-gray-700">
       <thead className="text-xs uppercase bg-gray-100">
@@ -42,20 +42,8 @@ const ProductTable = ({ head, data, refreshData, handleSearch }) => {
                   <DetailModal item={object} />
                   <UpdateModal
                     item={object}
-                    itemHead={[
-                      "product_code",
-                      "brand",
-                      "name",
-                      "category_id",
-                      "description",
-                    ]}
-                    updateUrl="/api/product/"
-                    refreshData={refreshData}
-                  />
-                  <DeleteDialog
-                    itemToDelete={object}
-                    itemHead={head}
-                    deleteUrl="/api/product/"
+                    itemHead={["request_id", "product_code", "quantity"]}
+                    updateUrl="/api/warehouse_request/"
                     refreshData={refreshData}
                   />
                 </td>
@@ -67,4 +55,4 @@ const ProductTable = ({ head, data, refreshData, handleSearch }) => {
   );
 };
 
-export default ProductTable;
+export default WarehouseRequestTable;

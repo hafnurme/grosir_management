@@ -22,20 +22,22 @@ const Produk = () => {
     fetchProduct();
   }, []);
 
-  const handleSearch = async (search) => {
+  const handleSearch = async (e, search) => {
+    e.preventDefault();
     if (search) {
+      search = search.replace(/[!@#$%^&*\\]/g, "");
       search = search.trim();
     }
     if (search || search !== "") {
-      console.log(search);
-      console.log("first");
-      // const dataTemp = await axios
-      //   .post(`/api/supplier/name`, { data: { supplier_name: search } })
-      //   .then((res) => {
-      //     return res.data;
-      //   });
+      const dataTemp = await axios
+        .post(`/api/product/name`, { data: { name: search } })
+        .then((res) => {
+          return res.data;
+        });
 
-      // setSupplier(dataTemp);
+      setProduct(dataTemp);
+    } else {
+      fetchProduct();
     }
   };
 
@@ -53,7 +55,7 @@ const Produk = () => {
             <div className="flex gap-2">
               <form
                 onSubmit={(e) => {
-                  handleSubmit(e);
+                  handleSearch(e, searchQuery);
                 }}
                 className="flex gap-2"
               >
@@ -65,7 +67,7 @@ const Produk = () => {
                     setSearchQuery(e.target.value);
                   }}
                 />
-                <IconButton className="w-20" color="orange">
+                <IconButton type="submit" className="w-20" color="orange">
                   <MagnifyingGlassIcon className="h-6" />
                 </IconButton>
               </form>

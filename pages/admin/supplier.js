@@ -25,6 +25,7 @@ export default function supplier() {
   const handleSearch = async (e, search) => {
     e.preventDefault();
     if (search) {
+      search = search.replace(/[!@#$%^&*\\]/g, "");
       search = search.trim();
     }
     if (search || search !== "") {

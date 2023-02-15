@@ -1,26 +1,15 @@
 import { useEffect, useState } from "react";
-import {
-  ArrowPathIcon,
-  MagnifyingGlassIcon,
-  PlusCircleIcon,
-} from "@heroicons/react/20/solid";
-import {
-  Button,
-  Card,
-  IconButton,
-  Input,
-  Typography,
-} from "@material-tailwind/react";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { IconButton, Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import BranchTable from "../../components/TableComponents/BranchTable";
-import { getSession } from "next-auth/react";
 import AddModal from "@/components/Modal/AddModal";
 import Paginate from "@/components/paginate";
 
 export default function Branch() {
   const [branch, setBranch] = useState();
-  const [search, setSearchQuery] = useState();
-  const [size, setSize] = useState()
+  const [searchQuery, setSearchQuery] = useState();
+  const [size, setSize] = useState();
 
   const fetchBranch = async () => {
     const branches = await axios.get("/api/branch");
@@ -30,24 +19,26 @@ export default function Branch() {
   };
 
   useEffect(() => {
+    window.innerWidth >= 960 ? setSize("lg") : setSize("sm");
     fetchBranch();
-    window.innerWidth >= 960 ? setSize('lg') : setSize('sm')
   }, []);
 
-  const handleSearch = async (search) => {
+  const handleSearch = async (e, search) => {
+    e.preventDefault();
     if (search) {
+      search = search.replace(/[!@#$%^&*\\]/g, "");
       search = search.trim();
     }
     if (search || search !== "") {
-      console.log(search);
-      console.log("first");
-      // const dataTemp = await axios
-      //   .post(`/api/supplier/name`, { data: { supplier_name: search } })
-      //   .then((res) => {
-      //     return res.data;
-      //   });
+      const dataTemp = await axios
+        .post(`/api/branch/name`, { data: { branch_name: search } })
+        .then((res) => {
+          return res.data;
+        });
 
-      // setSupplier(dataTemp);
+      return setBranch(dataTemp);
+    } else {
+      return fetchBranch();
     }
   };
   return (
@@ -62,7 +53,7 @@ export default function Branch() {
               <div className="flex gap-2">
                 <form
                   onSubmit={(e) => {
-                    handleSubmit(e);
+                    handleSearch(e, searchQuery);
                   }}
                   className="flex gap-2"
                 >
@@ -102,7 +93,6 @@ export default function Branch() {
                 title="Branches"
                 data={branch.data}
                 refreshData={fetchBranch}
-                search={true}
                 handleSearch={handleSearch}
               />
             </div>

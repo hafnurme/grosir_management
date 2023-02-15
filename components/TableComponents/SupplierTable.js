@@ -11,26 +11,13 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import AddModal from "../Modal/AddModal";
 import DeleteDialog from "../Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
 import UpdateModal from "../Modal/UpdateModal";
 
-export default function SupplierTable({
-  head,
-  title,
-  search,
-  data,
-  refreshData,
-  handleSearch,
-}) {
+export default function SupplierTable({ head, data, refreshData }) {
   const [finalData, setFinalData] = useState();
-  const [searchQuery, setSearchQuery] = useState();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSearch(searchQuery);
-  };
   useEffect(() => {
     setFinalData(data);
   }, [data]);

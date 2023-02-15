@@ -1,16 +1,9 @@
-import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import DeleteModal from "@/components/Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
 import UpdateModal from "../Modal/UpdateModal";
 
-export default function WarehouseTable({
-  head,
-  title,
-  search,
-  data,
-  refreshData,
-}) {
+export default function WarehouseTable({ head, data, refreshData }) {
   const [finalData, setFinalData] = useState();
 
   useEffect(() => {
@@ -69,14 +62,8 @@ export default function WarehouseTable({
                     <DetailModal item={object} size="md" col="1" />
                     <UpdateModal
                       item={object}
-                      itemHead={[
-                        "warehouse_id",
-                        "product_code",
-                        "stock",
-                        "location",
-                        "entry_date",
-                      ]}
-                      updateUrl="/api/product/"
+                      itemHead={["stock", "location"]}
+                      updateUrl="/api/warehouse/"
                       refreshData={refreshData}
                       col="1"
                       size={"md"}
