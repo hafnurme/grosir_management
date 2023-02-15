@@ -21,6 +21,10 @@ export default function Branch() {
   useEffect(() => {
     window.innerWidth >= 960 ? setSize("lg") : setSize("sm");
     fetchBranch();
+    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
+    window.addEventListener("resize", () =>
+      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
+    );
   }, []);
 
   const handleSearch = async (e, search) => {
@@ -81,7 +85,7 @@ export default function Branch() {
                   ]}
                   fieldType={["text", "text", "number", "text"]}
                   col={"1"}
-                  size={"md"}
+                  size={size}
                   label="Tambah Branch"
                 />
               </div>

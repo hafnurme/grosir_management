@@ -1,18 +1,21 @@
+import { PlusCircleIcon } from "@heroicons/react/20/solid";
 import {
   Button,
   Dialog,
   DialogBody,
   DialogFooter,
   DialogHeader,
+  IconButton,
   Input,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import SelectProductModal from "./SelectProductModal";
 
 const WarehouseAddModal = ({ size, refreshData }) => {
   const [open, setOpen] = useState(false);
   const [productSelected, setProductSelected] = useState();
+  const [size, setSize] = useState();
   const [selectProductModalOpen, setSelectProductModalOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -41,16 +44,28 @@ const WarehouseAddModal = ({ size, refreshData }) => {
       refreshData();
     });
   };
+
+  useEffect(() => {
+    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
+    window.addEventListener("resize", () =>
+      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
+    );
+  }, []);
+
   return (
-    <Fragment>
-      <div className="flex gap-3">
-        <Button onClick={handleOpen} color="orange" variant="filled">
-          Add Product
-        </Button>
-      </div>
+    <div className="absolute bottom-10 right-10 z-30 lg:static">
+      <IconButton
+        size={size}
+        className="w-20"
+        onClick={handleOpen}
+        color="orange"
+        variant="filled"
+      >
+        <PlusCircleIcon className={size == "md" ? "h-6" : "h-4"} />
+      </IconButton>
       <Dialog
         open={open}
-        size={size || "md"}
+        size={size == "md" ? "lg" : "xxl"}
         handler={handleOpen}
         className="flex flex-col"
       >
@@ -109,7 +124,7 @@ const WarehouseAddModal = ({ size, refreshData }) => {
           </Button>
         </DialogFooter>
       </Dialog>
-    </Fragment>
+    </div>
   );
 };
 

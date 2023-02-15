@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Dialog, DialogHeader, DialogBody, Input, Checkbox, Typography, Alert, Chip } from "@material-tailwind/react";
+import { Button, Dialog, DialogHeader, DialogBody, Input, Checkbox, Typography, Alert, Chip, DialogFooter } from "@material-tailwind/react";
 import UpdateModal from "@/components/Modal/UpdateRoleModal";
 import DeleteDialog from "@/components/Modal/DeleteModal"
 import { PlusCircleIcon } from "@heroicons/react/20/solid";
@@ -14,6 +14,7 @@ const role = () => {
     const [permisionList, setPermisionList] = useState([])
     const [errName, setErrName] = useState()
     const [errPermision, setErrPermision] = useState()
+    const [size, setSize] = useState()
 
     const fetchPermision = async () => {
         const res = await axios.get("/api/Permision").then(res => res.data);
@@ -61,11 +62,14 @@ const role = () => {
     useEffect(() => {
         fetchPermision();
         fetchRole()
+        window.innerWidth >= 960 ? setSize('lg') : setSize('sm')
+        window.addEventListener("resize", () => window.innerWidth >= 960 ? setSize('lg') : setSize('sm'))
     }, []);
 
     return (
         <div>
             <Button
+                size={size}
                 className="flex w-40 items-center justify-center"
                 color="orange"
                 onClick={handleOpen}
@@ -102,6 +106,7 @@ const role = () => {
                                                     <div className="flex gap-2 mr-4">
                                                         <DetailRoleModal item={e} />
                                                         <UpdateModal
+                                                            size={size}
                                                             item={e}
                                                             itemHead={["name"]}
                                                             updateUrl="/api/Permision/"
@@ -128,7 +133,7 @@ const role = () => {
                 </div>
             </div>
 
-            <Dialog className="p-5" open={openDialog} handler={handleOpen} size="lg">
+            <Dialog className="p-5" open={openDialog} handler={handleOpen} size={size == 'lg' ? 'lg' : 'xxl'}>
                 <DialogHeader>Tambah Role</DialogHeader>
                 <DialogBody>
                     <div className="w-full flex justify-start gap-x-5 mb-5">
@@ -157,7 +162,7 @@ const role = () => {
                                 return (
                                     <div key={i} className="mb-4">
                                         <h1 className="text-base font-bold ">{e}</h1>
-                                        <div className="grid grid-cols-3 font-semibold text-sm">
+                                        <div className="grid lg:grid-cols-3 font-semibold text-sm">
                                             {permision[e].map((el, idx) => {
                                                 return <Checkbox key={idx} id={el.name} value={el.permision_id} label={el.label} ripple={true} onChange={handleChange} />
                                             })}
@@ -168,6 +173,11 @@ const role = () => {
                         )}
                     </div>
                 </DialogBody>
+                <DialogFooter>
+                    <Button variant="text" color="red" onClick={handleOpen}>
+                        <span>Close</span>
+                    </Button>
+                </DialogFooter>
             </Dialog>
         </div >
     );

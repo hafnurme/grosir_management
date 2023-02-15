@@ -1,10 +1,11 @@
-import { PencilSquareIcon } from "@heroicons/react/20/solid";
+import { PencilSquareIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
 import {
   Button,
   Dialog,
   DialogBody,
   DialogFooter,
   DialogHeader,
+  IconButton,
   Input,
 } from "@material-tailwind/react";
 import axios from "axios";
@@ -16,8 +17,8 @@ export default function AddModal({
   refreshData,
   fieldType,
   label,
-  size,
   col,
+  size
 }) {
   const [open, setOpen] = useState(false);
 
@@ -44,11 +45,11 @@ export default function AddModal({
   const handleOpen = () => setOpen(!open);
 
   return (
-    <Fragment>
-      <Button size={size} onClick={handleOpen} color="orange" variant="filled">
-        {label && label}
-      </Button>
-      <Dialog open={open} handler={handleOpen} size={size || "xl"}>
+    <div className="absolute bottom-10 right-10 z-30 lg:static">
+      <IconButton size={size} className="w-20" onClick={handleOpen} color="orange" variant="filled">
+        <PlusCircleIcon className={size == 'md' ? 'h-6' : 'h-4'} />
+      </IconButton>
+      <Dialog open={open} handler={handleOpen} size={size == 'md' ? 'lg' : 'xxl'}>
         <form
           className="w-full relative flex flex-col"
           onSubmit={(e) => {
@@ -87,6 +88,6 @@ export default function AddModal({
           </DialogFooter>
         </form>
       </Dialog>
-    </Fragment>
+    </div>
   );
 }

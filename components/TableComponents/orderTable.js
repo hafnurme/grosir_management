@@ -32,7 +32,7 @@ export default function OrderTable({ head, title, search, data, refreshData }) {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-4 p-1">
+      <div className="flex overflow-x-hidden justify-between items-center mb-4 p-1">
         {title && (
           <div className="text-c">
             <div className="mx-2 text-2xl font-semibold">
@@ -50,52 +50,54 @@ export default function OrderTable({ head, title, search, data, refreshData }) {
           </div>
         )}
       </div>
-      <table className="w-full text-sm text-left text-gray-700">
-        <thead className="text-xs text-c uppercase bg-gray-100">
-          <tr>
-            <th scope="col" className="px-6 py-3"></th>
-            {head &&
-              head.map((e, i) => {
+      <div className="overflow-x-scroll">
+        <table className=" w-full text-sm text-left text-gray-700">
+          <thead className="text-xs text-c uppercase bg-gray-100">
+            <tr>
+              <th scope="col" className="px-6 py-3"></th>
+              {head &&
+                head.map((e, i) => {
+                  return (
+                    <th key={i} className="px-6 py-3">
+                      {e}
+                    </th>
+                  );
+                })}
+              <th scope="col" className="px-6 py-3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {finalData &&
+              finalData.map((object, index) => {
                 return (
-                  <th key={i} className="px-6 py-3">
-                    {e}
-                  </th>
+                  <tr className="bg-white border-b text-c" key={index}>
+                    <td className="px-6 py-3 w-10 text-center">{index + 1}</td>
+                    {head &&
+                      head.map((elem, i) => {
+                        return (
+                          <td className="px-6 py-3" key={Math.random() * 100 * i}>
+                            {object[elem]}
+                          </td>
+                        );
+                      })}
+                    <td className="px-3 py-2 flex gap-3 justify-end items-center">
+                      <DetailModal item={object} />
+                      <Button variant="text" className="p-1 shadow-md">
+                        <PencilSquareIcon className="h-6 text-c" />
+                      </Button>
+                      <DeleteDialog
+                        itemToDelete={object}
+                        itemHead={head}
+                        refreshData={refreshData}
+                        deleteUrl="/api/product/"
+                      />
+                    </td>
+                  </tr>
                 );
               })}
-            <th scope="col" className="px-6 py-3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {finalData &&
-            finalData.map((object, index) => {
-              return (
-                <tr className="bg-white border-b text-c" key={index}>
-                  <td className="px-6 py-3 w-10 text-center">{index + 1}</td>
-                  {head &&
-                    head.map((elem, i) => {
-                      return (
-                        <td className="px-6 py-3" key={Math.random() * 100 * i}>
-                          {object[elem]}
-                        </td>
-                      );
-                    })}
-                  <td className="px-3 py-2 flex gap-3 justify-end items-center">
-                    <DetailModal item={object} />
-                    <Button variant="text" className="p-1 shadow-md">
-                      <PencilSquareIcon className="h-6 text-c" />
-                    </Button>
-                    <DeleteDialog
-                      itemToDelete={object}
-                      itemHead={head}
-                      refreshData={refreshData}
-                      deleteUrl="/api/product/"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

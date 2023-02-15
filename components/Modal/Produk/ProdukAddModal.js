@@ -5,11 +5,13 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  IconButton,
 } from "@material-tailwind/react";
 import ProductDetailForm from "../../FormComponents/ProductDetailForm";
 import PilihSupplierModal from "./PilihSupplierModal";
 import PilihKategoriModal from "./PilihKategoriModal";
 import axios from "axios";
+import { PlusCircleIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/20/solid";
 
 const AddProductModal = ({ size }) => {
   const [open, setOpen] = useState(false);
@@ -53,20 +55,20 @@ const AddProductModal = ({ size }) => {
   };
 
   return (
-    <Fragment>
+    <div className="absolute bottom-10 right-10 z-30 lg:static">
       <div className="flex gap-3">
-        <Button onClick={handleOpen} color="orange" variant="filled">
-          Add Product
-        </Button>
+        <IconButton size={size} className="w-20" onClick={handleOpen} color="orange">
+          <PlusCircleIcon className={size == 'md' ? 'h-6' : 'h-4'} />
+        </IconButton>
       </div>
       <Dialog
         open={open}
-        size={size || "xl"}
+        size={size == 'md' ? 'lg' : 'xxl'}
         handler={handleOpen}
         className="flex flex-col"
       >
         <DialogHeader>Add Produk</DialogHeader>
-        <DialogBody className="flex-1 bg-blue-gray-50" divider>
+        <DialogBody className="flex-1 bg-blue-gray-50 overflow-y-scroll" divider>
           <form
             ref={refForm}
             onSubmit={(e) => {
@@ -113,7 +115,7 @@ const AddProductModal = ({ size }) => {
           </Button>
         </DialogFooter>
       </Dialog>
-    </Fragment>
+    </div>
   );
 };
 

@@ -87,6 +87,15 @@ export default function sidebar({ openNav, setOpenNav }) {
     } else {
       setSize("sm");
     }
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 960) {
+        setSize('lg')
+        setOpenNav(true)
+      } else {
+        setSize('sm')
+      }
+    })
   }, [status]);
 
   useEffect(() => {

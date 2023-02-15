@@ -21,7 +21,7 @@ const ProductDetailForm = ({
   return (
     <>
       <div className="mb-5">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-2 gap-4">
           <Input
             required={true}
             color="orange"
