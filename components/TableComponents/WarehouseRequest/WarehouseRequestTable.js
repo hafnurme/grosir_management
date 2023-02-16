@@ -1,6 +1,6 @@
-import DetailModal from "../Modal/DetailModal";
-import UpdateModal from "../Modal/UpdateModal";
-import DeleteModal from "../Modal/DeleteModal";
+import DetailModal from "../../Modal/DetailModal";
+import UpdateModal from "../../Modal/UpdateModal";
+import DeleteModal from "../../Modal/DeleteModal";
 import { useEffect, useState } from "react";
 
 const WarehouseRequestTable = ({ head, data, refreshData }) => {

@@ -1,13 +1,22 @@
 import AddModal from "@/components/Modal/AddModal";
 import WarehouseRequestAddModal from "@/components/Modal/WarehouseRequest/WarehouseRequestAddModal";
-import WarehouseRequestStatus from "@/components/TableComponents/WarehouseRequestStatus";
-import WarehouseRequestTable from "@/components/TableComponents/WarehouseRequestTable";
+import WarehouseRequestPanel from "@/components/TableComponents/WarehouseRequest/WarehouseRequestPanel";
 import { Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function index() {
   const [warehouseRequest, setWarehouseRequest] = useState();
+  const [permission, setPermission] = useState();
+
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      setPermission(session.permission);
+    }
+  }, [status]);
 
   const fetchWarehouseRequest = async () => {
     const dataTemp = await axios.get("/api/warehouse/request").then((res) => {
@@ -29,14 +38,17 @@ export default function index() {
             <div className="mx-2">
               <Typography variant="h4">Request Produk</Typography>
             </div>
-            <div className="flex gap-2">
-              <WarehouseRequestAddModal refreshData={fetchWarehouseRequest} />
-            </div>
+            {permission && permission.includes("tambah-request-pesanan") && (
+              <div className="flex gap-2">
+                <WarehouseRequestAddModal refreshData={fetchWarehouseRequest} />
+              </div>
+            )}
           </div>
           <div>
-            <WarehouseRequestStatus
+            <WarehouseRequestPanel
               data={warehouseRequest.data}
               refreshData={fetchWarehouseRequest}
+              permission={permission}
             />
           </div>
         </div>
