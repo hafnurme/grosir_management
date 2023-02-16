@@ -51,7 +51,7 @@ const CategoryTable = ({ head, data, refreshData, search }) => {
             finalData.map((object, indexp) => {
               return (
                 <tr className="bg-white border-b" key={indexp}>
-                  <td className="px-6 py-1 w-10enter">{indexp + 1}</td>
+                  <td className="px-3">{indexp + 1}</td>
                   {head &&
                     head.map((elem, i) => {
                       return (

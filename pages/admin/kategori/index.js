@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CategoryTable from "@/components/TableComponents/CategoryTable";
-import AddModal from "@/components/Modal/AddModal";
 import { IconButton, Input } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import CategoryAddModal from "@/components/Modal/Kategori/CategoryAddModal";
 
 const Kategori = () => {
   const [category, setCategory] = useState();
@@ -43,22 +43,13 @@ const Kategori = () => {
                   variant="outlined"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <Input label="Search" color="orange" variant="outlined" />
                 <IconButton size={size} className="w-20" color="orange">
                   <MagnifyingGlassIcon
                     className={size == "md" ? "h-6" : "h-4"}
                   />
                 </IconButton>
               </div>
-              <AddModal
-                refreshData={fetchKategori}
-                addUrl="/api/category"
-                itemHead={["category_name", "category_type"]}
-                fieldType={["text", "text"]}
-                label="Tambah Kategori"
-                col="1"
-                size={size}
-              />
+              <CategoryAddModal refreshData={fetchKategori} />
             </div>
           </div>
         </div>

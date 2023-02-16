@@ -63,7 +63,6 @@ export default function sidebar({ openNav, setOpenNav }) {
       Tab.filter((element) => {
         permission.map((permissionElement, index) => {
           if (element.permission.includes(permissionElement)) {
-            console.log(element);
             authorizedTab.push(element);
           }
         });
@@ -90,12 +89,12 @@ export default function sidebar({ openNav, setOpenNav }) {
 
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 960) {
-        setSize('lg')
-        setOpenNav(true)
+        setSize("lg");
+        setOpenNav(true);
       } else {
-        setSize('sm')
+        setSize("sm");
       }
-    })
+    });
   }, [status]);
 
   useEffect(() => {
@@ -105,7 +104,7 @@ export default function sidebar({ openNav, setOpenNav }) {
   return (
     <>
       {openNav && (
-        <aside className="absolute lg:sticky z-30 w-56 bg-blue-gray-50 shadow box-border py-9 px-4 lg:flex lg:flex-col lg:justify-between">
+        <aside className="absolute lg:sticky z-30 w-56 bg-blue-gray-50 shadow box-border p-4 lg:flex lg:flex-col lg:justify-between">
           <div className="w-full">
             {actualTab &&
               actualTab.map((tab, index) => {

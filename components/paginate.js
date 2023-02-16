@@ -5,8 +5,7 @@ import { getSession } from "next-auth/react";
 import { useState } from "react";
 
 const Paginate = ({ page, refreshData, setData }) => {
-
-  const [size, setSize] = useState()
+  const [size, setSize] = useState();
 
   const paginateNavigate = async (link) => {
     const accessToken = await getSession().then((token) => token.accessToken);
@@ -25,7 +24,7 @@ const Paginate = ({ page, refreshData, setData }) => {
   };
 
   return (
-    <div className="flex gap-1 bg-blue-gray-100">
+    <div className="flex gap-1 bg-blue-gray-100 pt-2">
       <IconButton size={size} onClick={refreshData}>
         <ArrowPathIcon className="h-6" />
       </IconButton>

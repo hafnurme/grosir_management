@@ -100,7 +100,7 @@ export default function Branch() {
                 handleSearch={handleSearch}
               />
             </div>
-            <div className="px-2 py-4 flex justify-end">
+            <div className="px-2  flex justify-end">
               <Paginate
                 page={branch}
                 setData={setBranch}

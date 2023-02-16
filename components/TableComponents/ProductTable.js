@@ -2,8 +2,15 @@ import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
 import DetailModal from "@/components/Modal/DetailModal";
 import UpdateModal from "@/components/Modal/UpdateModal";
+import index from "@/pages/admin";
 
-const ProductTable = ({ head, data, refreshData, handleSearch }) => {
+const ProductTable = ({
+  head,
+  data,
+  refreshData,
+  handleSearch,
+  current_page,
+}) => {
   const [finalData, setFinalData] = useState();
 
   useEffect(() => {
@@ -14,6 +21,7 @@ const ProductTable = ({ head, data, refreshData, handleSearch }) => {
     <table className="w-full text-sm text-left text-gray-700">
       <thead className="text-xs uppercase bg-gray-100">
         <tr>
+          <th></th>
           {head &&
             head.map((elem, i) => {
               return (
@@ -30,6 +38,7 @@ const ProductTable = ({ head, data, refreshData, handleSearch }) => {
           finalData.map((object, indexp) => {
             return (
               <tr className="bg-white border-b" key={indexp}>
+                <td className="px-3">{indexp + 1 + current_page * 10 - 10}</td>
                 {head &&
                   head.map((elem, i) => {
                     return (

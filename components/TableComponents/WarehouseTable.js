@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import DeleteModal from "@/components/Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
 import UpdateModal from "../Modal/UpdateModal";
+import { useSession } from "next-auth/react";
 
 export default function WarehouseTable({ head, data, refreshData }) {
   const [finalData, setFinalData] = useState();
+
+  const { data: session, status } = useSession();
+  const permission = session.permission;
 
   useEffect(() => {
     setFinalData(data);
@@ -58,23 +62,29 @@ export default function WarehouseTable({ head, data, refreshData }) {
                         </td>
                       );
                     })}
-                  <td className="px-3 py-1 flex gap-3 justify-end items-center">
-                    <DetailModal item={object} size="md" col="1" />
-                    <UpdateModal
-                      item={object}
-                      itemHead={["stock", "location"]}
-                      updateUrl="/api/warehouse/"
-                      refreshData={refreshData}
-                      col="1"
-                      size={"md"}
-                    />
-                    <DeleteModal
-                      itemToDelete={object}
-                      itemHead={head}
-                      deleteUrl="/api/warehouse/"
-                      refreshData={refreshData}
-                    />
-                  </td>
+                  {permission && (
+                    <td className="px-3 py-1 flex gap-3 justify-end items-center">
+                      <DetailModal item={object} size="md" col="1" />
+                      {permission.includes("edit-gudang") && (
+                        <UpdateModal
+                          item={object}
+                          itemHead={["stock", "location"]}
+                          updateUrl="/api/warehouse/"
+                          refreshData={refreshData}
+                          col="1"
+                          size={"md"}
+                        />
+                      )}
+                      {permission.includes("hapus-gudang") && (
+                        <DeleteModal
+                          itemToDelete={object}
+                          itemHead={head}
+                          deleteUrl="/api/warehouse/"
+                          refreshData={refreshData}
+                        />
+                      )}
+                    </td>
+                  )}
                 </tr>
               );
             })}

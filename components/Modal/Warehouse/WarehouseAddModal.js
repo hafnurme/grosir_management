@@ -12,7 +12,7 @@ import axios from "axios";
 import { Fragment, useEffect, useRef, useState } from "react";
 import SelectProductModal from "./SelectProductModal";
 
-const WarehouseAddModal = ({ size, refreshData }) => {
+const WarehouseAddModal = ({ modalSize, refreshData }) => {
   const [open, setOpen] = useState(false);
   const [productSelected, setProductSelected] = useState();
   const [size, setSize] = useState();

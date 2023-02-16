@@ -1,5 +1,6 @@
 import AddModal from "@/components/Modal/AddModal";
 import WarehouseRequestAddModal from "@/components/Modal/WarehouseRequest/WarehouseRequestAddModal";
+import WarehouseRequestStatus from "@/components/TableComponents/WarehouseRequestStatus";
 import WarehouseRequestTable from "@/components/TableComponents/WarehouseRequestTable";
 import { Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
@@ -33,15 +34,8 @@ export default function index() {
             </div>
           </div>
           <div>
-            <WarehouseRequestTable
+            <WarehouseRequestStatus
               data={warehouseRequest.data}
-              head={[
-                "warehouse_id",
-                "product_code",
-                "request_date",
-                "status",
-                "quantity",
-              ]}
               refreshData={fetchWarehouseRequest}
             />
           </div>

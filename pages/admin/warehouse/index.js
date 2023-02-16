@@ -1,13 +1,16 @@
-import AddModal from "@/components/Modal/AddModal";
 import WarehouseAddModal from "@/components/Modal/Warehouse/WarehouseAddModal";
 import Paginate from "@/components/paginate";
 import WarehouseTable from "@/components/TableComponents/WarehouseTable";
 import { Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function index() {
   const [warehouse, setWarehouse] = useState();
+  const [permission, setPermission] = useState();
+
+  const { data: session, status } = useSession();
 
   const fetchWarehouse = async () => {
     const dataTemp = await axios.get("/api/warehouse").then((res) => {
@@ -21,6 +24,12 @@ export default function index() {
     fetchWarehouse();
   }, []);
 
+  useEffect(() => {
+    if (session) {
+      return setPermission(session.permission);
+    }
+  }, [status]);
+
   return (
     <div>
       {warehouse && (
@@ -31,9 +40,11 @@ export default function index() {
             </div>
             <div className="flex gap-2">
               <div className="flex items-center">
-                <Input label="Search" color="deep-orange" />
+                <Input label="Search" color="orange" />
               </div>
-              <WarehouseAddModal refreshData={fetchWarehouse} />
+              {permission && permission.includes("tambah-gudang") && (
+                <WarehouseAddModal refreshData={fetchWarehouse} />
+              )}
             </div>
           </div>
           <div className="overflow-x-scroll">
@@ -51,7 +62,7 @@ export default function index() {
               refreshData={fetchWarehouse}
             />
           </div>
-          <div className="px-2 py-4 flex justify-end">
+          <div className="px-2 flex justify-end">
             <Paginate
               page={warehouse}
               refreshData={fetchWarehouse}

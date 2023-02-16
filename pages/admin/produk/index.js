@@ -29,11 +29,12 @@ const Produk = () => {
 
   const handleSearch = async (e, search) => {
     e.preventDefault();
+
     if (search) {
       search = search.replace(/[!@#$%^&*\\]/g, "");
       search = search.trim();
     }
-    if (search || search !== "") {
+    if (search && search !== "") {
       const dataTemp = await axios
         .post(`/api/product/name`, { data: { name: search } })
         .then((res) => {
@@ -85,7 +86,7 @@ const Produk = () => {
                   />
                 </IconButton>
               </form>
-              <ProdukAddModal size={size} />
+              <ProdukAddModal size={size} refreshData={fetchProduct} />
             </div>
           </div>
 
@@ -96,9 +97,10 @@ const Produk = () => {
               search={true}
               data={product.data}
               refreshData={fetchProduct}
+              current_page={product["current_page"]}
             />
           </div>
-          <div className="flex justify-end px-2 py-4">
+          <div className="flex justify-end px-2">
             <Paginate
               setData={setProduct}
               page={product}
