@@ -11,9 +11,13 @@ import ProductDetailForm from "../../FormComponents/ProductDetailForm";
 import PilihSupplierModal from "./PilihSupplierModal";
 import PilihKategoriModal from "./PilihKategoriModal";
 import axios from "axios";
-import { PlusCircleIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/20/solid";
+import {
+  PlusCircleIcon,
+  PlusIcon,
+  PlusSmallIcon,
+} from "@heroicons/react/20/solid";
 
-const AddProductModal = ({ size }) => {
+const AddProductModal = ({ size, refreshData }) => {
   const [open, setOpen] = useState(false);
   const [supplierModal, setSupplierModal] = useState(false);
   const [kategoriModal, setKategoriModal] = useState(false);
@@ -47,6 +51,7 @@ const AddProductModal = ({ size }) => {
     await axios.post("/api/product", { data: dataTemp }).then((res) => {
       console.log(res.data);
       handleOpen();
+      refreshData();
     });
   };
 
@@ -57,18 +62,26 @@ const AddProductModal = ({ size }) => {
   return (
     <div className="absolute bottom-10 right-10 z-30 lg:static">
       <div className="flex gap-3">
-        <IconButton size={size} className="w-20" onClick={handleOpen} color="orange">
-          <PlusCircleIcon className={size == 'md' ? 'h-6' : 'h-4'} />
+        <IconButton
+          size={size}
+          className="w-20"
+          onClick={handleOpen}
+          color="orange"
+        >
+          <PlusCircleIcon className={size == "md" ? "h-6" : "h-4"} />
         </IconButton>
       </div>
       <Dialog
         open={open}
-        size={size == 'md' ? 'lg' : 'xxl'}
+        size={size == "md" ? "lg" : "xxl"}
         handler={handleOpen}
         className="flex flex-col"
       >
         <DialogHeader>Add Produk</DialogHeader>
-        <DialogBody className="flex-1 bg-blue-gray-50 overflow-y-scroll" divider>
+        <DialogBody
+          className="flex-1 bg-blue-gray-50 overflow-y-scroll"
+          divider
+        >
           <form
             ref={refForm}
             onSubmit={(e) => {

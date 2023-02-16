@@ -97,7 +97,7 @@ const PilihKategoriModal = ({
             </IconButton>
           </form>
           <div
-            className={`mt-4 rounded overflow-hidden ${
+            className={`mt-4 rounded overflow-hidden max-h-[15rem] overflow-y-scroll ${
               finalData ? "border" : ""
             } border-blue-gray-200`}
           >

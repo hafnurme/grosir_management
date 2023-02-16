@@ -16,9 +16,8 @@ export default function AddModal({
   addUrl,
   refreshData,
   fieldType,
-  label,
   col,
-  size
+  size,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -46,10 +45,20 @@ export default function AddModal({
 
   return (
     <div className="absolute bottom-10 right-10 z-30 lg:static">
-      <IconButton size={size} className="w-20" onClick={handleOpen} color="orange" variant="filled">
-        <PlusCircleIcon className={size == 'md' ? 'h-6' : 'h-4'} />
+      <IconButton
+        size={size}
+        className="w-20"
+        onClick={handleOpen}
+        color="orange"
+        variant="filled"
+      >
+        <PlusCircleIcon className={size == "md" ? "h-6" : "h-4"} />
       </IconButton>
-      <Dialog open={open} handler={handleOpen} size={size == 'md' ? 'lg' : 'xxl'}>
+      <Dialog
+        open={open}
+        handler={handleOpen}
+        size={size == "md" ? "lg" : "xxl"}
+      >
         <form
           className="w-full relative flex flex-col"
           onSubmit={(e) => {
