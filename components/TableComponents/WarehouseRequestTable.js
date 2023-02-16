@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 const WarehouseRequestTable = ({ head, data, refreshData }) => {
   const [finalData, setFinalData] = useState();
 
-  console.log(finalData);
   useEffect(() => {
     setFinalData(data);
   }, [data]);
