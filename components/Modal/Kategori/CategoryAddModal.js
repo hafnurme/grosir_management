@@ -45,15 +45,8 @@ const CategoryAddModal = ({ modalSize, refreshData }) => {
     });
   };
 
-  useEffect(() => {
-    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
-    window.addEventListener("resize", () =>
-      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
-    );
-  }, []);
-
   return (
-    <div className="absolute bottom-10 right-10 z-30 lg:static">
+    <div>
       <IconButton
         size={size}
         className="w-20"
@@ -61,13 +54,12 @@ const CategoryAddModal = ({ modalSize, refreshData }) => {
         color="orange"
         variant="filled"
       >
-        <PlusCircleIcon className={size == "md" ? "h-6" : "h-4"} />
+        <PlusCircleIcon className="h-6" />
       </IconButton>
       <Dialog
         open={open}
-        size={size == "md" ? "lg" : "xxl"}
         handler={handleOpen}
-        className="flex flex-col"
+        className="flex flex-col min-w-[90%] md:min-w-[50%] lg:min-w-[25%]"
       >
         <DialogHeader>Add Produk</DialogHeader>
         <DialogBody className="flex-1 bg-blue-gray-50" divider>

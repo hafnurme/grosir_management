@@ -24,12 +24,11 @@ const Paginate = ({ page, refreshData, setData }) => {
   };
 
   return (
-    <div className="flex gap-1 bg-blue-gray-100 pt-2">
-      <IconButton size={size} onClick={refreshData}>
+    <div className="flex gap-1 bg-blue-gray-100 pt-4">
+      <IconButton onClick={refreshData}>
         <ArrowPathIcon className="h-6" />
       </IconButton>
       <IconButton
-        size={size}
         disabled={page.prev_page_url === null ? true : false}
         onClick={() => {
           paginateNavigate(page.prev_page_url);
@@ -39,7 +38,6 @@ const Paginate = ({ page, refreshData, setData }) => {
       </IconButton>
       {page.current_page != 1 && (
         <IconButton
-          size={size}
           onClick={() => {
             paginateNavigate(page.path + `?page=${page.current_page - 1}`);
           }}
@@ -48,7 +46,6 @@ const Paginate = ({ page, refreshData, setData }) => {
         </IconButton>
       )}
       <IconButton
-        size={size}
         onClick={() => {
           paginateNavigate(page.path + `?page=${page.current_page}`);
         }}
@@ -59,7 +56,6 @@ const Paginate = ({ page, refreshData, setData }) => {
       {page.current_page != page.last_page && (
         <>
           <IconButton
-            size={size}
             onClick={() => {
               paginateNavigate(page.path + `?page=${page.current_page + 1}`);
             }}
@@ -71,7 +67,6 @@ const Paginate = ({ page, refreshData, setData }) => {
       {page.current_page != page.last_page &&
         page.current_page + 1 != page.last_page && (
           <IconButton
-            size={size}
             onClick={() => {
               paginateNavigate(page.last_page_url);
             }}
@@ -80,7 +75,6 @@ const Paginate = ({ page, refreshData, setData }) => {
           </IconButton>
         )}
       <IconButton
-        size={size}
         disabled={page.next_page_url === null ? true : false}
         onClick={() => {
           paginateNavigate(page.next_page_url);

@@ -44,7 +44,7 @@ export default function index() {
               </div>
             )}
           </div>
-          <div>
+          <div className="px-2 sm:px-0">
             <WarehouseRequestPanel
               data={warehouseRequest.data}
               refreshData={fetchWarehouseRequest}

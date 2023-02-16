@@ -13,7 +13,7 @@ export default function BranchTable({ head, data, refreshData, handleSearch }) {
 
   return (
     <>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
         {finalData &&
           finalData.map((object, index) => {
             return (

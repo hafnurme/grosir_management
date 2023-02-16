@@ -52,24 +52,26 @@ export default function supplier() {
       {supplier && (
         <div className="relative">
           <div className="flex justify-between items-center py-4 px-2">
-            <div className="mx-2">
+            <div className="hidden sm:block">
               <Typography variant="h4">Supplier</Typography>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full">
               <form
                 onSubmit={(e) => {
                   handleSearch(e, searchQuery);
                 }}
-                className="flex gap-2"
+                className="flex gap-2 w-full sm:justify-end"
               >
-                <Input
-                  label="Search"
-                  color="orange"
-                  variant="outlined"
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                  }}
-                />
+                <div className="w-full sm:w-52">
+                  <Input
+                    label="Search"
+                    color="orange"
+                    variant="outlined"
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                    }}
+                  />
+                </div>
                 <IconButton className="w-20" color="orange">
                   <MagnifyingGlassIcon className="h-6" />
                 </IconButton>
@@ -86,7 +88,7 @@ export default function supplier() {
             </div>
           </div>
           <div>
-            <div className="px-2">
+            <div className="px-2 sm:px-0">
               <SupplierTable
                 head={["supplier_name", "contact", "address"]}
                 title="Supplier List"
@@ -96,7 +98,7 @@ export default function supplier() {
                 handleSearch={handleSearch}
               />
             </div>
-            <div className="flex justify-end px-2">
+            <div className="flex justify-center  sm:justify-end px-2">
               <Paginate
                 page={supplier}
                 refreshData={fetchSupplier}

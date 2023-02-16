@@ -19,12 +19,7 @@ export default function Branch() {
   };
 
   useEffect(() => {
-    window.innerWidth >= 960 ? setSize("lg") : setSize("sm");
     fetchBranch();
-    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
-    window.addEventListener("resize", () =>
-      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
-    );
   }, []);
 
   const handleSearch = async (e, search) => {
@@ -50,29 +45,30 @@ export default function Branch() {
       <div>
         {branch && (
           <>
-            <div className="flex justify-between items-center px-2 py-4">
-              <div className="mx-2">
+            <div className="flex sm:justify-between items-center px-2 py-4">
+              <div className="mx-2 hidden sm:block">
                 <Typography variant="h4">Branch</Typography>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-1 justify-end">
                 <form
                   onSubmit={(e) => {
                     handleSearch(e, searchQuery);
                   }}
-                  className="flex gap-2"
+                  className="flex gap-2 w-full sm:w-52"
                 >
                   <Input
                     label="Search"
                     color="orange"
                     variant="outlined"
+                    className="w-full"
                     onChange={(e) => {
                       setSearchQuery(e.target.value);
                     }}
                   />
-                  <IconButton className="w-20" color="orange">
-                    <MagnifyingGlassIcon className="h-6" />
-                  </IconButton>
                 </form>
+                <IconButton className="w-20" color="orange">
+                  <MagnifyingGlassIcon className="h-6" />
+                </IconButton>
 
                 <AddModal
                   refreshData={fetchBranch}
@@ -91,7 +87,7 @@ export default function Branch() {
               </div>
             </div>
 
-            <div className="px-2">
+            <div className="px-2 sm:px-0">
               <BranchTable
                 head={["branch_name", "leader_name", "contact", "address"]}
                 title="Branches"
@@ -100,7 +96,7 @@ export default function Branch() {
                 handleSearch={handleSearch}
               />
             </div>
-            <div className="px-2  flex justify-end">
+            <div className="px-2  flex justify-center sm:justify-end">
               <Paginate
                 page={branch}
                 setData={setBranch}

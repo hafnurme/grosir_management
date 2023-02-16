@@ -63,12 +63,10 @@ const PilihKategoriModal = ({
 
   return (
     <Fragment>
-      <div></div>
       <Dialog
         open={modalOpen || false}
-        size={size || "lg"}
         handler={handleOpenMod}
-        className="z-50"
+        className="z-50 max-w-[90%] min-w-[90%] lg:min-w-[75%]"
       >
         <DialogHeader>Pilih Kategori</DialogHeader>
         <DialogBody divider>

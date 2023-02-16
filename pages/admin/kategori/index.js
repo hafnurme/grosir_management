@@ -19,10 +19,6 @@ const Kategori = () => {
 
   useEffect(() => {
     fetchKategori();
-    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
-    window.addEventListener("resize", () =>
-      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
-    );
   }, []);
 
   return (
@@ -30,30 +26,28 @@ const Kategori = () => {
       <div>
         <div>
           <div className="flex justify-between items-center px-2 py-4  overflow-hidden">
-            <div className="text-c">
-              <div className="mx-2 text-2xl font-semibold">
+            <div className="hidden sm:block">
+              <div className="text-2xl font-semibold">
                 <h3>Kategori</h3>
               </div>
             </div>
-            <div className="flex gap-2">
-              <div className="flex items-center gap-2">
+            <div className="flex gap-2 w-full sm:justify-end">
+              <div className="flex items-center gap-2 w-full sm:w-52">
                 <Input
                   label="Search"
                   color="orange"
                   variant="outlined"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <IconButton size={size} className="w-20" color="orange">
-                  <MagnifyingGlassIcon
-                    className={size == "md" ? "h-6" : "h-4"}
-                  />
-                </IconButton>
               </div>
+              <IconButton className="w-20" color="orange">
+                <MagnifyingGlassIcon className="h-6" />
+              </IconButton>
               <CategoryAddModal refreshData={fetchKategori} />
             </div>
           </div>
         </div>
-        <div className="overflow-x-scroll">
+        <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:mx-0">
           <CategoryTable
             head={["category_name", "category_type"]}
             title="Kategori Table"

@@ -21,10 +21,10 @@ const Produk = () => {
 
   useEffect(() => {
     fetchProduct();
-    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
-    window.addEventListener("resize", () =>
-      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
-    );
+    // window.innerWidth >= 960 ? setSize("md") : setSize("sm");
+    // window.addEventListener("resize", () =>
+    //   window.innerWidth >= 960 ? setSize("md") : setSize("sm")
+    // );
   }, []);
 
   const handleSearch = async (e, search) => {
@@ -52,24 +52,25 @@ const Produk = () => {
       {product && (
         <>
           <div className="flex justify-between items-center py-4 px-2">
-            <div>
-              <div className="mx-2 text-2xl font-semibold">
+            <div className="hidden sm:block">
+              <div className="text-2xl font-semibold">
                 <h3>Produk</h3>
               </div>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full">
               <form
                 onSubmit={(e) => {
                   handleSearch(e, searchQuery);
                 }}
-                className="flex gap-2"
+                className="flex gap-2 w-full justify-end"
               >
-                <div className="w-52">
+                <div className="w-full sm:w-52">
                   <Input
                     label="Search"
                     color="orange"
                     variant="outlined"
+                    className="w-full"
                     onChange={(e) => {
                       setSearchQuery(e.target.value);
                     }}
@@ -81,16 +82,14 @@ const Produk = () => {
                   color="orange"
                   type="submit"
                 >
-                  <MagnifyingGlassIcon
-                    className={size == "md" ? "h-6" : "h-4"}
-                  />
+                  <MagnifyingGlassIcon className="w-6" />
                 </IconButton>
               </form>
               <ProdukAddModal size={size} refreshData={fetchProduct} />
             </div>
           </div>
 
-          <div className="overflow-x-scroll">
+          <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:mx-0">
             <ProductTable
               head={["product_code", "name", "brand", "category_id"]}
               title="Product List"
@@ -100,7 +99,7 @@ const Produk = () => {
               current_page={product["current_page"]}
             />
           </div>
-          <div className="flex justify-end px-2">
+          <div className="flex justify-center  lg:justify-end px-2">
             <Paginate
               setData={setProduct}
               page={product}

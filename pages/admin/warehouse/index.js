@@ -35,11 +35,11 @@ export default function index() {
       {warehouse && (
         <div>
           <div className="flex justify-between items-center py-4 px-2">
-            <div className="mx-2">
+            <div className="hidden sm:block">
               <Typography variant="h4">Warehouse</Typography>
             </div>
-            <div className="flex gap-2">
-              <div className="flex items-center">
+            <div className="flex gap-2 w-full sm:justify-end">
+              <div className="flex items-center w-full sm:w-52">
                 <Input label="Search" color="orange" />
               </div>
               {permission && permission.includes("tambah-gudang") && (
@@ -47,7 +47,7 @@ export default function index() {
               )}
             </div>
           </div>
-          <div className="overflow-x-scroll">
+          <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:m-0">
             <WarehouseTable
               head={[
                 "warehouse_id",
@@ -62,7 +62,7 @@ export default function index() {
               refreshData={fetchWarehouse}
             />
           </div>
-          <div className="px-2 flex justify-end">
+          <div className="px-2 flex justify-center sm:justify-end">
             <Paginate
               page={warehouse}
               refreshData={fetchWarehouse}

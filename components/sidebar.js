@@ -81,7 +81,7 @@ export default function sidebar({ openNav, setOpenNav }) {
       setPermission(session.permission);
     }
     if (window.innerWidth >= 960) {
-      setSize("lg");
+      setSize("md");
       setOpenNav(true);
     } else {
       setSize("sm");
@@ -89,7 +89,7 @@ export default function sidebar({ openNav, setOpenNav }) {
 
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 960) {
-        setSize("lg");
+        setSize("md");
         setOpenNav(true);
       } else {
         setSize("sm");

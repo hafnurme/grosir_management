@@ -45,17 +45,9 @@ const WarehouseAddModal = ({ modalSize, refreshData }) => {
     });
   };
 
-  useEffect(() => {
-    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
-    window.addEventListener("resize", () =>
-      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
-    );
-  }, []);
-
   return (
-    <div className="absolute bottom-10 right-10 z-30 lg:static">
+    <div>
       <IconButton
-        size={size}
         className="w-20"
         onClick={handleOpen}
         color="orange"
@@ -65,7 +57,7 @@ const WarehouseAddModal = ({ modalSize, refreshData }) => {
       </IconButton>
       <Dialog
         open={open}
-        size={size == "md" ? "lg" : "xxl"}
+        size={"xl"}
         handler={handleOpen}
         className="flex flex-col"
       >

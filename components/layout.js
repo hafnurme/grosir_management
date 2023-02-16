@@ -17,7 +17,7 @@ export default function layout({ children }) {
         <Navbar openNav={openNav} setOpenNav={setOpenNav} />
         <div className="flex flex-1 h-full overflow-hidden flex-row-reverse lg:flex-row">
           <Sidebar openNav={openNav} setOpenNav={setOpenNav} />
-          <main className="h-full px-4 box-border w-full bg-blue-gray-100 overflow-y-scroll">
+          <main className="h-full px-1 sm:px-4 box-border w-full bg-blue-gray-100 overflow-y-scroll">
             {children}
           </main>
         </div>

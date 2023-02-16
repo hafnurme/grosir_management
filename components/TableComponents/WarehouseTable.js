@@ -46,24 +46,29 @@ export default function WarehouseTable({ head, data, refreshData }) {
             finalData.map((object, indexp) => {
               return (
                 <tr className="bg-white border-b" key={indexp}>
-                  <td className="px-6 py-1 w-8 text-center">{indexp + 1}</td>
+                  <td className="px-2 w-8 text-center">{indexp + 1}</td>
                   {head &&
                     head.map((elem, i) => {
                       if (elem === "warehouse_id") {
                         return (
-                          <td className="py-1" key={Math.random() * 100 * i}>
-                            <span className="inline-block">{object[elem]}</span>
+                          <td className="sm:py-1" key={Math.random() * 100 * i}>
+                            <span className="inline-block whitespace-nowrap">
+                              {object[elem]}
+                            </span>
                           </td>
                         );
                       }
                       return (
-                        <td className="px-6 py-1" key={Math.random() * 100 * i}>
+                        <td
+                          className="px-6 sm:py-1"
+                          key={Math.random() * 100 * i}
+                        >
                           {object[elem]}
                         </td>
                       );
                     })}
                   {permission && (
-                    <td className="px-3 py-1 flex gap-3 justify-end items-center">
+                    <td className="px-3 py-1 flex gap-3 sm:justify-end  items-center">
                       <DetailModal item={object} size="md" col="1" />
                       {permission.includes("edit-gudang") && (
                         <UpdateModal

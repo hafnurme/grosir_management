@@ -55,12 +55,12 @@ const CategoryTable = ({ head, data, refreshData, search }) => {
                   {head &&
                     head.map((elem, i) => {
                       return (
-                        <td className="px-6 py-1" key={Math.random() * 100 * i}>
+                        <td className="px-6" key={Math.random() * 100 * i}>
                           {object[elem]}
                         </td>
                       );
                     })}
-                  <td className="px-3 py-1 flex gap-3 justify-end items-center">
+                  <td className="px-3 sm:py-1 flex gap-3 justify-end items-center">
                     <UpdateModal
                       item={object}
                       itemHead={head}
@@ -68,7 +68,6 @@ const CategoryTable = ({ head, data, refreshData, search }) => {
                       refreshData={refreshData}
                       updateUrl="/api/category/"
                       col="1"
-                      size="md"
                     />
                     <DeleteDialog
                       itemToDelete={object}

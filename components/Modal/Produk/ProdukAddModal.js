@@ -60,7 +60,7 @@ const AddProductModal = ({ size, refreshData }) => {
   };
 
   return (
-    <div className="absolute bottom-10 right-10 z-30 lg:static">
+    <div className="lg:static">
       <div className="flex gap-3">
         <IconButton
           size={size}
@@ -68,7 +68,7 @@ const AddProductModal = ({ size, refreshData }) => {
           onClick={handleOpen}
           color="orange"
         >
-          <PlusCircleIcon className={size == "md" ? "h-6" : "h-4"} />
+          <PlusCircleIcon className="h-6" />
         </IconButton>
       </div>
       <Dialog

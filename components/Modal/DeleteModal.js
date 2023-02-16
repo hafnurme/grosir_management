@@ -37,7 +37,7 @@ export default function DeleteModal({
       >
         <TrashIcon className="h-6" />
       </Button>
-      <Dialog open={open} handler={handleOpen} size={"md"}>
+      <Dialog open={open} handler={handleOpen} size={"xl"}>
         <DialogHeader>Confirm</DialogHeader>
         <DialogBody className="text-c bg-blue-gray-50 text-gray-800" divider>
           <div className="w-full m-2">

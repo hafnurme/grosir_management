@@ -52,7 +52,9 @@ export default function WarehouseRequestPanel({
     <Tabs value="accepted">
       <TabsHeader>
         {tab.map(({ label, value }) => {
-          if (permission && permission.includes("admin") && value !== "sent") {
+          if (permission && permission.includes("admin") && value === "sent") {
+            return;
+          } else {
             return (
               <Tab key={value} value={value}>
                 {label}
@@ -64,19 +66,17 @@ export default function WarehouseRequestPanel({
       <TabsBody>
         {tab.map(({ value, dataStatus }) => (
           <TabPanel key={value} value={value} className="p-0 py-4">
-            {permission && permission.includes("admin") && value !== "sent" && (
-              <WarehouseRequestTable
-                data={dataStatus}
-                head={[
-                  "warehouse_id",
-                  "product_code",
-                  "request_date",
-                  "status",
-                  "quantity",
-                ]}
-                refreshData={refreshData}
-              />
-            )}
+            <WarehouseRequestTable
+              data={dataStatus}
+              head={[
+                "warehouse_id",
+                "product_code",
+                "request_date",
+                "status",
+                "quantity",
+              ]}
+              refreshData={refreshData}
+            />
           </TabPanel>
         ))}
       </TabsBody>
