@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const body = await req.body.data;
 
     body["user_id"] = session.user.user_id;
-   
+
     const options = {
       method: "POST",
       url: `${base_url}/api/branch`,
