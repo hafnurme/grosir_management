@@ -25,7 +25,7 @@ export default function DetailModal({ item, size, col }) {
         className="flex flex-col"
       >
         <DialogHeader>Detail</DialogHeader>
-        <DialogBody className="text-gray-800 bg-blue-gray-50 flex-1" divider>
+        <DialogBody className="text-gray-800 bg-blue-gray-50 flex-1 overflow-y-auto" divider>
           <div className={`grid grid-cols-${col || "2"}`}>
             {item &&
               Object.keys(item).map((key, index) => {

@@ -5,7 +5,7 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: #fff;
+  background: transparent;
   border-radius: 5px;
 }
 

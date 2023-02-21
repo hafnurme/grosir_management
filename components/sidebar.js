@@ -1,4 +1,5 @@
-import { Button } from "@material-tailwind/react";
+import { UserCircleIcon } from "@heroicons/react/20/solid";
+import { Button, IconButton } from "@material-tailwind/react";
 import { getSession, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -126,14 +127,25 @@ export default function sidebar({ openNav, setOpenNav }) {
                 );
               })}
           </div>
-          <Button
-            size={size}
-            color="orange"
-            variant="gradient"
-            onClick={handleLogOut}
-          >
-            LogOut
-          </Button>
+          <div className="flex justify-between items-center px-1">
+            <Button
+              size={size}
+              color="red"
+              variant="gradient"
+              onClick={handleLogOut}
+            >
+              LogOut
+            </Button>
+            <Link href="/admin/profile">
+              <IconButton
+                size={size}
+                color="blue-gray"
+                className=" p-1"
+              >
+                <UserCircleIcon className="h-6" />
+              </IconButton>
+            </Link>
+          </div>
         </aside>
       )}
     </>

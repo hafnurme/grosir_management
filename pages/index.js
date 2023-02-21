@@ -14,9 +14,9 @@ export default function Home() {
 
   const { data: session } = useSession();
 
-  useEffect(() => {
-    window.innerWidth >= 960 ? setSize("lg") : setSize("sm")
-  }, [])
+  // useEffect(() => {
+  //   window.innerWidth >= 960 ? setSize("lg") : setSize("sm")
+  // }, [])
 
 
   return (
@@ -41,7 +41,7 @@ export default function Home() {
             Grosir Management System
           </h1>
           <Button
-            size={size}
+            size='md'
             color="orange"
             variant="gradient"
             className=" lg:w-40"

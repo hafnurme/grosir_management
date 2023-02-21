@@ -162,7 +162,7 @@ const role = () => {
                                 return (
                                     <div key={i} className="mb-4">
                                         <h1 className="text-base font-bold ">{e}</h1>
-                                        <div className="grid lg:grid-cols-3 font-semibold text-sm">
+                                        <div className="grid md:grid-cols-2 lg:grid-cols-3 font-semibold text-sm">
                                             {permision[e].map((el, idx) => {
                                                 return <Checkbox key={idx} id={el.name} value={el.permision_id} label={el.label} ripple={true} onChange={handleChange} />
                                             })}

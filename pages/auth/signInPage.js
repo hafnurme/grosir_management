@@ -34,9 +34,9 @@ export default function signInPage() {
       console.log("gagal");
     }
   };
-  useEffect(() => {
-    window.innerWidth >= 960 ? setSize("lg") : setSize("sm")
-  }, [])
+  // useEffect(() => {
+  //   window.innerWidth >= 960 ? setSize("md") : setSize("sm")
+  // }, [])
 
   useEffect(() => {
     const sess = getSession();
@@ -94,7 +94,7 @@ export default function signInPage() {
                   setPassword(e.target.value);
                 }}
               />
-              <Button size={size} color="orange" variant="gradient" onClick={handleSub}>
+              <Button size="md" color="orange" variant="gradient" onClick={handleSub}>
                 Login
               </Button>
               {loginError === true && (
