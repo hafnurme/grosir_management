@@ -53,7 +53,7 @@ const WarehouseAddModal = ({ modalSize, refreshData }) => {
         color="orange"
         variant="filled"
       >
-        <PlusCircleIcon className={size == "md" ? "h-6" : "h-4"} />
+        <PlusCircleIcon className={"h-6"} />
       </IconButton>
       <Dialog
         open={open}

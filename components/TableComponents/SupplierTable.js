@@ -41,7 +41,11 @@ export default function SupplierTable({ head, data, refreshData }) {
                   </Typography>
                 </div>
                 <div className="flex gap-2 mt-2">
-                  <DetailModal item={object} size="xl" />
+                  <DetailModal
+                    exception={["supplier_id"]}
+                    item={object}
+                    size="xl"
+                  />
                   <UpdateModal
                     item={object}
                     itemHead={["supplier_name", "contact", "address"]}

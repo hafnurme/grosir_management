@@ -34,7 +34,11 @@ export default function BranchTable({ head, data, refreshData, handleSearch }) {
                 </div>
 
                 <div className="flex gap-2 mt-2">
-                  <DetailModal item={object} size="xl" />
+                  <DetailModal
+                    exception={["branch_id", "user_id"]}
+                    item={object}
+                    size="xl"
+                  />
                   <UpdateModal
                     item={object}
                     itemHead={[

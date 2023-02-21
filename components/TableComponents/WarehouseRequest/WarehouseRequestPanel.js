@@ -68,14 +68,9 @@ export default function WarehouseRequestPanel({
           <TabPanel key={value} value={value} className="p-0 py-4">
             <WarehouseRequestTable
               data={dataStatus}
-              head={[
-                "warehouse_id",
-                "product_code",
-                "request_date",
-                "status",
-                "quantity",
-              ]}
+              head={["product_code", "request_date", "status", "quantity"]}
               refreshData={refreshData}
+              permission={permission}
             />
           </TabPanel>
         ))}

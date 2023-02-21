@@ -40,18 +40,28 @@ export default function sidebar({ openNav, setOpenNav }) {
       permission: ["admin"],
     },
     {
-      label: "Warehouse",
-      link: "/admin/warehouse",
-      permission: ["admin", "lihat-gudang"],
+      label: "Inventory",
+      link: "/admin/inventory",
+      permission: ["lihat-gudang"],
     },
     {
-      label: "Request Produk",
+      label: "Warehouse",
+      link: "/admin/warehouse",
+      permission: ["admin"],
+    },
+    {
+      label: "Warehouse Request",
       link: "/admin/warehouse_request",
       permission: ["admin", "lihat-request-pesanan"],
     },
     {
       label: "Role",
       link: "/admin/role",
+      permission: ["admin"],
+    },
+    {
+      label: "User",
+      link: "/admin/user",
       permission: ["admin"],
     },
   ];

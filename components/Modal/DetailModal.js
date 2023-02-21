@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
 
-export default function DetailModal({ item, size, col }) {
+export default function DetailModal({ item, size, col, exception }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -32,7 +32,8 @@ export default function DetailModal({ item, size, col }) {
                 if (
                   key !== "created_at" &&
                   key !== "updated_at" &&
-                  key !== "deleted_at"
+                  key !== "deleted_at" &&
+                  !exception.includes(key)
                 ) {
                   return (
                     <div

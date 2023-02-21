@@ -1,9 +1,7 @@
-import DetailModal from "../../Modal/DetailModal";
 import UpdateModal from "../../Modal/UpdateModal";
-import DeleteModal from "../../Modal/DeleteModal";
 import { useEffect, useState } from "react";
 
-const WarehouseRequestTable = ({ head, data, refreshData }) => {
+const WarehouseRequestTable = ({ head, data, refreshData, permission }) => {
   const [finalData, setFinalData] = useState();
 
   useEffect(() => {
@@ -21,7 +19,9 @@ const WarehouseRequestTable = ({ head, data, refreshData }) => {
                 </th>
               );
             })}
-          <th scope="col" className="px-6 py-3"></th>
+          {!permission.includes("admin") && (
+            <th scope="col" className="px-6 py-3"></th>
+          )}
         </tr>
       </thead>
       <tbody>
@@ -32,20 +32,24 @@ const WarehouseRequestTable = ({ head, data, refreshData }) => {
                 {head &&
                   head.map((elem, i) => {
                     return (
-                      <td className="px-6 py-1" key={Math.random() * 100 * i}>
+                      <td
+                        className="px-6 py-1 text-base"
+                        key={Math.random() * 100 * i}
+                      >
                         {object[elem]}
                       </td>
                     );
                   })}
-                <td className="px-3 py-1 flex gap-3 justify-end items-center">
-                  <DetailModal item={object} />
-                  <UpdateModal
-                    item={object}
-                    itemHead={["request_id", "product_code", "quantity"]}
-                    updateUrl="/api/warehouse_request/"
-                    refreshData={refreshData}
-                  />
-                </td>
+                {!permission.includes("admin") && (
+                  <td className="px-3 py-1 flex gap-3 justify-end items-center">
+                    <UpdateModal
+                      item={object}
+                      itemHead={["request_id", "product_code", "quantity"]}
+                      updateUrl="/api/warehouse_request/"
+                      refreshData={refreshData}
+                    />
+                  </td>
+                )}
               </tr>
             );
           })}

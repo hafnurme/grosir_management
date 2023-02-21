@@ -54,7 +54,10 @@ const ProductTable = ({
                     );
                   })}
                 <td className="px-2 sm:py-1 flex gap-3 justify-end items-center">
-                  <DetailModal item={object} />
+                  <DetailModal
+                    exception={["id", "supplier_id"]}
+                    item={object}
+                  />
                   <UpdateModal
                     item={object}
                     itemHead={[

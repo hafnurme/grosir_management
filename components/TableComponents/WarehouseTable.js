@@ -69,7 +69,12 @@ export default function WarehouseTable({ head, data, refreshData }) {
                     })}
                   {permission && (
                     <td className="px-3 py-1 flex gap-3 sm:justify-end  items-center">
-                      <DetailModal item={object} size="md" col="1" />
+                      <DetailModal
+                        exception={["id", "warehouse_id"]}
+                        item={object}
+                        size="md"
+                        col="1"
+                      />
                       {permission.includes("edit-gudang") && (
                         <UpdateModal
                           item={object}
