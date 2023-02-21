@@ -24,7 +24,7 @@ export default function SupplierTable({ head, data, refreshData }) {
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 gap-2 sm:gap-4">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 sm:gap-4">
         {finalData &&
           finalData.map((object, index) => {
             return (
