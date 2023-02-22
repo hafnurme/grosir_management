@@ -31,7 +31,7 @@ export default function sidebar({ openNav, setOpenNav }) {
       permission: ["admin"],
     },
     {
-      label: "Product Order",
+      label: "Order Product",
       link: "/admin/order",
       permission: ["admin"],
     },
@@ -42,7 +42,7 @@ export default function sidebar({ openNav, setOpenNav }) {
     },
     {
       label: "Inventory",
-      link: "/admin/inventory",
+      link: "/admin/Inventory",
       permission: ["lihat-gudang"],
     },
     {
@@ -147,11 +147,7 @@ export default function sidebar({ openNav, setOpenNav }) {
               LogOut
             </Button>
             <Link href="/admin/profile">
-              <IconButton
-                size={size}
-                color="blue-gray"
-                className=" p-1"
-              >
+              <IconButton size={size} color="blue-gray" className=" p-1">
                 <UserCircleIcon className="h-6" />
               </IconButton>
             </Link>

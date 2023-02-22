@@ -25,19 +25,18 @@ const index = () => {
         </div>
         <div className="flex gap-2 w-full sm:justify-end">
           <div className="flex items-center gap-2 w-full sm:w-52">
-            <Input
-              label="Search"
-              color="orange"
-              variant="outlined"
-              // onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            <Input label="Search" color="orange" variant="outlined" />
           </div>
           <IconButton className="w-20" color="orange">
             <MagnifyingGlassIcon className="h-6" />
           </IconButton>
         </div>
       </div>
-      <UserTable data={user} />
+      <UserTable
+        data={user}
+        head={["username", "name"]}
+        refreshData={fetchUser}
+      />
     </>
   );
 };

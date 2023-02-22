@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -8,8 +8,18 @@ import {
 } from "@material-tailwind/react";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
 
-export default function DetailModal({ item, size, col, exception }) {
+export default function UserDetailModal({
+  item,
+  size,
+  col,
+  exception,
+  getData,
+}) {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleOpen = () => setOpen(!open);
   return (
