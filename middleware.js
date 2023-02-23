@@ -35,6 +35,13 @@ export default withAuth(
       return NextResponse.redirect(new URL("/admin", NextRequest.url));
     }
 
+    if (NextRequest.nextUrl.pathname.startsWith("/admin/order/distribute")) {
+      if (permission.includes("admin")) {
+        return NextResponse.next();
+      }
+      return NextResponse.redirect(new URL("/admin", NextRequest.url));
+    }
+
     if (NextRequest.nextUrl.pathname.startsWith("/admin/supplier")) {
       if (permission.includes("admin")) {
         return NextResponse.next();
@@ -43,7 +50,27 @@ export default withAuth(
     }
 
     if (NextRequest.nextUrl.pathname.startsWith("/admin/warehouse")) {
-      if (permission.includes("admin") || permission.includes("lihat-gudang")) {
+      if (permission.includes("admin")) {
+        return NextResponse.next();
+      }
+      return NextResponse.redirect(new URL("/admin", NextRequest.url));
+    }
+
+    if (NextRequest.nextUrl.pathname.startsWith("/admin/warehouse/detail")) {
+      if (permission.includes("admin")) {
+        return NextResponse.next();
+      }
+      return NextResponse.redirect(new URL("/admin", NextRequest.url));
+    }
+
+    if (NextRequest.nextUrl.pathname.startsWith("/admin/role")) {
+      if (permission.includes("admin")) {
+        return NextResponse.next();
+      }
+      return NextResponse.redirect(new URL("/admin", NextRequest.url));
+    }
+    if (NextRequest.nextUrl.pathname.startsWith("/admin/user")) {
+      if (permission.includes("admin")) {
         return NextResponse.next();
       }
       return NextResponse.redirect(new URL("/admin", NextRequest.url));
