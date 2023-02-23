@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { Fragment, useRef, useState } from "react";
-import SelectProductModal from "../Warehouse/SelectProductModal";
+import SelectProductModal from "../Inventory/SelectProductModal";
 
 const WarehouseRequestAddModal = ({ size, refreshData }) => {
   const [open, setOpen] = useState(false);

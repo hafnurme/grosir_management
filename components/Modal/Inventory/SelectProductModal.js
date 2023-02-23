@@ -11,26 +11,25 @@ import {
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 
-const SelectWarehouseModal = ({
+const SelectProductModal = ({
   size,
   open,
   handleOpenMod,
   setSelectedProduct,
-  url,
 }) => {
   const [finalData, setFinalData] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [productList, setProductList] = useState();
 
-  const fetchProductWarehouse = async () => {
-    const productTemp = await axios.get(`${url}product`).then((res) => {
+  const fetchProduct = async () => {
+    const productTemp = await axios.get("/api/product").then((res) => {
       return res.data;
     });
-    setProductList(productTemp);
+    setProductList(productTemp.data);
   };
 
   useEffect(() => {
-    fetchProductWarehouse();
+    fetchProduct();
   }, []);
 
   useEffect(() => {
@@ -41,14 +40,14 @@ const SelectWarehouseModal = ({
     e.preventDefault();
     if (search !== null || search !== "") {
       const dataTemp = await axios
-        .post(`${url}product/search`, { data: { name: search } })
+        .post(`/api/product/name`, { data: { name: search } })
         .then((res) => {
           return res.data;
         });
 
       setProductList(dataTemp.data);
     } else {
-      fetchProductWarehouse();
+      fetchProduct();
     }
   };
 
@@ -63,7 +62,6 @@ const SelectWarehouseModal = ({
         open={open || false}
         handler={handleOpenMod}
         className="z-50 max-w-[90%] min-w-[90%] lg:min-w-[75%]"
-        animate={{ mount: 0, unmount: 0 }}
       >
         <DialogHeader>Pilih Product</DialogHeader>
         <DialogBody divider>
@@ -106,8 +104,7 @@ const SelectWarehouseModal = ({
                         handleSelectProduct(element);
                       }}
                     >
-                      <span className="font-medium">{element.name}</span> -{" "}
-                      {element.product_code}
+                      {element.name}
                     </li>
                   );
                 })}
@@ -136,4 +133,4 @@ const SelectWarehouseModal = ({
   );
 };
 
-export default SelectWarehouseModal;
+export default SelectProductModal;

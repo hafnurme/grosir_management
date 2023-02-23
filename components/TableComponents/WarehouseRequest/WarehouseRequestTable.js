@@ -1,12 +1,22 @@
 import UpdateModal from "../../Modal/UpdateModal";
 import { useEffect, useState } from "react";
+import AcceptRequest from "./AcceptRequest";
+import DecelineRequest from "./DecelineRequest";
+import ProcessRequest from "./ProccessRequest";
 
-const WarehouseRequestTable = ({ head, data, refreshData, permission }) => {
+const WarehouseRequestTable = ({
+  head,
+  data,
+  refreshData,
+  permission,
+  label,
+}) => {
   const [finalData, setFinalData] = useState();
 
   useEffect(() => {
     setFinalData(data);
   }, [data]);
+
   return (
     <table className="w-full text-sm text-left text-gray-700">
       <thead className="text-xs uppercase bg-gray-100">
@@ -19,8 +29,11 @@ const WarehouseRequestTable = ({ head, data, refreshData, permission }) => {
                 </th>
               );
             })}
-          {!permission.includes("admin") && (
+          {permission && !permission.includes("admin") && (
             <th scope="col" className="px-6 py-3"></th>
+          )}
+          {permission && permission.includes("admin") && (
+            <th scope="col" className=" py-3"></th>
           )}
         </tr>
       </thead>
@@ -40,7 +53,7 @@ const WarehouseRequestTable = ({ head, data, refreshData, permission }) => {
                       </td>
                     );
                   })}
-                {!permission.includes("admin") && (
+                {permission && !permission.includes("admin") && (
                   <td className="px-3 py-1 flex gap-3 justify-end items-center">
                     <UpdateModal
                       item={object}
@@ -50,6 +63,31 @@ const WarehouseRequestTable = ({ head, data, refreshData, permission }) => {
                     />
                   </td>
                 )}
+                {permission &&
+                  permission.includes("admin") &&
+                  label == "sent" && (
+                    <td className="px-3 py-1 flex gap-3 justify-end items-center">
+                      <AcceptRequest
+                        id={object["product_order_requests_id"]}
+                        refreshData={refreshData}
+                      />
+                      <DecelineRequest
+                        id={object["product_order_requests_id"]}
+                        refreshData={refreshData}
+                      />
+                    </td>
+                  )}
+                {permission &&
+                  permission.includes("admin") &&
+                  label == "accepted" && (
+                    <td className="px-3 py-1 flex gap-3 justify-end items-center">
+                      <ProcessRequest
+                        id={object["product_code"]}
+                        refreshData={refreshData}
+                        orderObj={object}
+                      />
+                    </td>
+                  )}
               </tr>
             );
           })}

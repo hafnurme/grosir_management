@@ -13,11 +13,10 @@ export default function WarehouseRequestPanel({
   permission,
 }) {
   const dataSented = data.filter((element) => {
-    if (element["status"] === "sent") {
+    if (element["status"] === "pending") {
       return element;
     }
   });
-
   const dataAccepted = data.filter((element) => {
     if (element["status"] === "accepted") {
       return element;
@@ -53,7 +52,11 @@ export default function WarehouseRequestPanel({
       <TabsHeader>
         {tab.map(({ label, value }) => {
           if (permission && permission.includes("admin") && value === "sent") {
-            return;
+            return (
+              <Tab key={value} value={value}>
+                Pending
+              </Tab>
+            );
           } else {
             return (
               <Tab key={value} value={value}>
@@ -64,13 +67,14 @@ export default function WarehouseRequestPanel({
         })}
       </TabsHeader>
       <TabsBody>
-        {tab.map(({ value, dataStatus }) => (
+        {tab.map(({ label, value, dataStatus }) => (
           <TabPanel key={value} value={value} className="p-0 py-4">
             <WarehouseRequestTable
               data={dataStatus}
               head={["product_code", "request_date", "status", "quantity"]}
               refreshData={refreshData}
               permission={permission}
+              label={value}
             />
           </TabPanel>
         ))}

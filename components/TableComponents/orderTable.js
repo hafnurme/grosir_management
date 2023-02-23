@@ -1,10 +1,4 @@
-import {
-  InformationCircleIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/20/solid";
-import { Button, Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import DeleteDialog from "../Modal/DeleteModal";
 import DetailModal from "../Modal/DetailModal";
 
 export default function OrderTable({ head, title, search, data, refreshData }) {
@@ -32,24 +26,6 @@ export default function OrderTable({ head, title, search, data, refreshData }) {
 
   return (
     <>
-      <div className="flex overflow-x-hidden justify-between items-center mb-4 p-1">
-        {title && (
-          <div className="text-c">
-            <div className="mx-2 text-2xl font-semibold">
-              <h3>{title}</h3>
-            </div>
-          </div>
-        )}
-        {search && (
-          <div className="flex">
-            <Input
-              label="Search"
-              color="deep-orange"
-              onChange={inputListener}
-            />
-          </div>
-        )}
-      </div>
       <div className="overflow-x-scroll">
         <table className=" w-full text-sm text-left text-gray-700">
           <thead className="text-xs text-c uppercase bg-gray-100">
@@ -75,21 +51,18 @@ export default function OrderTable({ head, title, search, data, refreshData }) {
                     {head &&
                       head.map((elem, i) => {
                         return (
-                          <td className="px-6 py-3" key={Math.random() * 100 * i}>
+                          <td
+                            className="px-6 py-3"
+                            key={Math.random() * 100 * i}
+                          >
                             {object[elem]}
                           </td>
                         );
                       })}
                     <td className="px-3 py-2 flex gap-3 justify-end items-center">
-                      <DetailModal item={object} />
-                      <Button variant="text" className="p-1 shadow-md">
-                        <PencilSquareIcon className="h-6 text-c" />
-                      </Button>
-                      <DeleteDialog
-                        itemToDelete={object}
-                        itemHead={head}
-                        refreshData={refreshData}
-                        deleteUrl="/api/product/"
+                      <DetailModal
+                        item={object}
+                        exception={["product_order_id", "supplier_id"]}
                       />
                     </td>
                   </tr>
