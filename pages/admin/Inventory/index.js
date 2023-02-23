@@ -1,6 +1,6 @@
-import WarehouseAddModal from "@/components/Modal/Warehouse/WarehouseAddModal";
+import WarehouseAddModal from "@/components/Modal/Inventory/InventoryAddModal";
 import Paginate from "@/components/paginate";
-import WarehouseTable from "@/components/TableComponents/WarehouseTable";
+import InventoryTable from "@/components/TableComponents/InventoryTable";
 import { Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -36,7 +36,7 @@ export default function index() {
         <div>
           <div className="flex justify-between items-center py-4 px-2">
             <div className="hidden sm:block">
-              <Typography variant="h4">Warehouse</Typography>
+              <Typography variant="h4">Inventory</Typography>
             </div>
             <div className="flex gap-2 w-full sm:justify-end">
               <div className="flex items-center w-full sm:w-52">
@@ -48,7 +48,7 @@ export default function index() {
             </div>
           </div>
           <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:m-0">
-            <WarehouseTable
+            <InventoryTable
               head={["product_code", "stock", "location", "entry_date"]}
               title="Warehouse List"
               search={true}

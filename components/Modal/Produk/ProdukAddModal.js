@@ -114,7 +114,11 @@ const AddProductModal = ({ size, refreshData }) => {
           <Button
             variant="text"
             color="red"
-            onClick={() => handleOpen()}
+            onClick={() => {
+              handleOpen();
+              setCategory(null);
+              setSupplier(null);
+            }}
             className="mr-1"
           >
             <span>Cancel</span>

@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (req.method == "GET") {
     const options = {
       method: "GET",
-      url: `${base_url}/api/product/category`,
+      url: `${base_url}/api/product/order`,
       headers: {
         token: session.accessToken,
       },
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
       },
       data: body,
     };
-    console.log(body);
+    console.log(options);
     await axios
       .request(options)
       .then((response) => {

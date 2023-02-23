@@ -5,13 +5,15 @@ import {
   Navbar,
   Typography,
 } from "@material-tailwind/react";
+import { useSession } from "next-auth/react";
 
 export default function navbar({ openNav, setOpenNav }) {
+  const { data: session, status } = useSession();
   return (
     <Navbar className="rounded-none  m-0 max-w-none py-3 px-6 lg:px-8 lg:py-4">
       <div className=" flex justify-between">
         <Typography className="cursor-pointer text-lg font-semibold text-black">
-          <span>Grosir Admin</span>
+          <span>Grosir {session && session.position}</span>
         </Typography>
         <IconButton
           variant="text"

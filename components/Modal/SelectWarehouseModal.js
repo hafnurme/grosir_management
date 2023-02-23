@@ -46,7 +46,7 @@ const SelectWarehouseModal = ({
           return res.data;
         });
 
-      setProductList(dataTemp.data);
+      setProductList(dataTemp);
     } else {
       fetchProductWarehouse();
     }
@@ -63,7 +63,6 @@ const SelectWarehouseModal = ({
         open={open || false}
         handler={handleOpenMod}
         className="z-50 max-w-[90%] min-w-[90%] lg:min-w-[75%]"
-        animate={{ mount: 0, unmount: 0 }}
       >
         <DialogHeader>Pilih Product</DialogHeader>
         <DialogBody divider>

@@ -1,16 +1,4 @@
-import { PlusCircleIcon } from "@heroicons/react/20/solid";
-import {
-  Button,
-  Card,
-  Input,
-  Option,
-  Select,
-  Textarea,
-} from "@material-tailwind/react";
-import axios from "axios";
-import { useState } from "react";
-import PilihKategoriModal from "../Modal/Produk/PilihKategoriModal";
-import PilihSupplierModal from "../Modal/Produk/PilihSupplierModal";
+import { Input, Textarea } from "@material-tailwind/react";
 
 const ProductDetailForm = ({
   supplier,
@@ -56,6 +44,7 @@ const ProductDetailForm = ({
             }}
             tabIndex="4"
             required={true}
+            key={category ? category.category_name : "category"}
           />
           <Input
             required={true}
@@ -109,6 +98,7 @@ const ProductDetailForm = ({
               if (e.key !== "Tab") handleOpenSupplierModal();
             }}
             required={true}
+            key={supplier ? supplier.supplier_name : "supplier"}
           />
         </div>
       </div>
