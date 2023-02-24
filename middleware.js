@@ -35,21 +35,13 @@ export default withAuth(
       return NextResponse.redirect(new URL("/admin", NextRequest.url));
     }
 
-    if (NextRequest.nextUrl.pathname.startsWith("/admin/order/distribute")) {
-      if (permission.includes("admin")) {
-        return NextResponse.next();
-      }
-      return NextResponse.redirect(new URL("/admin", NextRequest.url));
-    }
-
     if (NextRequest.nextUrl.pathname.startsWith("/admin/supplier")) {
       if (permission.includes("admin")) {
         return NextResponse.next();
       }
       return NextResponse.redirect(new URL("/admin", NextRequest.url));
     }
-
-    if (NextRequest.nextUrl.pathname.startsWith("/admin/warehouse")) {
+    if (NextRequest.nextUrl.pathname == "/admin/warehouse") {
       if (permission.includes("admin")) {
         return NextResponse.next();
       }
@@ -76,7 +68,7 @@ export default withAuth(
       return NextResponse.redirect(new URL("/admin", NextRequest.url));
     }
 
-    if (NextRequest.nextUrl.pathname.startsWith("/admin/warehouse_request")) {
+    if (NextRequest.nextUrl.pathname == "admin/warehouse_request") {
       if (
         permission.includes("admin") ||
         permission.includes("lihat-request-pesanan")
