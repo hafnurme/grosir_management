@@ -83,14 +83,6 @@ export default function BatchTable({ head, data, refreshData }) {
                         size="md"
                         col="1"
                       />
-                      {permission.includes("hapus-gudang") && (
-                        <DeleteModal
-                          itemToDelete={object}
-                          itemHead={head}
-                          deleteUrl="/api/warehouse/"
-                          refreshData={refreshData}
-                        />
-                      )}
                     </td>
                   )}
                 </tr>
