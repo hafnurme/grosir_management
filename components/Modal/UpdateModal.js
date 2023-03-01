@@ -74,6 +74,7 @@ export default function UpdateModal({
                       key={index}
                       defaultValue={item[key]}
                       name={key}
+                      required
                     ></Input>
                   );
                 })}

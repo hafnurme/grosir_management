@@ -22,20 +22,11 @@ export default function UpdateModal({
     col,
 }) {
     const [open, setOpen] = useState(false);
-    const [itemUpdate, setItemUpdate] = useState({ username: "", name: "", contact: "", email: "", role_id: "" });
-    const [role, setRole] = useState()
-    const [roleId, setRoleId] = useState()
+    const [itemUpdate, setItemUpdate] = useState({ username: "", name: "", contact: "", email: "" });
 
     useEffect(() => {
-        setItemUpdate({ username: item.username, name: item.name, contact: item.password, email: item.email, role_id: item.role_id });
-        fetchRole()
+        setItemUpdate({ username: item.username, name: item.name, contact: item.password, email: item.email });
     }, []);
-
-    const fetchRole = async () => {
-        const res = await axios.get('/api/Role').then(res => res.data)
-
-        setRole(res)
-    }
 
     const handleUpdate = async (e, id) => {
         e.preventDefault();
@@ -47,25 +38,21 @@ export default function UpdateModal({
             itemUpdateTemp[key] = value;
         });
 
-
         setItemUpdate(itemUpdateTemp);
 
         await axios
-            .put(`${updateUrl}${id}`, {
+            .put(`${updateUrl}`, {
                 data: itemUpdate,
             })
             .then((res) => {
-                console.log(res.data)
+                alert(res.data.message)
                 refreshData();
                 handleOpen();
-            });
+            })
+            .catch(err => console.log(err))
     };
 
     const handleOpen = () => setOpen(!open);
-
-    const handleOnChange = (e) => {
-        setRoleId(e.target.value)
-    }
 
     return (
         <Fragment>
@@ -92,21 +79,10 @@ export default function UpdateModal({
                                             key={index}
                                             defaultValue={item[key]}
                                             name={key}
+                                            required
                                         ></Input>
                                     );
                                 })}
-                        </div>
-                        <div>
-                            <h1 className="text-xl font-semibold">Role</h1>
-                            {role &&
-                                role.map((e, i) => {
-                                    if (e.role_id == item.role_id) {
-                                        return <Radio name="role_id" key={i} value={e.role_id} label={e.name} onChange={handleOnChange} defaultChecked={true} />
-                                    } else {
-                                        return <Radio name="role_id" key={i} value={e.role_id} label={e.name} onChange={handleOnChange} defaultChecked={false} />
-                                    }
-                                })
-                            }
                         </div>
                     </DialogBody>
                     <DialogFooter>

@@ -146,12 +146,12 @@ const role = () => {
                     </div>
                     <div className=" flex gap-x-4">
                         {errName && (
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                                 {errName.toString()}
                             </div>
                         )}
                         {errPermision && (
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                                 {errPermision.toString()}
                             </div>
                         )}
@@ -164,7 +164,7 @@ const role = () => {
                                         <h1 className="text-base font-bold ">{e}</h1>
                                         <div className="grid md:grid-cols-2 lg:grid-cols-3 font-semibold text-sm">
                                             {permision[e].map((el, idx) => {
-                                                return <Checkbox key={idx} id={el.name} value={el.permision_id} label={el.label} ripple={true} onChange={handleChange} />
+                                                return <Checkbox key={idx} id={el.name} value={el.permision_id} label={el.label} onChange={handleChange} />
                                             })}
                                         </div>
                                     </div>

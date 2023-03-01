@@ -1,3 +1,5 @@
+import AddModal from "@/components/Modal/AddModal";
+import CheckExpModal from "@/components/Modal/Inventory/CheckExpModal";
 import WarehouseAddModal from "@/components/Modal/Inventory/InventoryAddModal";
 import Paginate from "@/components/paginate";
 import InventoryTable from "@/components/TableComponents/InventoryTable";
@@ -39,6 +41,7 @@ export default function index() {
               <Typography variant="h4">Inventory</Typography>
             </div>
             <div className="flex gap-2 w-full sm:justify-end">
+              <CheckExpModal data={warehouse} />
               <div className="flex items-center w-full sm:w-52">
                 <Input label="Search" color="orange" />
               </div>

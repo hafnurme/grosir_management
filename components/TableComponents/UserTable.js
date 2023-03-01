@@ -74,8 +74,9 @@ const UserTable = ({ data, head, refreshData }) => {
                   <DeleteModal
                     itemToDelete={object}
                     itemHead={head}
-                    deleteUrl="/api/product/"
+                    deleteUrl="/api/user/"
                     refreshData={refreshData}
+                    itemIndex="user_id"
                   />
                 </td>
               </tr>

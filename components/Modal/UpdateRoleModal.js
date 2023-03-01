@@ -58,8 +58,9 @@ export default function UpdateModal({
                 setOpen(false)
             })
             .catch(err => {
-                // setErrPermision(err.response.data.permision)
-                console.log(err)
+                setErrPermision(err.response.data.permision)
+                setErrName(err.response.data.name)
+                console.log(err.response.data)
             })
     }
 
@@ -90,12 +91,12 @@ export default function UpdateModal({
                     </div>
                     <div className=" flex gap-x-4">
                         {errName && (
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                                 {errName.toString()}
                             </div>
                         )}
                         {errPermision && (
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                                 {errPermision.toString()}
                             </div>
                         )}

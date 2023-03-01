@@ -61,7 +61,7 @@ export default function DetailRoleModal({ item, size }) {
                                             <label className="uppercase block font-semibold">
                                                 {key} :
                                             </label>
-                                            <p className="block text-gray-900">{item[key].toString()}</p>
+                                            <p className="block text-gray-900">{item[key]}</p>
                                         </div>
                                     );
                                 }
