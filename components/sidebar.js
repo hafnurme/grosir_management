@@ -13,7 +13,6 @@ export default function sidebar({ openNav, setOpenNav }) {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  console.log(session);
   const Tab = [
     {
       label: "Produk",
@@ -43,6 +42,11 @@ export default function sidebar({ openNav, setOpenNav }) {
     {
       label: "Inventory",
       link: "/admin/Inventory",
+      permission: ["lihat-gudang"],
+    },
+    {
+      label: "Batch",
+      link: "/admin/batch",
       permission: ["lihat-gudang"],
     },
     {
