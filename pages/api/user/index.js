@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const options = {
       method: "GET",
-      url: `${base_url}/api/user/`,
+      url: `${base_url}/api/user`,
       headers: {
         token: session.accessToken,
       },
@@ -26,12 +26,11 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "PUT") {
-
     const body = await req.body.data;
 
     const options = {
       method: "PUT",
-      url: `${base_url}/api/user/`,
+      url: `${base_url}/api/user`,
       headers: {
         "Content-Type": "application/json",
         token: session.accessToken,
@@ -50,6 +49,5 @@ export default async function handler(req, res) {
         console.log(error);
         res.status(500).json("Delete Failed , Server Error");
       });
-
   }
 }
