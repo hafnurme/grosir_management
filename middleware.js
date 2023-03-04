@@ -21,8 +21,15 @@ export default withAuth(
       return NextResponse.redirect(new URL("/admin", NextRequest.url));
     }
 
-    if (NextRequest.nextUrl.pathname.startsWith("/admin/branch")) {
+    if (NextRequest.nextUrl.pathname == "/admin/branch") {
       if (permission.includes("admin")) {
+        return NextResponse.next();
+      }
+      return NextResponse.redirect(new URL("/admin", NextRequest.url));
+    }
+
+    if (NextRequest.nextUrl.pathname == "/admin/branch") {
+      if (permission.includes("lihat_produk_request")) {
         return NextResponse.next();
       }
       return NextResponse.redirect(new URL("/admin", NextRequest.url));

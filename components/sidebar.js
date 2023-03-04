@@ -13,6 +13,10 @@ export default function sidebar({ openNav, setOpenNav }) {
   const router = useRouter();
   const { data: session, status } = useSession();
 
+  useEffect(() => {
+    console.log(session);
+  }, [status]);
+
   const Tab = [
     {
       label: "Produk",
@@ -58,6 +62,11 @@ export default function sidebar({ openNav, setOpenNav }) {
       label: "Warehouse Request",
       link: "/admin/warehouse_request",
       permission: ["admin", "lihat-request-pesanan"],
+    },
+    {
+      label: "Branch Request",
+      link: "/admin/branch_request",
+      permission: ["lihat-request-produk"],
     },
     {
       label: "Role",
