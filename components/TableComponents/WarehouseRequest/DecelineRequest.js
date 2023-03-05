@@ -10,14 +10,14 @@ import {
 import axios from "axios";
 import { Fragment, useState } from "react";
 
-const DecelineRequest = ({ id, refreshData }) => {
+const DecelineRequest = ({ id, refreshData, url }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
   const handleConfirm = async () => {
     await axios
-      .post(`/api/warehouse/request/deceline`, {
-        data: { product_order_request_id: id },
+      .post(url, {
+        data: { id },
       })
       .then((res) => {
         console.log(res.data);

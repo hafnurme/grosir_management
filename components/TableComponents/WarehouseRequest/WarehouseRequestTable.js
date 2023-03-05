@@ -53,26 +53,23 @@ const WarehouseRequestTable = ({
                       </td>
                     );
                   })}
-                {permission && !permission.includes("admin") && (
-                  <td className="px-3 py-1 flex gap-3 justify-end items-center">
-                    <UpdateModal
-                      item={object}
-                      itemHead={["request_id", "product_code", "quantity"]}
-                      updateUrl="/api/warehouse_request/"
-                      refreshData={refreshData}
-                    />
-                  </td>
-                )}
+                {permission &&
+                  !permission.includes("admin") &&
+                  label == "transferred" && (
+                    <td className="px-3 py-1 flex gap-3 justify-end items-center"></td>
+                  )}
                 {permission &&
                   permission.includes("admin") &&
                   label == "sent" && (
                     <td className="px-3 py-1 flex gap-3 justify-end items-center">
                       <AcceptRequest
                         id={object["product_order_requests_id"]}
+                        url="/api/warehouse/request/accept"
                         refreshData={refreshData}
                       />
                       <DecelineRequest
                         id={object["product_order_requests_id"]}
+                        url="/api/warehouse/request/deceline"
                         refreshData={refreshData}
                       />
                     </td>

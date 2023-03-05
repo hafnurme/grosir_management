@@ -5,26 +5,36 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 import BranchRequestTable from "./BranchRequestTable";
 
 export default function BranchRequestPanel({ data, refreshData, permission }) {
-  const dataSented = data.filter((element) => {
-    console.log(element);
-    if (element["status"] === "sent") {
-      return element;
-    }
-  });
-  const dataAccepted = data.filter((element) => {
-    if (element["status"] === "accepted") {
-      return element;
-    }
-  });
+  const [dataSented, setDataSented] = useState();
+  const [dataAccepted, setDataAccepted] = useState();
+  const [dataTransferred, setDataTransferred] = useState();
 
-  const dataTransferred = data.filter((element) => {
-    if (element["status"] === "transferred") {
-      return element;
+  useEffect(() => {
+    if (data) {
+      const dataSentedT = data.filter((element) => {
+        if (element["status"] === "pending") {
+          return element;
+        }
+      });
+      const dataAcceptedT = data.filter((element) => {
+        if (element["status"] === "accepted") {
+          return element;
+        }
+      });
+      const dataTransferredT = data.filter((element) => {
+        if (element["status"] === "transferred") {
+          return element;
+        }
+      });
+      setDataSented(dataSentedT);
+      setDataAccepted(dataAcceptedT);
+      setDataTransferred(dataTransferredT);
     }
-  });
+  }, [data]);
 
   const tab = [
     {
@@ -45,7 +55,7 @@ export default function BranchRequestPanel({ data, refreshData, permission }) {
   ];
 
   return (
-    <Tabs value="accepted">
+    <Tabs value="sent">
       <TabsHeader>
         {tab.map(({ label, value }) => {
           return (

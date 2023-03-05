@@ -9,36 +9,19 @@ export default async function handler(req, res) {
   if (req.method == "POST") {
     const body = await req.body.data;
 
-    body["user_id"] = session.user.user_id;
-
     const options = {
       method: "POST",
-      url: `${base_url}/api/branch`,
+      url: `${base_url}/api/branch/request/accept`,
       headers: {
         token: session.accessToken,
       },
-      data: body,
+      data: {
+        request_id: body.id,
+      },
     };
 
+    console.log(options);
     axios
-      .request(options)
-      .then((response) => {
-        return res.status(200).json(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        return res.status(500).json({ message: "Fetch Failed, server error" });
-      });
-  } else {
-    const options = {
-      method: "GET",
-      url: `${base_url}/api/branch/request`,
-      headers: {
-        token: session.accessToken,
-      },
-    };
-
-    await axios
       .request(options)
       .then((response) => {
         return res.status(200).json(response.data);

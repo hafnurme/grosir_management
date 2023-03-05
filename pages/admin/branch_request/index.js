@@ -1,6 +1,6 @@
 import AddModal from "@/components/Modal/AddModal";
 import WarehouseRequestAddModal from "@/components/Modal/WarehouseRequest/WarehouseRequestAddModal";
-import BranchRequestPanel from "@/components/TableComponents/BranchRequest/BranchRequestPandel";
+import BranchRequestPanel from "@/components/TableComponents/BranchRequest/BranchRequestPanel";
 import WarehouseRequestPanel from "@/components/TableComponents/WarehouseRequest/WarehouseRequestPanel";
 import { Input, Typography } from "@material-tailwind/react";
 import axios from "axios";

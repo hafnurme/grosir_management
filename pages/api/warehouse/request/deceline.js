@@ -15,7 +15,9 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
         token: session.accessToken,
       },
-      data: body,
+      data: {
+        product_order_requests_id: body.id,
+      },
     };
 
     console.log(options);

@@ -1,6 +1,8 @@
 import UpdateModal from "../../Modal/UpdateModal";
 import { useEffect, useState } from "react";
 import BranchProccessRequest from "./BranchProccessRequest";
+import AcceptRequest from "../WarehouseRequest/AcceptRequest";
+import DecelineRequest from "../WarehouseRequest/DecelineRequest";
 
 const BranchRequestTable = ({ head, data, refreshData, permission, label }) => {
   const [finalData, setFinalData] = useState();
@@ -43,11 +45,13 @@ const BranchRequestTable = ({ head, data, refreshData, permission, label }) => {
                 {label == "sent" && (
                   <td className="px-3 py-1 flex gap-3 justify-end items-center">
                     <AcceptRequest
-                      id={object["product_order_requests_id"]}
+                      id={object["request_id"]}
+                      url="/api/branch/request/accept"
                       refreshData={refreshData}
                     />
                     <DecelineRequest
-                      id={object["product_order_requests_id"]}
+                      id={object["request_id"]}
+                      url="/api/branch/request/deceline"
                       refreshData={refreshData}
                     />
                   </td>
