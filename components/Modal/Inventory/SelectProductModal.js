@@ -104,7 +104,7 @@ const SelectProductModal = ({
                         handleSelectProduct(element);
                       }}
                     >
-                      {element.name}
+                      {element.name} - {element.product_code}
                     </li>
                   );
                 })}

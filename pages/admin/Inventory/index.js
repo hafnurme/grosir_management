@@ -41,13 +41,9 @@ export default function index() {
               <Typography variant="h4">Inventory</Typography>
             </div>
             <div className="flex gap-2 w-full sm:justify-end">
-              <CheckExpModal data={warehouse} />
               <div className="flex items-center w-full sm:w-52">
                 <Input label="Search" color="orange" />
               </div>
-              {permission && permission.includes("tambah-gudang") && (
-                <WarehouseAddModal refreshData={fetchWarehouse} />
-              )}
             </div>
           </div>
           <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:m-0">
