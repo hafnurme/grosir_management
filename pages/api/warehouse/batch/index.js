@@ -6,19 +6,15 @@ const base_url = process.env.API_BASE_URL;
 export default async function handler(req, res) {
     const session = await getServerSession(req, res, authOptions);
 
-    if (req.method === "PUT") {
-        const body = await req.body.data;
-
+    if (req.method === "GET") {
         const options = {
-            method: "PUT",
+            method: "GET",
             url: `${base_url}/api/warehouse/batch`,
             headers: {
                 "Content-Type": "application/json",
                 token: session.accessToken,
-            },
-            data: body,
+            }
         };
-        console.log(body)
         axios
             .request(options)
             .then(function (response) {
