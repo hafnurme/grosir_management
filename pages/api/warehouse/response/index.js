@@ -41,6 +41,8 @@ export default async function handler(req, res) {
       },
     };
 
+    console.log(options);
+
     axios
       .request(options)
       .then(function (response) {
@@ -48,7 +50,7 @@ export default async function handler(req, res) {
         return res.status(200).json(response.data);
       })
       .catch(function (error) {
-        console.error(error);
+        console.log(error);
         return res.status(500).json({ message: "Fetch Failed, server error" });
       });
   }

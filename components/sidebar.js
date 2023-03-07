@@ -66,7 +66,7 @@ export default function sidebar({ openNav, setOpenNav }) {
     {
       label: "Get Response",
       link: "/admin/warehouse_request/response",
-      permission: ["admin"],
+      permission: ["lihat-respon-order"],
     },
     {
       label: "Branch Request",

@@ -72,13 +72,10 @@ export default function InventoryTable({ head, data, refreshData }) {
                       size="md"
                       col="1"
                     />
-                    {permission && permission.includes("admin") && (
-                      <GetOrderModalAdmin
-                        url={"/api/warehouse/response"}
-                        refreshData={refreshData}
-                        id={object["response_id"]}
-                      />
-                    )}
+                    <GetOrderModalAdmin
+                      url={"/api/warehouse/response"}
+                      id={object["response_id"]}
+                    />
                   </td>
                 </tr>
               );

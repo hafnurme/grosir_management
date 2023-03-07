@@ -1,9 +1,6 @@
-import AddModal from "@/components/Modal/AddModal";
-import CheckExpModal from "@/components/Modal/Inventory/CheckExpModal";
-import WarehouseAddModal from "@/components/Modal/Inventory/InventoryAddModal";
 import Paginate from "@/components/paginate";
 import InventoryTable from "@/components/TableComponents/InventoryTable";
-import { Input, Typography } from "@material-tailwind/react";
+import { Button, Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -11,6 +8,7 @@ import { useEffect, useState } from "react";
 export default function index() {
   const [warehouse, setWarehouse] = useState();
   const [permission, setPermission] = useState();
+  const [disabled, setDisabled] = useState(true);
 
   const { data: session, status } = useSession();
 
@@ -20,6 +18,17 @@ export default function index() {
     });
 
     setWarehouse(dataTemp);
+  };
+
+  const checkExpired = async () => {
+    await axios.get("/api/warehouse/batch");
+    setDisabled(!disabled);
+  };
+
+  const updateStock = async () => {
+    await axios.put("/api/warehouse/stock");
+    setDisabled(!disabled);
+    fetchWarehouse();
   };
 
   useEffect(() => {
@@ -40,8 +49,27 @@ export default function index() {
             <div className="hidden sm:block">
               <Typography variant="h4">Inventory</Typography>
             </div>
-            <div className="flex gap-2 w-full sm:justify-end">
-              <div className="flex items-center w-full sm:w-52"></div>
+            <div className="flex gap-2 w-full items-center sm:justify-end">
+              <Button
+                color="orange"
+                className="text-sm capitalize"
+                size="sm"
+                onClick={updateStock}
+                disabled={disabled}
+              >
+                update stock
+              </Button>
+              <Button
+                color="orange"
+                className="text-sm capitalize"
+                size="sm"
+                onClick={checkExpired}
+              >
+                Check
+              </Button>
+              <div className="flex items-center w-full sm:w-52">
+                <Input label="Search" color="orange" />
+              </div>
             </div>
           </div>
           <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:m-0">

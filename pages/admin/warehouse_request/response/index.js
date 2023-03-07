@@ -47,7 +47,7 @@ export default function index() {
           </div>
           <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:m-0">
             <ResponseTable
-              head={["quantity"]}
+              head={["quantity", "response_id"]}
               title="Response List"
               data={response.data}
               refreshData={fetchResponse}

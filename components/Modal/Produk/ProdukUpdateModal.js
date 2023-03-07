@@ -42,7 +42,9 @@ export default function ProductUpdateModal({
       itemUpdateTemp[key] = value;
     });
 
-    itemUpdateTemp["category_id"] = category.category_id;
+    if (category) {
+      itemUpdateTemp["category_id"] = category.category_id;
+    }
 
     setItemUpdate(itemUpdateTemp);
 
