@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import { Fragment, useRef, useState } from "react";
 import SelectProductModal from "../Inventory/SelectProductModal";
+import SelectProductWarehouse from "./SelectProductWarehouse";
 
 const WarehouseRequestAddModal = ({ size, refreshData }) => {
   const [open, setOpen] = useState(false);

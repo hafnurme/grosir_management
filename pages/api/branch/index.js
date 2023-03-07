@@ -20,6 +20,8 @@ export default async function handler(req, res) {
       data: body,
     };
 
+    console.log(options);
+
     axios
       .request(options)
       .then((response) => {

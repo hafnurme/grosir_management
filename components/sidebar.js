@@ -34,7 +34,7 @@ export default function sidebar({ openNav, setOpenNav }) {
       permission: ["admin"],
     },
     {
-      label: "Order Product",
+      label: "Product Order (PO)",
       link: "/admin/order",
       permission: ["admin"],
     },
@@ -62,6 +62,11 @@ export default function sidebar({ openNav, setOpenNav }) {
       label: "Warehouse Request",
       link: "/admin/warehouse_request",
       permission: ["admin", "lihat-request-pesanan"],
+    },
+    {
+      label: "Get Response",
+      link: "/admin/warehouse_request/response",
+      permission: ["admin"],
     },
     {
       label: "Branch Request",

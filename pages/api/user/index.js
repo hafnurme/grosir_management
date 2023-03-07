@@ -24,6 +24,28 @@ export default async function handler(req, res) {
         return res.status(500).json({ message: "Fetch Failed, server error" });
       });
   }
+  if (req.method === "POST") {
+    const body = await req.body.data;
+
+    const options = {
+      method: "POST",
+      url: `${base_url}/api/register`,
+      headers: {
+        token: session.accessToken,
+      },
+      data: body,
+    };
+
+    await axios
+      .request(options)
+      .then((response) => {
+        return res.status(200).json(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        return res.status(500).json({ message: "Fetch Failed, server error" });
+      });
+  }
 
   if (req.method === "PUT") {
     const body = await req.body.data;

@@ -1,29 +1,28 @@
-import AddModal from "@/components/Modal/AddModal";
-import CheckExpModal from "@/components/Modal/Inventory/CheckExpModal";
-import WarehouseAddModal from "@/components/Modal/Inventory/InventoryAddModal";
+import GetOrder from "@/components/Modal/Order/GetOrderModalAdmin";
 import Paginate from "@/components/paginate";
 import InventoryTable from "@/components/TableComponents/InventoryTable";
+import ResponseTable from "@/components/TableComponents/ResponseTable";
 import { Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function index() {
-  const [warehouse, setWarehouse] = useState();
+  const [response, setRequestResponse] = useState();
   const [permission, setPermission] = useState();
 
   const { data: session, status } = useSession();
 
-  const fetchWarehouse = async () => {
-    const dataTemp = await axios.get("/api/warehouse").then((res) => {
+  const fetchResponse = async () => {
+    const dataTemp = await axios.get("/api/warehouse/response").then((res) => {
       return res.data;
     });
 
-    setWarehouse(dataTemp);
+    setRequestResponse(dataTemp);
   };
 
   useEffect(() => {
-    fetchWarehouse();
+    fetchResponse();
   }, []);
 
   useEffect(() => {
@@ -34,30 +33,31 @@ export default function index() {
 
   return (
     <div>
-      {warehouse && (
+      {response && (
         <div>
           <div className="flex justify-between items-center py-4 px-2">
             <div className="hidden sm:block">
-              <Typography variant="h4">Inventory</Typography>
+              <Typography variant="h4">Get Order</Typography>
             </div>
             <div className="flex gap-2 w-full sm:justify-end">
-              <div className="flex items-center w-full sm:w-52"></div>
+              <div className="flex items-center w-full sm:w-52">
+                <Input label="Search" color="orange" />
+              </div>
             </div>
           </div>
           <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:m-0">
-            <InventoryTable
-              head={["product_code", "stock", "name", "location", "entry_date"]}
-              title="Warehouse List"
-              search={true}
-              data={warehouse.data}
-              refreshData={fetchWarehouse}
+            <ResponseTable
+              head={["quantity"]}
+              title="Response List"
+              data={response.data}
+              refreshData={fetchResponse}
             />
           </div>
           <div className="px-2 flex justify-center sm:justify-end">
             <Paginate
-              page={warehouse}
-              refreshData={fetchWarehouse}
-              setData={setWarehouse}
+              page={response}
+              refreshData={fetchResponse}
+              setData={setRequestResponse}
             />
           </div>
         </div>
