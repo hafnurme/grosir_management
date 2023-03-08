@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CategoryTable from "@/components/TableComponents/CategoryTable";
-import { IconButton, Input } from "@material-tailwind/react";
+import { IconButton, Input, Typography } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import CategoryAddModal from "@/components/Modal/Kategori/CategoryAddModal";
 
@@ -25,10 +25,10 @@ const Kategori = () => {
     <>
       <div>
         <div>
-          <div className="flex justify-between items-center px-2 py-4  overflow-hidden">
+          <div className="flex justify-between items-center px-2 pb-4  overflow-hidden">
             <div className="hidden sm:block">
               <div className="text-2xl font-semibold">
-                <h3>Kategori</h3>
+                <Typography variant="h3">Kategori</Typography>
               </div>
             </div>
             <div className="flex gap-2 w-full sm:justify-end">

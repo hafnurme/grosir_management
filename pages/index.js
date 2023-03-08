@@ -1,26 +1,14 @@
 import { Button } from "@material-tailwind/react";
 import Head from "next/head";
 import Image from "next/image";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { signIn } from "next-auth/react";
 export default function Home() {
-
-  const [size, setSize] = useState()
-
   const handleSub = async () => {
-    // console.log(res.status);
     await signIn({ callbackUrl: "/admin" });
   };
 
-  const { data: session } = useSession();
-
-  // useEffect(() => {
-  //   window.innerWidth >= 960 ? setSize("lg") : setSize("sm")
-  // }, [])
-
-
   return (
-    <>
+    <div>
       <Head>
         <title>Grosir</title>
         <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
@@ -41,7 +29,7 @@ export default function Home() {
             Grosir Management System
           </h1>
           <Button
-            size='md'
+            size="md"
             color="orange"
             variant="gradient"
             className=" lg:w-40"
@@ -51,6 +39,6 @@ export default function Home() {
           </Button>
         </div>
       </main>
-    </>
+    </div>
   );
 }

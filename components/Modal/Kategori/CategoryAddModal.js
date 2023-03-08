@@ -1,3 +1,4 @@
+import AlertComponent from "@/components/AlertComponent";
 import { PlusCircleIcon } from "@heroicons/react/20/solid";
 import {
   Button,
@@ -17,6 +18,7 @@ const CategoryAddModal = ({ modalSize, refreshData }) => {
   const [open, setOpen] = useState(false);
   const [size, setSize] = useState();
   const [categoryType, setCategoryType] = useState();
+  const [alertShow, setAlertShow] = useState(false);
 
   const handleOpen = () => setOpen(!open);
   const refForm = useRef(null);
@@ -36,13 +38,15 @@ const CategoryAddModal = ({ modalSize, refreshData }) => {
       dataTemp[key] = value;
     });
 
-    dataTemp["category_type"] = categoryType;
-
-    await axios.post("/api/category", { data: dataTemp }).then((res) => {
-      console.log(res.data);
-      handleOpen();
-      refreshData();
-    });
+    try {
+      await axios.post("/api/category", { data: dataTemp }).then((res) => {
+        console.log(res.data);
+        handleOpen();
+        refreshData();
+      });
+    } catch (error) {
+      return setAlertShow(true);
+    }
   };
 
   return (
@@ -63,6 +67,11 @@ const CategoryAddModal = ({ modalSize, refreshData }) => {
       >
         <DialogHeader>Add Produk</DialogHeader>
         <DialogBody className="flex-1 bg-blue-gray-50" divider>
+          {alertShow && (
+            <div className="mb-4">
+              <AlertComponent show={alertShow} setShow={setAlertShow} />
+            </div>
+          )}
           <form
             ref={refForm}
             onSubmit={(e) => {
@@ -75,15 +84,27 @@ const CategoryAddModal = ({ modalSize, refreshData }) => {
                 label="Category Name"
                 type="text"
                 name="category_name"
+                required
               />
-              <Select label="Category Type" color="orange">
-                <Option onClick={() => setCategoryType("Pangan")}>
+              <select
+                name="category_type"
+                id="countries"
+                className="bg-blue-gray-50 border-2  border-blue-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-orange-500 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option
+                  value="Pangan"
+                  onClick={() => setCategoryType("Pangan")}
+                >
                   Pangan
-                </Option>
-                <Option onClick={() => setCategoryType("Non-Pangan")}>
-                  Non-Pangan
-                </Option>
-              </Select>
+                </option>
+                <option
+                  value="Non-Pangan"
+                  onClick={() => setCategoryType("Non-Pangan")}
+                >
+                  Non Pangan
+                </option>
+              </select>
             </div>
           </form>
         </DialogBody>

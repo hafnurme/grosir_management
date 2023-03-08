@@ -8,9 +8,10 @@ import {
   Input,
   Checkbox,
   Typography,
-  Alert,
-  Chip,
   DialogFooter,
+  Card,
+  CardBody,
+  IconButton,
 } from "@material-tailwind/react";
 import UpdateModal from "@/components/Modal/UpdateRoleModal";
 import DeleteDialog from "@/components/Modal/DeleteModal";
@@ -79,34 +80,31 @@ const role = () => {
   }, []);
 
   return (
-    <div>
-      <div className="flex flex-col">
+    <Card>
+      <CardBody className="flex flex-col">
         <div className="overflow-x-auto w-full">
-          <div className="py-2 inline-block min-w-full ">
+          <div className="inline-block min-w-full ">
             <div className="overflow-hidden">
               <table className="min-w-full">
-                <thead className="border-b bg-white">
+                <thead className="border-b bg-white mb-4">
                   <tr>
                     <th
                       scope="col"
                       colSpan={2}
-                      className="text-sm font-medium text-gray-900 px-6 py-2"
+                      className="text-sm font-medium text-gray-900 text-left"
                     >
-                      <Typography variant="h4" className="my-4">
-                        Daftar Role
-                      </Typography>
+                      <Typography variant="h4">Daftar Role</Typography>
                     </th>
-                    <th className="w-14 px-2">
-                      <Button
-                        className="flex w-40 items-center justify-center"
+                    <th className="flex justify-end mr-4">
+                      <IconButton
+                        className="flex items-center justify-center"
                         color="orange"
                         onClick={handleOpen}
                       >
-                        <div className="text-md">Add</div>
-                        <div className="h-5 w-5 inline-block ml-2">
+                        <div className="h-6 w-6">
                           <PlusCircleIcon />
                         </div>
-                      </Button>
+                      </IconButton>
                     </th>
                   </tr>
                 </thead>
@@ -151,7 +149,7 @@ const role = () => {
             </div>
           </div>
         </div>
-      </div>
+      </CardBody>
 
       <Dialog
         className="p-5"
@@ -227,7 +225,7 @@ const role = () => {
           </Button>
         </DialogFooter>
       </Dialog>
-    </div>
+    </Card>
   );
 };
 

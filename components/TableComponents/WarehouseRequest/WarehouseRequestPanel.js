@@ -48,7 +48,7 @@ export default function WarehouseRequestPanel({
   ];
 
   return (
-    <Tabs value="accepted">
+    <Tabs value="sent">
       <TabsHeader>
         {tab.map(({ label, value }) => {
           if (permission && permission.includes("admin") && value === "sent") {

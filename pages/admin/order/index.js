@@ -49,18 +49,18 @@ const OrderProduk = () => {
     <div>
       {product && (
         <>
-          <div className="flex justify-between items-center py-4 px-2">
+          <div className="flex justify-between items-center pb-4">
             <div className="hidden sm:block">
               <div className="text-2xl font-semibold">
-                <h3>Order </h3>
+                <h3>Order</h3>
               </div>
             </div>
 
-            <div className="flex gap-2 w-full">
-              <form
-                // onSubmit={(e) => {
-                //   handleSearch(e, searchQuery);
-                // }}
+            <div className="flex justify-end gap-2 w-full">
+              {/* <form
+                onSubmit={(e) => {
+                  handleSearch(e, searchQuery);
+                }}
                 className="flex gap-2 w-full justify-end"
               >
                 <div className="w-full sm:w-52">
@@ -74,20 +74,15 @@ const OrderProduk = () => {
                     // }}
                   />
                 </div>
-                <IconButton
-                  size={size}
-                  className="w-20"
-                  color="orange"
-                  // type="submit"
-                >
+                <IconButton size={size} className="w-20" color="orange">
                   <MagnifyingGlassIcon className="w-6" />
                 </IconButton>
-              </form>
+              </form> */}
               <MakeNewOrder refreshData={fetchProduct} />
             </div>
           </div>
 
-          <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:mx-0">
+          <div className="overflow-x-scroll lg:overflow-auto  sm:mx-0">
             <OrderTable
               data={product.data}
               refreshData={fetchProduct}
@@ -102,13 +97,11 @@ const OrderProduk = () => {
               ]}
             />
           </div>
-          <div className="flex justify-center  lg:justify-end px-2">
-            <Paginate
-              setData={setProduct}
-              page={product}
-              refreshData={fetchProduct}
-            />
-          </div>
+          <Paginate
+            setData={setProduct}
+            page={product}
+            refreshData={fetchProduct}
+          />
         </>
       )}
     </div>

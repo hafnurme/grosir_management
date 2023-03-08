@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import ProductTable from "@/components/TableComponents/ProductTable";
 import Paginate from "@/components/paginate";
 import ProdukAddModal from "@/components/Modal/Produk/ProdukAddModal";
-import { IconButton, Input } from "@material-tailwind/react";
+import { IconButton, Input, Typography } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import AlertComponent from "@/components/AlertComponent";
 
 const Produk = () => {
   const [product, setProduct] = useState();
   const [searchQuery, setSearchQuery] = useState();
-  const [size, setSize] = useState();
+  const [alertShow, setAlertShow] = useState(false);
 
   const fetchProduct = async (page, link) => {
     const producttemp = await axios.get("/api/product").then((res) => {
@@ -31,26 +32,34 @@ const Produk = () => {
       search = search.trim();
     }
     if (search && search !== "") {
-      const dataTemp = await axios
-        .post(`/api/product/name`, { data: { name: search } })
-        .then((res) => {
-          return res.data;
-        });
-
-      setProduct(dataTemp);
+      try {
+        const dataTemp = await axios
+          .post(`/api/product/name`, { data: { name: search } })
+          .then((res) => {
+            return res.data;
+          });
+        setProduct(dataTemp);
+      } catch (error) {
+        return setAlertShow(true);
+      }
     } else {
       fetchProduct();
     }
   };
 
   return (
-    <div>
+    <div className="relative">
+      <AlertComponent
+        show={alertShow}
+        setShow={setAlertShow}
+        position="absolute"
+      />
       {product && (
         <>
-          <div className="flex justify-between items-center py-4 px-2">
+          <div className="flex items-center pb-4 px-2">
             <div className="hidden sm:block">
-              <div className="text-2xl font-semibold">
-                <h3>Produk</h3>
+              <div>
+                <Typography variant="h3">Produk</Typography>
               </div>
             </div>
 
@@ -72,16 +81,11 @@ const Produk = () => {
                     }}
                   />
                 </div>
-                <IconButton
-                  size={size}
-                  className="w-20"
-                  color="orange"
-                  type="submit"
-                >
+                <IconButton className="w-20" color="orange" type="submit">
                   <MagnifyingGlassIcon className="w-6" />
                 </IconButton>
               </form>
-              <ProdukAddModal size={size} refreshData={fetchProduct} />
+              <ProdukAddModal refreshData={fetchProduct} />
             </div>
           </div>
 
@@ -95,13 +99,11 @@ const Produk = () => {
               current_page={product["current_page"]}
             />
           </div>
-          <div className="flex justify-center  lg:justify-end px-2">
-            <Paginate
-              setData={setProduct}
-              page={product}
-              refreshData={fetchProduct}
-            />
-          </div>
+          <Paginate
+            setData={setProduct}
+            page={product}
+            refreshData={fetchProduct}
+          />
         </>
       )}
     </div>

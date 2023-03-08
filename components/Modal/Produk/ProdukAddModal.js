@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Button,
   Dialog,
@@ -11,11 +11,8 @@ import ProductDetailForm from "../../FormComponents/ProductDetailForm";
 import PilihSupplierModal from "./PilihSupplierModal";
 import PilihKategoriModal from "./PilihKategoriModal";
 import axios from "axios";
-import {
-  PlusCircleIcon,
-  PlusIcon,
-  PlusSmallIcon,
-} from "@heroicons/react/20/solid";
+import { PlusCircleIcon } from "@heroicons/react/20/solid";
+import AlertComponent from "@/components/AlertComponent";
 
 const AddProductModal = ({ size, refreshData }) => {
   const [open, setOpen] = useState(false);
@@ -23,6 +20,7 @@ const AddProductModal = ({ size, refreshData }) => {
   const [kategoriModal, setKategoriModal] = useState(false);
   const [supplier, setSupplier] = useState();
   const [category, setCategory] = useState();
+  const [alertShow, setAlertShow] = useState(false);
 
   const refForm = useRef(null);
 
@@ -48,11 +46,15 @@ const AddProductModal = ({ size, refreshData }) => {
     dataTemp["category_id"] = category.category_id;
     dataTemp["supplier_id"] = supplier.supplier_id;
 
-    await axios.post("/api/product", { data: dataTemp }).then((res) => {
-      console.log(res.data);
-      handleOpen();
-      refreshData();
-    });
+    try {
+      await axios.post("/apsi/product", { data: dataTemp }).then((res) => {
+        console.log(res.data);
+        handleOpen();
+        refreshData();
+      });
+    } catch (error) {
+      return setAlertShow(true);
+    }
   };
 
   const submitAddProduct = () => {
@@ -95,6 +97,7 @@ const AddProductModal = ({ size, refreshData }) => {
               handleOpenKategoriModal={handleOpenKategoriModal}
             />
           </form>
+          <AlertComponent show={alertShow} setShow={setAlertShow} />
           <div className="grid grid-cols-2 gap-4">
             <PilihSupplierModal />
             <PilihKategoriModal />

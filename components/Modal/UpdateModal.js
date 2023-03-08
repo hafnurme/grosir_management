@@ -9,6 +9,7 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
+import AlertComponent from "../AlertComponent";
 
 export default function UpdateModal({
   item,
@@ -20,6 +21,7 @@ export default function UpdateModal({
 }) {
   const [open, setOpen] = useState(false);
   const [itemUpdate, setItemUpdate] = useState();
+  const [alertShow, setAlertShow] = useState(false);
 
   useEffect(() => {
     setItemUpdate(item);
@@ -37,15 +39,18 @@ export default function UpdateModal({
 
     setItemUpdate(itemUpdateTemp);
 
-    await axios
-      .put(`${updateUrl}${id}`, {
-        data: itemUpdate,
-      })
-      .then((res) => {
-        console.log(res.data);
-        refreshData();
-        handleOpen();
-      });
+    try {
+      await axios
+        .put(`${updateUrl}${id}`, {
+          data: itemUpdate,
+        })
+        .then((res) => {
+          refreshData();
+          handleOpen();
+        });
+    } catch (error) {
+      setAlertShow(true);
+    }
   };
 
   const handleOpen = () => setOpen(!open);
@@ -64,6 +69,11 @@ export default function UpdateModal({
         >
           <DialogHeader>Update</DialogHeader>
           <DialogBody className="bg-blue-gray-50 flex-1" divider>
+            {alertShow && (
+              <div className="mb-4">
+                <AlertComponent show={alertShow} setShow={setAlertShow} />
+              </div>
+            )}
             <div className={`grid grid-cols-${col || "2"} gap-5 h-min w-full`}>
               {itemUpdate &&
                 itemHead.map((key, index) => {

@@ -17,7 +17,7 @@ export default function BranchTable({ head, data, refreshData, handleSearch }) {
         {finalData &&
           finalData.map((object, index) => {
             return (
-              <Card key={index} className="p-4 flex justify-between">
+              <Card key={index} className="p-4 flex justify-between rounded-md">
                 <div>
                   <Typography variant="h5" className="mb-1">
                     {object["branch_name"]}

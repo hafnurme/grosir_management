@@ -16,23 +16,12 @@ export default function InventoryTable({ head, data, refreshData }) {
 
   useEffect(() => {
     if (session) {
-      console.log(session);
       setPermission(session.permission);
     }
   }, [status]);
 
-  const inputListener = (input) => {
-    const filteredData = data.filter((elem) => {
-      const key = new RegExp(input.target.value, "i");
-      if (elem.location.match(key)) {
-        return elem;
-      }
-    });
-
-    setFinalData(filteredData);
-  };
   return (
-    <>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-700">
         <thead className="text-xs text-c uppercase bg-gray-100">
           <tr>
@@ -109,6 +98,6 @@ export default function InventoryTable({ head, data, refreshData }) {
             })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

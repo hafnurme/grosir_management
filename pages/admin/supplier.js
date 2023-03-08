@@ -2,15 +2,24 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import SupplierTable from "@/components/TableComponents/SupplierTable";
 import AddModal from "@/components/Modal/AddModal";
-import { IconButton, Input, Typography } from "@material-tailwind/react";
-import { getSession } from "next-auth/react";
-import { ArrowPathIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import {
+  Alert,
+  Button,
+  IconButton,
+  Input,
+  Typography,
+} from "@material-tailwind/react";
+import {
+  ExclamationTriangleIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/20/solid";
 import Paginate from "@/components/paginate";
+import AlertComponent from "@/components/AlertComponent";
 
 export default function supplier() {
   const [supplier, setSupplier] = useState();
   const [searchQuery, setSearchQuery] = useState();
-  const [size, setSize] = useState();
+  const [alertShow, setAlertShow] = useState(false);
 
   const fetchSupplier = async () => {
     const supplier = await axios.get("/api/supplier");
@@ -21,10 +30,6 @@ export default function supplier() {
 
   useEffect(() => {
     fetchSupplier();
-    window.innerWidth >= 960 ? setSize("md") : setSize("sm");
-    window.addEventListener("resize", () =>
-      window.innerWidth >= 960 ? setSize("md") : setSize("sm")
-    );
   }, []);
 
   const handleSearch = async (e, search) => {
@@ -34,15 +39,16 @@ export default function supplier() {
       search = search.trim();
     }
     if (search || search !== "") {
-      console.log(search);
-      console.log("first");
-      const dataTemp = await axios
-        .post(`/api/supplier/name`, { data: { supplier_name: search } })
-        .then((res) => {
-          return res.data;
-        });
-
-      return setSupplier(dataTemp);
+      try {
+        const dataTemp = await axios
+          .post(`/api/supplier/name`, { data: { supplier_name: search } })
+          .then((res) => {
+            return res.data;
+          });
+        return setSupplier(dataTemp);
+      } catch (error) {
+        return setAlertShow(true);
+      }
     }
     fetchSupplier();
   };
@@ -51,7 +57,14 @@ export default function supplier() {
     <>
       {supplier && (
         <div className="relative">
-          <div className="flex justify-between items-center py-4 px-2">
+          {alertShow && (
+            <AlertComponent
+              show={alertShow}
+              setShow={setAlertShow}
+              position="absolute"
+            />
+          )}
+          <div className="flex justify-between items-center pb-4 px-2">
             <div className="hidden sm:block">
               <Typography variant="h4">Supplier</Typography>
             </div>
@@ -83,7 +96,6 @@ export default function supplier() {
                 label="Tambah Supplier"
                 refreshData={fetchSupplier}
                 col="1"
-                size={size}
               />
             </div>
           </div>
@@ -98,13 +110,11 @@ export default function supplier() {
                 handleSearch={handleSearch}
               />
             </div>
-            <div className="flex justify-center  sm:justify-end px-2">
-              <Paginate
-                page={supplier}
-                refreshData={fetchSupplier}
-                setData={setSupplier}
-              />
-            </div>
+            <Paginate
+              page={supplier}
+              refreshData={fetchSupplier}
+              setData={setSupplier}
+            />
           </div>
         </div>
       )}

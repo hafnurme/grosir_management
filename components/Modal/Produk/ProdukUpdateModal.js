@@ -1,3 +1,4 @@
+import AlertComponent from "@/components/AlertComponent";
 import { PencilSquareIcon } from "@heroicons/react/20/solid";
 import {
   Button,
@@ -23,6 +24,7 @@ export default function ProductUpdateModal({
   const [itemUpdate, setItemUpdate] = useState();
   const [kategoriModal, setKategoriModal] = useState(false);
   const [category, setCategory] = useState();
+  const [alertShow, setAlertShow] = useState(false);
 
   const handleOpenKategoriModal = () => {
     setKategoriModal(!kategoriModal);
@@ -48,14 +50,18 @@ export default function ProductUpdateModal({
 
     setItemUpdate(itemUpdateTemp);
 
-    await axios
-      .put(`${updateUrl}${id}`, {
-        data: itemUpdate,
-      })
-      .then((res) => {
-        refreshData();
-        handleOpen();
-      });
+    try {
+      await axios
+        .put(`${updateUrl}${id}`, {
+          data: itemUpdate,
+        })
+        .then((res) => {
+          refreshData();
+          handleOpen();
+        });
+    } catch (error) {
+      return setAlertShow(true);
+    }
   };
 
   const handleOpen = () => setOpen(!open);
@@ -74,7 +80,10 @@ export default function ProductUpdateModal({
         >
           <DialogHeader>Update</DialogHeader>
           <DialogBody className="bg-blue-gray-50 flex-1" divider>
-            <div className={`grid grid-cols-${col || "2"} gap-5 h-min w-full`}>
+            <AlertComponent setShow={setAlertShow} show={alertShow} />
+            <div
+              className={`grid grid-cols-${col || "2"} gap-5 h-min w-full py-4`}
+            >
               {itemUpdate &&
                 itemHead.map((key, index) => {
                   return (

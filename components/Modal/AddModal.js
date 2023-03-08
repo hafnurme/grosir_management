@@ -1,4 +1,4 @@
-import { PencilSquareIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
+import { PlusCircleIcon } from "@heroicons/react/20/solid";
 import {
   Button,
   Dialog,
@@ -9,7 +9,8 @@ import {
   Input,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
+import { useState } from "react";
+import AlertComponent from "../AlertComponent";
 
 export default function AddModal({
   itemHead,
@@ -17,11 +18,11 @@ export default function AddModal({
   refreshData,
   fieldType,
   col,
-  size,
 }) {
   const [open, setOpen] = useState(false);
+  const [alertShow, setAlertShow] = useState(false);
 
-  const handleSubmit = async (e, id) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
@@ -31,14 +32,17 @@ export default function AddModal({
       itemAddTemp[key] = value;
     });
 
-    axios
-      .post(`${addUrl}`, {
-        data: itemAddTemp,
-      })
-      .then((res) => {
-        // console.log(res.data);
-        refreshData();
-      });
+    try {
+      await axios
+        .post(`${addUrl}`, {
+          data: itemAddTemp,
+        })
+        .then(() => {
+          refreshData();
+        });
+    } catch (error) {
+      return setAlertShow(true);
+    }
   };
 
   const handleOpen = () => setOpen(!open);
@@ -63,6 +67,7 @@ export default function AddModal({
           <DialogHeader>Add</DialogHeader>
           <DialogBody className="bg-blue-gray-50 flex-1" divider>
             <div className={`grid grid-cols-${col || "2"} gap-5 h-min w-full`}>
+              <AlertComponent setShow={setAlertShow} show={alertShow} />
               {itemHead &&
                 itemHead.map((key, index) => {
                   return (
@@ -72,6 +77,7 @@ export default function AddModal({
                       key={index}
                       name={key}
                       type={fieldType[index]}
+                      required
                     ></Input>
                   );
                 })}

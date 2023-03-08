@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
+import AlertComponent from "../AlertComponent";
 
 export default function DeleteModal({
   itemToDelete,
@@ -17,14 +18,19 @@ export default function DeleteModal({
   itemIndex,
 }) {
   const [open, setOpen] = useState(false);
+  const [alertShow, setAlertShow] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
   const handleDeleteItem = async (id) => {
-    axios.delete(`${deleteUrl}${id}`).then((res) => {
-      handleOpen();
-      refreshData();
-    });
+    try {
+      await axios.delete(`${deleteUrl}${id}`).then((res) => {
+        handleOpen();
+        refreshData();
+      });
+    } catch (error) {
+      return setAlertShow(true);
+    }
   };
 
   return (
@@ -40,6 +46,7 @@ export default function DeleteModal({
       <Dialog open={open} handler={handleOpen} size={"xl"}>
         <DialogHeader>Confirm</DialogHeader>
         <DialogBody className="text-c bg-blue-gray-50 text-gray-800" divider>
+          <AlertComponent show={alertShow} setShow={setAlertShow} />
           <div className="w-full m-2">
             <p className="mb-3 font-semibold">Are you sure want to delete :</p>
             <div>

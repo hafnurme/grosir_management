@@ -1,9 +1,8 @@
-import AddModal from "@/components/Modal/AddModal";
-import GetOrder from "@/components/Modal/Order/GetOrderModalAdmin";
 import GetOrderModalW from "@/components/Modal/Order/GetOrderModalW";
 import WarehouseRequestAddModal from "@/components/Modal/WarehouseRequest/WarehouseRequestAddModal";
+import Paginate from "@/components/paginate";
 import WarehouseRequestPanel from "@/components/TableComponents/WarehouseRequest/WarehouseRequestPanel";
-import { Input, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -36,8 +35,8 @@ export default function index() {
     <>
       {warehouseRequest && (
         <div>
-          <div className="flex justify-between items-center py-4 px-2">
-            <div className="mx-2">
+          <div className="flex justify-between items-center pb-4 px-2">
+            <div>
               <Typography variant="h4">Request Produk</Typography>
             </div>
             {permission && permission.includes("tambah-request-pesanan") && (
@@ -54,6 +53,11 @@ export default function index() {
               permission={permission}
             />
           </div>
+          <Paginate
+            page={warehouseRequest}
+            refreshData={fetchWarehouseRequest}
+            setData={setWarehouseRequest}
+          />
         </div>
       )}
     </>

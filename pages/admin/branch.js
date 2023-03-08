@@ -5,17 +5,23 @@ import axios from "axios";
 import BranchTable from "../../components/TableComponents/BranchTable";
 import AddModal from "@/components/Modal/AddModal";
 import Paginate from "@/components/paginate";
+import AlertComponent from "@/components/AlertComponent";
 
 export default function Branch() {
   const [branch, setBranch] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [size, setSize] = useState();
+  const [alertShow, setAlertShow] = useState();
 
   const fetchBranch = async () => {
-    const branches = await axios.get("/api/branch");
-    const res = branches.data;
+    try {
+      const branches = await axios.get("/api/branch");
+      const res = branches.data;
 
-    setBranch(res);
+      setBranch(res);
+    } catch (error) {
+      return setAlertShow(true);
+    }
   };
 
   useEffect(() => {
@@ -29,25 +35,33 @@ export default function Branch() {
       search = search.trim();
     }
     if (search || search !== "") {
-      const dataTemp = await axios
-        .post(`/api/branch/name`, { data: { branch_name: search } })
-        .then((res) => {
-          return res.data;
-        });
-
-      return setBranch(dataTemp);
+      try {
+        const dataTemp = await axios
+          .post(`/api/branch/name`, { data: { branch_name: search } })
+          .then((res) => {
+            return res.data;
+          });
+        return setBranch(dataTemp);
+      } catch (error) {
+        return setAlertShow(true);
+      }
     } else {
       return fetchBranch();
     }
   };
   return (
     <>
-      <div>
+      <div className="relative">
+        <AlertComponent
+          setShow={setAlertShow}
+          show={alertShow}
+          position={"absolute"}
+        />
         {branch && (
           <>
-            <div className="flex sm:justify-between items-center px-2 py-4">
-              <div className="mx-2 hidden sm:block">
-                <Typography variant="h4">Branch</Typography>
+            <div className="flex sm:justify-between items-center pb-4">
+              <div className="hidden sm:block">
+                <Typography variant="h3">Branch</Typography>
               </div>
               <div className="flex gap-2 flex-1 justify-end">
                 <form
@@ -69,7 +83,6 @@ export default function Branch() {
                 <IconButton className="w-20" color="orange">
                   <MagnifyingGlassIcon className="h-6" />
                 </IconButton>
-
                 <AddModal
                   refreshData={fetchBranch}
                   addUrl="/api/branch"
@@ -96,13 +109,11 @@ export default function Branch() {
                 handleSearch={handleSearch}
               />
             </div>
-            <div className="px-2  flex justify-center sm:justify-end">
-              <Paginate
-                page={branch}
-                setData={setBranch}
-                refreshData={fetchBranch}
-              />
-            </div>
+            <Paginate
+              page={branch}
+              setData={setBranch}
+              refreshData={fetchBranch}
+            />
           </>
         )}
       </div>

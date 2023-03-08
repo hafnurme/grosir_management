@@ -97,7 +97,7 @@ export default function MakeNewOrder({ refreshData }) {
                       ? supplierSelected.supplier_name
                       : "supplier"
                   }
-                  readOnly
+                  required
                 />
                 <Input
                   label="product"
@@ -105,7 +105,7 @@ export default function MakeNewOrder({ refreshData }) {
                   defaultValue={productSelected ? productSelected["name"] : ""}
                   name="product_code"
                   key={productSelected ? productSelected.name : "product"}
-                  readOnly
+                  required
                 />
                 <Input
                   type={"date"}

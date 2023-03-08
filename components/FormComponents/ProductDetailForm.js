@@ -32,7 +32,6 @@ const ProductDetailForm = ({
             name="name"
           />
           <Input
-            readOnly
             label="Kategori"
             name="kategori_id"
             color="orange"
@@ -43,7 +42,7 @@ const ProductDetailForm = ({
               if (e.key !== "Tab") handleOpenKategoriModal();
             }}
             tabIndex="4"
-            required={true}
+            required
             key={category ? category.category_name : "category"}
           />
           <Input
@@ -86,7 +85,6 @@ const ProductDetailForm = ({
             name="property"
           />
           <Input
-            readOnly
             label="Supplier"
             color="orange"
             className="w-full"
