@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
     const options = {
       method: "POST",
-      url: `${base_url}/api/warehouse/request/deceline`,
+      url: `${base_url}/api/warehouse/request/decline`,
       headers: {
         "Content-Type": "application/json",
         token: session.accessToken,

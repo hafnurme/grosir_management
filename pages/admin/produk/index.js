@@ -21,10 +21,6 @@ const Produk = () => {
 
   useEffect(() => {
     fetchProduct();
-    // window.innerWidth >= 960 ? setSize("md") : setSize("sm");
-    // window.addEventListener("resize", () =>
-    //   window.innerWidth >= 960 ? setSize("md") : setSize("sm")
-    // );
   }, []);
 
   const handleSearch = async (e, search) => {
@@ -91,7 +87,7 @@ const Produk = () => {
 
           <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:mx-0">
             <ProductTable
-              head={["product_code", "name", "brand", "category_id"]}
+              head={["product_code", "name", "brand", "category_name"]}
               title="Product List"
               search={true}
               data={product.data}

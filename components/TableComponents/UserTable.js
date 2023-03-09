@@ -71,13 +71,13 @@ const UserTable = ({ data, head, refreshData }) => {
                     refreshData={refreshData}
                     itemIndex={"user_id"}
                   />
-                  <DeleteModal
+                  {/* <DeleteModal
                     itemToDelete={object}
                     itemHead={head}
                     deleteUrl="/api/user/"
                     refreshData={refreshData}
                     itemIndex="user_id"
-                  />
+                  /> */}
                 </td>
               </tr>
             );

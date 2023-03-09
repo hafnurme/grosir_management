@@ -71,7 +71,7 @@ const CategoryTable = ({ head, data, refreshData, search }) => {
                     />
                     <DeleteDialog
                       itemToDelete={object}
-                      itemIndex="category _id"
+                      itemIndex="category_id"
                       itemHead={head}
                       refreshData={refreshData}
                       deleteUrl="/api/category/"

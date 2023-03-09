@@ -1,3 +1,5 @@
+import AddUserModel from "@/components/Modal/User/AddUserModal";
+import Paginate from "@/components/paginate";
 import UserTable from "@/components/TableComponents/UserTable";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { IconButton, Input, Typography } from "@material-tailwind/react";
@@ -24,12 +26,19 @@ const index = () => {
           </div>
         </div>
         <div className="flex gap-2 w-full sm:justify-end">
-          <div className="flex items-center gap-2 w-full sm:w-52">
-            <Input label="Search" color="orange" variant="outlined" />
-          </div>
-          <IconButton className="w-20" color="orange">
-            <MagnifyingGlassIcon className="h-6" />
-          </IconButton>
+          <AddUserModel
+            refreshData={fetchUser}
+            itemHead={[
+              "user",
+              "name",
+              "username",
+              "password",
+              "contact",
+              "email",
+            ]}
+            fieldType={["text", "text", "text", "text", "text", "email"]}
+            min={[3, 3, 6, 10, 10]}
+          />
         </div>
       </div>
       <UserTable

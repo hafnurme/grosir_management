@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
 import DetailModal from "@/components/Modal/DetailModal";
-import UpdateModal from "@/components/Modal/UpdateModal";
-import index from "@/pages/admin";
+import ProductUpdateModal from "../Modal/Produk/ProdukUpdateModal";
 
-const ProductTable = ({
-  head,
-  data,
-  refreshData,
-  handleSearch,
-  current_page,
-}) => {
+const ProductTable = ({ head, data, refreshData, current_page }) => {
   const [finalData, setFinalData] = useState();
 
   useEffect(() => {
@@ -58,15 +51,9 @@ const ProductTable = ({
                     exception={["id", "supplier_id"]}
                     item={object}
                   />
-                  <UpdateModal
+                  <ProductUpdateModal
                     item={object}
-                    itemHead={[
-                      "product_code",
-                      "brand",
-                      "name",
-                      "category_id",
-                      "description",
-                    ]}
+                    itemHead={["product_code", "brand", "name", "description"]}
                     updateUrl="/api/product/"
                     refreshData={refreshData}
                   />

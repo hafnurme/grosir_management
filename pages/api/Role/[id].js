@@ -4,50 +4,53 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 const base_url = process.env.API_BASE_URL;
 
 export default async function handler(req, res) {
-    const session = await getServerSession(req, res, authOptions);
-    const { id } = req.query;
+  const session = await getServerSession(req, res, authOptions);
+  const { id } = req.query;
 
-    if (req.method === "DELETE") {
-        const options = {
-            method: "DELETE",
-            url: `${base_url}/api/role/${id}`,
-            headers: {
-                token: session.accessToken,
-            },
-        };
+  if (req.method === "DELETE") {
+    const options = {
+      method: "DELETE",
+      url: `${base_url}/api/role/${id}`,
+      headers: {
+        token: session.accessToken,
+      },
+    };
 
-        axios
-            .request(options)
-            .then(function (response) {
-                res.status(200).json(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-                res.status(500).json("Delete Failed , Server Error");
-            });
-    }
+    axios
+      .request(options)
+      .then(function (response) {
+        res.status(200).json(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.status(500).json("Delete Failed , Server Error");
+      });
+  }
 
-    if (req.method === "PUT") {
-        const body = await req.body.data;
+  if (req.method === "PUT") {
+    const body = await req.body.data;
 
-        const options = {
-            method: "PUT",
-            url: `${base_url}/api/role/${id}`,
-            headers: {
-                "Content-Type": "application/json;charset=UTF-8",
-                token: session.accessToken,
-            },
-            data: body,
-        };
+    const options = {
+      method: "PUT",
+      url: `${base_url}/api/role/${id}`,
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        token: session.accessToken,
+      },
+      data: body,
+    };
 
-        axios
-            .request(options)
-            .then(function (response) {
-                // console.log(response.data);
-                res.status(200).json(response.data);
-            })
-            .catch(function (error) {
-                return res.status(error.response.status).json(error.response.data);
-            });
-    }
+    console.log(options);
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        res.status(200).json(response.data);
+      })
+      .catch(function (error) {
+        console.log(response.data);
+        return res.status(error.response.status).json(error.response.data);
+      });
+  }
 }

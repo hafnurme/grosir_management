@@ -95,6 +95,7 @@ const OrderProduk = () => {
               search={false}
               head={[
                 "product_code",
+                "name",
                 "total_amount",
                 "quantity",
                 "product_expired",

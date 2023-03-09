@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import AcceptRequest from "./AcceptRequest";
 import DecelineRequest from "./DecelineRequest";
 import ProcessRequest from "./ProccessRequest";
+import GetOrderModal from "@/components/Modal/Order/GetOrderModalAdmin";
+import GetOrderModalW from "@/components/Modal/Order/GetOrderModalW";
 
 const WarehouseRequestTable = ({
   head,
@@ -29,12 +31,12 @@ const WarehouseRequestTable = ({
                 </th>
               );
             })}
-          {permission && !permission.includes("admin") && (
-            <th scope="col" className="px-6 py-3"></th>
-          )}
           {permission && permission.includes("admin") && (
             <th scope="col" className=" py-3"></th>
           )}
+          {permission &&
+            !permission.includes("admin") &&
+            label == "transferred" && <th scope="col" className=" py-3"></th>}
         </tr>
       </thead>
       <tbody>
@@ -53,11 +55,6 @@ const WarehouseRequestTable = ({
                       </td>
                     );
                   })}
-                {permission &&
-                  !permission.includes("admin") &&
-                  label == "transferred" && (
-                    <td className="px-3 py-1 flex gap-3 justify-end items-center"></td>
-                  )}
                 {permission &&
                   permission.includes("admin") &&
                   label == "sent" && (

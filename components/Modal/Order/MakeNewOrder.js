@@ -12,6 +12,7 @@ import {
 
 import SelectWarehouseModal from "@/components/Modal/SelectWarehouseModal";
 import { useRouter } from "next/router";
+import SelectProductModal from "../Inventory/SelectProductModal";
 
 export default function MakeNewOrder({ refreshData }) {
   const [order, setOrder] = useState();
@@ -124,11 +125,10 @@ export default function MakeNewOrder({ refreshData }) {
                 modalOpen={supplierModal}
                 setSupplier={setSupplierSelected}
               />
-              <SelectWarehouseModal
+              <SelectProductModal
                 handleOpenMod={handleOpenWarehouseModal}
                 open={selectWarehouse}
                 setSelectedProduct={setProductSelected}
-                url="/api/warehouse/"
               />
             </div>
           </DialogBody>

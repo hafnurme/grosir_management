@@ -1,4 +1,6 @@
 import AddModal from "@/components/Modal/AddModal";
+import GetOrder from "@/components/Modal/Order/GetOrderModalAdmin";
+import GetOrderModalW from "@/components/Modal/Order/GetOrderModalW";
 import WarehouseRequestAddModal from "@/components/Modal/WarehouseRequest/WarehouseRequestAddModal";
 import WarehouseRequestPanel from "@/components/TableComponents/WarehouseRequest/WarehouseRequestPanel";
 import { Input, Typography } from "@material-tailwind/react";
@@ -40,6 +42,7 @@ export default function index() {
             </div>
             {permission && permission.includes("tambah-request-pesanan") && (
               <div className="flex gap-2">
+                <GetOrderModalW refreshData={fetchWarehouseRequest} />
                 <WarehouseRequestAddModal refreshData={fetchWarehouseRequest} />
               </div>
             )}

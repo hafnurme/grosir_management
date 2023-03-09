@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function index() {
   const [warehouse, setWarehouse] = useState();
   const [permission, setPermission] = useState();
-  const [disabled, setDisabled] = useState(true)
+  const [disabled, setDisabled] = useState(true);
 
   const { data: session, status } = useSession();
 
@@ -21,15 +21,15 @@ export default function index() {
   };
 
   const checkExpired = async () => {
-    await axios.get('/api/warehouse/batch')
-    setDisabled(!disabled)
-  }
+    await axios.get("/api/warehouse/batch");
+    setDisabled(!disabled);
+  };
 
   const updateStock = async () => {
-    await axios.put('/api/warehouse/stock')
-    setDisabled(!disabled)
-    fetchWarehouse()
-  }
+    await axios.put("/api/warehouse/stock");
+    setDisabled(!disabled);
+    fetchWarehouse();
+  };
 
   useEffect(() => {
     fetchWarehouse();
@@ -50,10 +50,21 @@ export default function index() {
               <Typography variant="h4">Inventory</Typography>
             </div>
             <div className="flex gap-2 w-full items-center sm:justify-end">
-              <Button color="orange" className="text-sm capitalize" size="sm" onClick={updateStock} disabled={disabled}>
+              <Button
+                color="orange"
+                className="text-sm capitalize"
+                size="sm"
+                onClick={updateStock}
+                disabled={disabled}
+              >
                 update stock
               </Button>
-              <Button color="orange" className="text-sm capitalize" size="sm" onClick={checkExpired}>
+              <Button
+                color="orange"
+                className="text-sm capitalize"
+                size="sm"
+                onClick={checkExpired}
+              >
                 Check
               </Button>
               <div className="flex items-center w-full sm:w-52">
@@ -63,7 +74,7 @@ export default function index() {
           </div>
           <div className="overflow-x-scroll lg:overflow-auto mx-2 sm:m-0">
             <InventoryTable
-              head={["product_code", "stock", "location", "entry_date"]}
+              head={["product_code", "stock", "name", "location", "entry_date"]}
               title="Warehouse List"
               search={true}
               data={warehouse.data}
