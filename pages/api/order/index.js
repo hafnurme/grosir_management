@@ -38,15 +38,16 @@ export default async function handler(req, res) {
       data: body,
     };
     console.log(options);
-    await axios
+    axios
       .request(options)
       .then((response) => {
-        console.log(response.data);
         return res.status(200).json(response.data);
       })
       .catch((error) => {
-        console.log(error);
-        return res.status(500).json({ message: "Fetch Failed, server error" });
+        if (error.status == "404") {
+          return res.status(500).json({ message: "Server Error" });
+        }
+        return res.status(500).json(error.response.data);
       });
   }
 }

@@ -47,7 +47,7 @@ const AddProductModal = ({ size, refreshData }) => {
     dataTemp["supplier_id"] = supplier.supplier_id;
 
     try {
-      await axios.post("/apsi/product", { data: dataTemp }).then((res) => {
+      await axios.post("/api/product", { data: dataTemp }).then((res) => {
         console.log(res.data);
         handleOpen();
         refreshData();

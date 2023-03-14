@@ -1,8 +1,5 @@
 import AddUserModel from "@/components/Modal/User/AddUserModal";
-import Paginate from "@/components/paginate";
 import UserTable from "@/components/TableComponents/UserTable";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { IconButton, Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -19,7 +16,7 @@ const index = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center px-2 py-4  overflow-hidden">
+      <div className="flex justify-between items-center pb-4  overflow-hidden">
         <div className="hidden sm:block">
           <div className="text-2xl font-semibold">
             <h3>User</h3>

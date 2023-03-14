@@ -1,3 +1,4 @@
+import AlertComponent from "@/components/AlertComponent";
 import {
   Button,
   Dialog,
@@ -9,16 +10,20 @@ import {
 import axios from "axios";
 import { Fragment, useRef, useState } from "react";
 import SelectProductModal from "../Inventory/SelectProductModal";
-import SelectProductWarehouse from "./SelectProductWarehouse";
 
 const WarehouseRequestAddModal = ({ size, refreshData }) => {
   const [open, setOpen] = useState(false);
   const [productSelected, setProductSelected] = useState();
   const [selectProductModalOpen, setSelectProductModalOpen] = useState(false);
+  const [alertShow, setAlertShow] = useState();
+  const [alertMessage, setAlertMessage] = useState(false);
 
   const refForm = useRef(null);
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setOpen(!open);
+    setAlertShow(false);
+  };
 
   const submitAddProduct = () => {
     refForm.current.requestSubmit();
@@ -37,12 +42,17 @@ const WarehouseRequestAddModal = ({ size, refreshData }) => {
 
     dataTemp["product_code"] = productSelected.product_code;
 
-    await axios
-      .post("/api/warehouse/request", { data: dataTemp })
-      .then((res) => {
-        handleOpen();
-        refreshData();
-      });
+    try {
+      await axios
+        .post("/api/warehouse/request", { data: dataTemp })
+        .then((res) => {
+          handleOpen();
+          refreshData();
+        });
+    } catch (error) {
+      setAlertShow(true);
+      setAlertMessage(error.response.data);
+    }
   };
   return (
     <Fragment>
@@ -59,6 +69,11 @@ const WarehouseRequestAddModal = ({ size, refreshData }) => {
       >
         <DialogHeader>Add Produk</DialogHeader>
         <DialogBody className="flex-1 bg-blue-gray-50" divider>
+          <AlertComponent
+            show={alertShow}
+            setShow={setAlertShow}
+            message={alertMessage}
+          />
           <form
             ref={refForm}
             className="grid grid-cols-1 gap-4"

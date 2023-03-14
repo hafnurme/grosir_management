@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Button,
   Dialog,
@@ -9,18 +9,16 @@ import {
   Input,
 } from "@material-tailwind/react";
 import axios from "axios";
-import {
-  PlusCircleIcon,
-  PlusIcon,
-  PlusSmallIcon,
-} from "@heroicons/react/20/solid";
+import { PlusCircleIcon } from "@heroicons/react/20/solid";
 import SelectRoleModal from "./SelectRoleModal";
-import index from "@/pages/admin";
+import AlertComponent from "@/components/AlertComponent";
 
 const AddUserModel = ({ size, refreshData, itemHead, fieldType, min }) => {
   const [open, setOpen] = useState(false);
   const [roleModal, setRoleModal] = useState(false);
   const [role, setRole] = useState();
+  const [alertShow, setAlertShow] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(false);
 
   const refForm = useRef(null);
 
@@ -42,12 +40,16 @@ const AddUserModel = ({ size, refreshData, itemHead, fieldType, min }) => {
     });
 
     dataTemp["role_id"] = role.role_id;
-    console.log(dataTemp);
-    await axios.post("/api/user", { data: dataTemp }).then((res) => {
-      console.log(res.data);
-      handleOpen();
-      refreshData();
-    });
+
+    try {
+      await axios.post("/api/user", { data: dataTemp }).then((res) => {
+        handleOpen();
+        refreshData();
+      });
+    } catch (error) {
+      setAlertMessage(error.response.data);
+      setAlertShow(true);
+    }
   };
 
   const submitAddRole = () => {
@@ -115,6 +117,13 @@ const AddUserModel = ({ size, refreshData, itemHead, fieldType, min }) => {
               />
             </div>
           </form>
+
+          <AlertComponent
+            setShow={setAlertShow}
+            show={alertShow}
+            message={alertMessage}
+          />
+
           <div>
             <SelectRoleModal
               handleOpenMod={handleOpenRoleModal}

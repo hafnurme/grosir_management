@@ -1,3 +1,4 @@
+import AlertComponent from "@/components/AlertComponent";
 import { Squares2X2Icon } from "@heroicons/react/20/solid";
 import {
   Button,
@@ -14,6 +15,8 @@ const ProcessRequest = ({ id, refreshData, orderObj }) => {
   const [open, setOpen] = useState(false);
   const [orderList, setOrderList] = useState();
   const [selectedOrder, setSelectedOrder] = useState();
+  const [alertShow, setALertShow] = useState();
+  const [alertMessage, setALertMessage] = useState();
 
   const fetchOrder = async () => {
     const dataTemp = await axios.get(`/api/order/${id}`).then((res) => {
@@ -34,22 +37,29 @@ const ProcessRequest = ({ id, refreshData, orderObj }) => {
     setSelectedOrder(item);
   };
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setOpen(!open);
+    setALertShow(false);
+  };
 
   const handleConfirm = async () => {
-    await axios
-      .post(`/api/order/distribute/${selectedOrder["product_order_id"]}`, {
-        data: {
-          warehouse_id: orderObj["warehouse_id"],
-          quantity: orderObj["quantity"],
-          product_order_requests_id: orderObj["product_order_requests_id"],
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        handleOpen();
-        refreshData();
-      });
+    try {
+      await axios
+        .post(`/api/order/distribute/${selectedOrder["product_order_id"]}`, {
+          data: {
+            warehouse_id: orderObj["warehouse_id"],
+            quantity: orderObj["quantity"],
+            product_order_requests_id: orderObj["product_order_requests_id"],
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          handleOpen();
+          refreshData();
+        });
+    } catch (error) {
+      setALertShow(true);
+    }
   };
 
   return (
@@ -60,6 +70,7 @@ const ProcessRequest = ({ id, refreshData, orderObj }) => {
       <Dialog open={open} size="xl" handler={handleOpen}>
         <DialogHeader>Process Request</DialogHeader>
         <DialogBody divider>
+          <AlertComponent show={alertShow} setALertShow={setALertShow} />
           <Typography className="text-gray-800">Pilih Order</Typography>
           <div
             className={`mt-4 rounded overflow-hidden max-h-[15rem] overflow-y-scroll border
@@ -68,6 +79,7 @@ const ProcessRequest = ({ id, refreshData, orderObj }) => {
             <ul>
               {orderList &&
                 orderList.map((element, index) => {
+                  console.log(element);
                   return (
                     <label
                       className="bg-blue-gray-50 py-2 px-2 border-blue-gray-200 hover:bg-gray-50 cursor-pointer text-gray-800 flex gap-2"

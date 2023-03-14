@@ -1,3 +1,4 @@
+import AlertComponent from "@/components/AlertComponent";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import {
   Button,
@@ -12,18 +13,26 @@ import { Fragment, useState } from "react";
 
 const GetOrderModalAdmin = ({ id, refreshData, url }) => {
   const [open, setOpen] = useState(false);
+  const [alertShow, setALertShow] = useState();
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setALertShow(false);
+    setOpen(!open);
+  };
   const handleConfirm = async () => {
-    await axios
-      .post(url, {
-        data: { id },
-      })
-      .then((res) => {
-        console.log(res.data);
-        handleOpen();
-        refreshData();
-      });
+    try {
+      await axios
+        .post(url, {
+          data: { id },
+        })
+        .then((res) => {
+          console.log(res.data);
+          handleOpen();
+          refreshData();
+        });
+    } catch (error) {
+      setALertShow(true);
+    }
   };
 
   return (
@@ -34,6 +43,7 @@ const GetOrderModalAdmin = ({ id, refreshData, url }) => {
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Confirmation</DialogHeader>
         <DialogBody divider>
+          <AlertComponent setShow={setALertShow} show={alertShow} />
           <Typography>Get This Response ?</Typography>
         </DialogBody>
         <DialogFooter>

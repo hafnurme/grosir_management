@@ -13,6 +13,7 @@ import {
 import SelectWarehouseModal from "@/components/Modal/SelectWarehouseModal";
 import { useRouter } from "next/router";
 import SelectProductModal from "../Inventory/SelectProductModal";
+import AlertComponent from "@/components/AlertComponent";
 
 export default function MakeNewOrder({ refreshData }) {
   const [order, setOrder] = useState();
@@ -20,6 +21,8 @@ export default function MakeNewOrder({ refreshData }) {
   const [supplierSelected, setSupplierSelected] = useState();
   const [productSelected, setProductSelected] = useState();
   const [selectWarehouse, setSelectWarehouseModal] = useState(false);
+  const [alertShow, setAlertShow] = useState();
+  const [alertMessage, setAlertMessage] = useState();
 
   const [open, setOpen] = useState(false);
 
@@ -36,20 +39,25 @@ export default function MakeNewOrder({ refreshData }) {
 
   const handleConfirm = async () => {
     const form = refForm.current;
-    await axios
-      .post("/api/order", {
-        data: {
-          supplier_id: supplierSelected["supplier_id"],
-          product_code: productSelected["product_code"],
-          purchase_date: form["purchase_date"].value,
-          quantity: form["quantity"].value,
-          total_amount: form["total_amount"].value,
-          expire_date: form["expire_date"].value,
-        },
-      })
-      .then(() => {
-        handleClose();
-      });
+    try {
+      await axios
+        .post("/api/order", {
+          data: {
+            supplier_id: supplierSelected["supplier_id"],
+            product_code: productSelected["product_code"],
+            purchase_date: form["purchase_date"].value,
+            quantity: form["quantity"].value,
+            total_amount: form["total_amount"].value,
+            expire_date: form["expire_date"].value,
+          },
+        })
+        .then(() => {
+          handleClose();
+        });
+    } catch (error) {
+      setAlertMessage(error.response.data);
+      setAlertShow(true);
+    }
   };
 
   const router = useRouter();
@@ -64,11 +72,15 @@ export default function MakeNewOrder({ refreshData }) {
 
   useEffect(() => {
     const fetchProductReq = async () => {
-      const producttemp = await axios
-        .get("/api/request")
-        .then((res) => res.data);
+      try {
+        const producttemp = await axios
+          .get("/api/request")
+          .then((res) => res.data);
 
-      setOrder(producttemp);
+        setOrder(producttemp);
+      } catch (error) {
+        setAlertShow(true);
+      }
     };
 
     fetchProductReq();
@@ -83,6 +95,11 @@ export default function MakeNewOrder({ refreshData }) {
         <Dialog open={open} handler={handleOpen}>
           <DialogHeader>Make New Order.</DialogHeader>
           <DialogBody divider>
+            <AlertComponent
+              setShow={setAlertShow}
+              show={alertShow}
+              message={alertMessage}
+            />
             <div className="my-3">
               <form className="flex flex-col gap-4" ref={refForm}>
                 <Input
@@ -116,9 +133,20 @@ export default function MakeNewOrder({ refreshData }) {
                   label="Total Amount"
                   type={"number"}
                   name="total_amount"
+                  required
                 />
-                <Input label="Quantity" type={"number"} name="quantity" />
-                <Input label="Expire Date" type={"date"} name="expire_date" />
+                <Input
+                  label="Quantity"
+                  type={"number"}
+                  name="quantity"
+                  required
+                />
+                <Input
+                  label="Expire Date"
+                  type={"date"}
+                  name="expire_date"
+                  required
+                />
               </form>
               <PilihSupplierModal
                 handleOpenMod={handleOpenSupplierModal}

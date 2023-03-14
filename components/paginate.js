@@ -21,9 +21,13 @@ const Paginate = ({ page, refreshData, setData }) => {
     return setData(dataTemp);
   };
 
+  if (!page.next_page_url && !page.prev_page_url) {
+    return null;
+  }
+
   return (
     <>
-      {page && page.next_page_url && (
+      {page && (
         <div className="flex w-min gap-1 backdrop:blur sticky  bottom-0 mt-4 ml-auto">
           <IconButton onClick={refreshData}>
             <ArrowPathIcon className="h-6" />

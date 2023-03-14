@@ -41,7 +41,6 @@ export default function index() {
             </div>
             {permission && permission.includes("tambah-request-pesanan") && (
               <div className="flex gap-2">
-                <GetOrderModalW refreshData={fetchWarehouseRequest} />
                 <WarehouseRequestAddModal refreshData={fetchWarehouseRequest} />
               </div>
             )}

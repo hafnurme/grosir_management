@@ -47,6 +47,7 @@ const role = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("first");
     e.preventDefault();
     const res = await axios
       .post("/api/Role", {
@@ -73,10 +74,6 @@ const role = () => {
   useEffect(() => {
     fetchPermision();
     fetchRole();
-    window.innerWidth >= 960 ? setSize("lg") : setSize("sm");
-    window.addEventListener("resize", () =>
-      window.innerWidth >= 960 ? setSize("lg") : setSize("sm")
-    );
   }, []);
 
   return (
@@ -86,16 +83,16 @@ const role = () => {
           <div className="inline-block min-w-full ">
             <div className="overflow-hidden">
               <table className="min-w-full">
-                <thead className="border-b bg-white mb-4">
+                <thead className="border-b bg-white">
                   <tr>
                     <th
                       scope="col"
                       colSpan={2}
-                      className="text-sm font-medium text-gray-900 text-left"
+                      className="text-sm font-medium text-gray-900 text-left mb-4"
                     >
                       <Typography variant="h4">Daftar Role</Typography>
                     </th>
-                    <th className="flex justify-end mr-4">
+                    <th className="flex justify-end mr-4 mb-4">
                       <IconButton
                         className="flex items-center justify-center"
                         color="orange"

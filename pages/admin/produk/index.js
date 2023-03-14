@@ -11,6 +11,7 @@ const Produk = () => {
   const [product, setProduct] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [alertShow, setAlertShow] = useState(false);
+  const [permission, setPermission] = useState();
 
   const fetchProduct = async (page, link) => {
     const producttemp = await axios.get("/api/product").then((res) => {
@@ -85,7 +86,9 @@ const Produk = () => {
                   <MagnifyingGlassIcon className="w-6" />
                 </IconButton>
               </form>
-              <ProdukAddModal refreshData={fetchProduct} />
+              {permission && permission.includes("admin") && (
+                <ProdukAddModal refreshData={fetchProduct} />
+              )}
             </div>
           </div>
 

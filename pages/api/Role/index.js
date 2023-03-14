@@ -36,6 +36,7 @@ export default async function handler(req, res) {
         token: session.accessToken,
       },
     };
+    console.log(options);
     await axios
       .request(options)
       .then((response) => {

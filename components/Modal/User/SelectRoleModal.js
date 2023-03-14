@@ -51,7 +51,7 @@ const SelectRoleModal = ({ size, modalOpen, handleOpenMod, setRole }) => {
     }
   };
 
-  const handleSelectCategory = (item) => {
+  const handleSelectRole = (item) => {
     setRole(item);
     handleOpenMod();
   };
@@ -102,7 +102,7 @@ const SelectRoleModal = ({ size, modalOpen, handleOpenMod, setRole }) => {
                       className="bg-blue-gray-50 py-2 px-2 border-blue-gray-200 hover:bg-gray-50 cursor-pointer text-gray-800"
                       key={index}
                       onClick={() => {
-                        handleSelectCategory(element);
+                        handleSelectRole(element);
                       }}
                     >
                       {element.name}

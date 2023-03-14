@@ -2,9 +2,17 @@ import { useEffect, useState } from "react";
 import DeleteDialog from "@/components/Modal/DeleteModal";
 import DetailModal from "@/components/Modal/DetailModal";
 import ProductUpdateModal from "../Modal/Produk/ProdukUpdateModal";
+import { useSession } from "next-auth/react";
 
 const ProductTable = ({ head, data, refreshData, current_page }) => {
   const [finalData, setFinalData] = useState();
+  const [permission, setPermission] = useState();
+
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    setPermission(session.permission);
+  }, [status]);
 
   useEffect(() => {
     setFinalData(data);
@@ -54,23 +62,27 @@ const ProductTable = ({ head, data, refreshData, current_page }) => {
                       exception={["id", "supplier_id"]}
                       item={object}
                     />
-                    <ProductUpdateModal
-                      item={object}
-                      itemHead={[
-                        "product_code",
-                        "brand",
-                        "name",
-                        "description",
-                      ]}
-                      updateUrl="/api/product/"
-                      refreshData={refreshData}
-                    />
-                    <DeleteDialog
-                      itemToDelete={object}
-                      itemHead={head}
-                      deleteUrl="/api/producat/"
-                      refreshData={refreshData}
-                    />
+                    {permission && permission.includes("admin") && (
+                      <>
+                        <ProductUpdateModal
+                          item={object}
+                          itemHead={[
+                            "product_code",
+                            "brand",
+                            "name",
+                            "description",
+                          ]}
+                          updateUrl="/api/product/"
+                          refreshData={refreshData}
+                        />
+                        <DeleteDialog
+                          itemToDelete={object}
+                          itemHead={head}
+                          deleteUrl="/api/product/"
+                          refreshData={refreshData}
+                        />
+                      </>
+                    )}
                   </td>
                 </tr>
               );

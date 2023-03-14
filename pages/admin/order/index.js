@@ -57,27 +57,6 @@ const OrderProduk = () => {
             </div>
 
             <div className="flex justify-end gap-2 w-full">
-              {/* <form
-                onSubmit={(e) => {
-                  handleSearch(e, searchQuery);
-                }}
-                className="flex gap-2 w-full justify-end"
-              >
-                <div className="w-full sm:w-52">
-                  <Input
-                    label="Search"
-                    color="orange"
-                    variant="outlined"
-                    className="w-full"
-                    // onChange={(e) => {
-                    //   setSearchQuery(e.target.value);
-                    // }}
-                  />
-                </div>
-                <IconButton size={size} className="w-20" color="orange">
-                  <MagnifyingGlassIcon className="w-6" />
-                </IconButton>
-              </form> */}
               <MakeNewOrder refreshData={fetchProduct} />
             </div>
           </div>
