@@ -14,7 +14,7 @@ const AlertComponent = ({
       color={color}
       icon={icon}
       show={show}
-      className={`z-50 ${position}`}
+      className={`z-50 fixed left-1/2 -translate-x-1/2 w-[97.5%] top-[2.5%]`}
       dismissible={{
         onClose: () => setShow(false),
         action: (
@@ -24,7 +24,15 @@ const AlertComponent = ({
         ),
       }}
     >
-      {message}
+      {typeof message === "string" && message}
+      {typeof message === "object" &&
+        !message.message &&
+        Object.values(message).map((element, index) => {
+          return <div>{element[0]}</div>;
+        })}
+      {typeof message === "object" && message.message && (
+        <div>{message.message}</div>
+      )}
     </Alert>
   );
 };
