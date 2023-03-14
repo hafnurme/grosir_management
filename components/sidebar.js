@@ -83,6 +83,11 @@ export default function sidebar({ openNav, setOpenNav }) {
       link: "/admin/user",
       permission: ["admin"],
     },
+    {
+      label: "Trash",
+      link: "/admin/trash",
+      permission: ["admin"],
+    },
   ];
 
   const authorizePermissionTab = () => {
